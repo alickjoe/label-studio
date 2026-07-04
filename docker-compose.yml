@@ -1,11 +1,10 @@
 services:
   nginx:
     build: .
-    image: heartexlabs/label-studio:latest
+    image: alickjoe/label-studio:latest
     restart: unless-stopped
     ports:
-      - "8080:8085"
-      - "8081:8086"
+      - "127.0.0.1:8088:8085"
     depends_on:
       - app
     environment:
@@ -28,7 +27,7 @@ services:
     stdin_open: true
     tty: true
     build: .
-    image: heartexlabs/label-studio:latest
+    image: alickjoe/label-studio:latest
     restart: unless-stopped
     expose:
       - "8000"
