@@ -2,6 +2,8 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import { Divider } from "../../../components/Divider/Divider";
 import { EmptyState, SimpleCard } from "@humansignal/ui";
 import { IconPredictions, Typography, IconExternal } from "@humansignal/ui";
+import { useTranslation, Trans } from "react-i18next";
+import i18n from "i18next";
 import { useUpdatePageTitle, createTitleFromSegments } from "@humansignal/core";
 import { useAPI } from "../../../providers/ApiProvider";
 import { ProjectContext } from "../../../providers/ProjectProvider";
@@ -14,8 +16,9 @@ export const PredictionsSettings = () => {
   const [versions, setVersions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const { t } = useTranslation();
 
-  useUpdatePageTitle(createTitleFromSegments([project?.title, "Predictions Settings"]));
+  useUpdatePageTitle(createTitleFromSegments([project?.title, t("predictionsSettings.title")]));
 
   const fetchVersions = useCallback(async () => {
     setLoading(true);
@@ -40,7 +43,7 @@ export const PredictionsSettings = () => {
   return (
     <section className="max-w-[42rem]">
       <Typography variant="headline" size="medium" className="mb-tight">
-        Predictions
+        {t("predictionsSettings.title")}
       </Typography>
       <div>
         {loading && <Spinner size={32} />}
@@ -48,15 +51,10 @@ export const PredictionsSettings = () => {
         {loaded && versions.length > 0 && (
           <>
             <Typography variant="title" size="medium">
-              Predictions List
+              {t("predictionsSettings.predictionsList")}
             </Typography>
             <Typography size="small" className="text-neutral-content-subtler mt-base mb-wider">
-              List of predictions available in the project. Each card is associated with a separate model version. To
-              learn about how to import predictions,{" "}
-              <a href="https://labelstud.io/guide/predictions.html" target="_blank" rel="noreferrer">
-                see&nbsp;the&nbsp;documentation
-              </a>
-              .
+              <Trans i18nKey="predictionsSettings.predictionsListDesc" components={{ 1: <a href="https://labelstud.io/guide/predictions.html" target="_blank" rel="noreferrer" /> }} />
             </Typography>
           </>
         )}
@@ -67,8 +65,8 @@ export const PredictionsSettings = () => {
               size="medium"
               variant="primary"
               icon={<IconPredictions />}
-              title="No predictions uploaded yet"
-              description="Upload predictions to automatically prelabel your data and speed up annotation. Import predictions from multiple model versions to compare their performance, or connect live models from the Model page to generate predictions on demand."
+              title={t("predictionsSettings.noPredictions")}
+              description={t("predictionsSettings.noPredictionsDesc")}
               footer={
                 !window.APP_SETTINGS?.whitelabel_is_active && (
                   <Typography variant="label" size="small" className="text-primary-link">
@@ -80,7 +78,7 @@ export const PredictionsSettings = () => {
                       aria-label="Learn more about predictions (opens in new window)"
                       className="inline-flex items-center gap-1 hover:underline"
                     >
-                      Learn more
+                      {t("predictionsSettings.learnMore")}
                       <IconExternal width={16} height={16} />
                     </a>
                   </Typography>
@@ -98,5 +96,5 @@ export const PredictionsSettings = () => {
   );
 };
 
-PredictionsSettings.title = "Predictions";
+PredictionsSettings.title = i18n.t("predictionsSettings.title");
 PredictionsSettings.path = "/predictions";

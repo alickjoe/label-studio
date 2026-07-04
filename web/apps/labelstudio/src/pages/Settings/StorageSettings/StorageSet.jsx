@@ -3,6 +3,7 @@ import { ff } from "@humansignal/core";
 import { Button } from "@humansignal/ui";
 import { useAtomValue } from "jotai";
 import { forwardRef, useCallback, useContext, useImperativeHandle } from "react";
+import { useTranslation } from "react-i18next";
 import { Columns } from "../../../components";
 import { confirm, modal } from "../../../components/Modal/Modal";
 import { Spinner } from "../../../components/Spinner/Spinner";
@@ -31,6 +32,7 @@ export const StorageSet = forwardRef(
   ) => {
     const api = useContext(ApiContext);
     const project = useAtomValue(projectAtom);
+    const { t } = useTranslation();
 
     const useNewStorageScreen = ff.isActive(ff.FF_NEW_STORAGES);
 
@@ -38,7 +40,10 @@ export const StorageSet = forwardRef(
       (storage) => {
         const action = storage ? "Edit" : "Connect";
         const actionTarget = target === "export" ? "Target" : "Source";
-        const title = `${action} ${actionTarget} Storage`;
+        const storageKey = storage
+          ? (target === "export" ? "storageSettings.editTarget" : "storageSettings.editSource")
+          : (target === "export" ? "storageSettings.connectTarget" : "storageSettings.connectSource");
+        const title = t(storageKey);
 
         const modalRef = modal({
           title,
@@ -104,8 +109,8 @@ export const StorageSet = forwardRef(
     const onDeleteStorage = useCallback(
       async (storage) => {
         confirm({
-          title: "Deleting storage",
-          body: "This action cannot be undone. Are you sure?",
+          title: t("storageSettings.deletingStorage"),
+          body: t("storageSettings.deleteConfirm"),
           buttonLook: "negative",
           onOk: async () => {
             const response = await api.callApi("deleteStorage", {

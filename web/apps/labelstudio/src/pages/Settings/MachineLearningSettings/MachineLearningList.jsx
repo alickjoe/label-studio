@@ -4,6 +4,7 @@ import { useCallback, useContext } from "react";
 import truncate from "truncate-middle";
 import { Menu } from "../../../components";
 import { Button, Dropdown } from "@humansignal/ui";
+import { useTranslation } from "react-i18next";
 import { confirm } from "../../../components/Modal/Modal";
 import { Oneof } from "../../../components/Oneof/Oneof";
 import { IconEllipsis } from "@humansignal/icons";
@@ -45,11 +46,12 @@ export const MachineLearningList = ({ backends, fetchBackends, onEdit, onTestReq
 };
 
 const BackendCard = ({ backend, onStartTrain, onEdit, onDelete, onTestRequest }) => {
+  const { t } = useTranslation();
   const confirmDelete = useCallback(
     (backend) => {
       confirm({
-        title: "Delete ML Backend",
-        body: "This action cannot be undone. Are you sure?",
+        title: t("mlSettings.deleteMLBackend"),
+        body: t("mlSettings.deleteConfirm"),
         buttonLook: "destructive",
         onOk() {
           onDelete?.(backend);
@@ -74,12 +76,12 @@ const BackendCard = ({ backend, onStartTrain, onEdit, onDelete, onTestRequest })
             align="right"
             content={
               <Menu size="medium" contextual>
-                <Menu.Item onClick={() => onEdit(backend)}>Edit</Menu.Item>
-                <Menu.Item onClick={() => onTestRequest(backend)}>Send Test Request</Menu.Item>
-                <Menu.Item onClick={() => onStartTrain(backend)}>Start Training</Menu.Item>
+                <Menu.Item onClick={() => onEdit(backend)}>{t("mlSettings.edit")}</Menu.Item>
+                <Menu.Item onClick={() => onTestRequest(backend)}>{t("mlSettings.sendTestRequest")}</Menu.Item>
+                <Menu.Item onClick={() => onStartTrain(backend)}>{t("mlSettings.startTrainingItem")}</Menu.Item>
                 <Menu.Divider />
                 <Menu.Item onClick={() => confirmDelete(backend)} isDangerous>
-                  Delete
+                  {t("mlSettings.delete")}
                 </Menu.Item>
               </Menu>
             }
@@ -96,7 +98,7 @@ const BackendCard = ({ backend, onStartTrain, onEdit, onDelete, onTestRequest })
         <div className={rootClass.elem("group").toClassName()}>
           <Tooltip title={format(parseISO(backend.created_at), "yyyy-MM-dd HH:mm:ss")}>
             <span>
-              Created&nbsp;
+              {t("mlSettings.created")}&nbsp;
               {formatDistanceToNow(parseISO(backend.created_at), {
                 addSuffix: true,
               })}
@@ -110,16 +112,17 @@ const BackendCard = ({ backend, onStartTrain, onEdit, onDelete, onTestRequest })
 
 const BackendState = ({ backend }) => {
   const { state } = backend;
+  const { t } = useTranslation();
 
   return (
     <div className={cn("ml").elem("status").toClassName()}>
       <span className={cn("ml").elem("indicator").mod({ state }).toClassName()} />
       <Oneof value={state} className={cn("ml").elem("status-label").toClassName()}>
-        <span case="DI">Disconnected</span>
-        <span case="CO">Connected</span>
-        <span case="ER">Error</span>
-        <span case="TR">Training</span>
-        <span case="PR">Predicting</span>
+        <span case="DI">{t("mlSettings.disconnected")}</span>
+        <span case="CO">{t("mlSettings.connected")}</span>
+        <span case="ER">{t("mlSettings.error")}</span>
+        <span case="TR">{t("mlSettings.training")}</span>
+        <span case="PR">{t("mlSettings.predicting")}</span>
       </Oneof>
     </div>
   );

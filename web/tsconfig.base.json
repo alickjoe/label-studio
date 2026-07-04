@@ -47,6 +47,12 @@
       "@humansignal/icons": [
         "libs/ui/src/assets/icons"
       ],
+      "@humansignal/i18n": [
+        "libs/i18n/src/index.ts"
+      ],
+      "@humansignal/i18n/*": [
+        "libs/i18n/src/*"
+      ],
       "@humansignal/shad/*": [
         "./libs/ui/src/shad/*"
       ],

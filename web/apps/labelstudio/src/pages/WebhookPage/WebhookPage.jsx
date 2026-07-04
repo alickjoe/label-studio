@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 import { useAPI } from "../../providers/ApiProvider";
+import { useTranslation } from "react-i18next";
+import i18n from "i18next";
 
 import { useHistory } from "react-router";
 import { useProject } from "../../providers/ProjectProvider";
@@ -12,13 +14,14 @@ const Webhook = () => {
   const [activeWebhook, setActiveWebhook] = useState(null);
   const [webhooks, setWebhooks] = useState(null);
   const [webhooksInfo, setWebhooksInfo] = useState(null);
+  const { t } = useTranslation();
 
   const history = useHistory();
 
   const api = useAPI();
   const { project } = useProject();
 
-  useUpdatePageTitle(createTitleFromSegments([project?.title, "Webhooks Settings"]));
+  useUpdatePageTitle(createTitleFromSegments([project?.title, t("webhooks.title")]));
 
   const projectId = useMemo(() => {
     if (history.location.pathname.startsWith("/projects")) {
@@ -113,7 +116,7 @@ const Webhook = () => {
 };
 
 export const WebhookPage = {
-  title: "Webhooks",
+  title: i18n.t("webhooks.title"),
   path: "/webhooks",
   component: Webhook,
 };

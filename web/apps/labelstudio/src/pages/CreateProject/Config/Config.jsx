@@ -6,6 +6,7 @@ import { ToggleItems } from "../../../components";
 import { Form, Input } from "../../../components/Form";
 import { useAPI } from "../../../providers/ApiProvider";
 import { cn } from "../../../utils/bem";
+import { useTranslation } from "react-i18next";
 import { Palette } from "../../../utils/colors";
 import { FF_UNSAVED_CHANGES, isFF } from "../../../utils/feature-flags";
 import { colorNames } from "./colors";
@@ -37,6 +38,7 @@ const configClass = cn("configure");
  * Wrapped in React.memo to prevent unnecessary re-renders when parent re-renders.
  */
 const AdaptivePreview = React.memo(({ config, hasPendingUpdate, onUpdatePreview, isUpdating, ...previewProps }) => {
+  const { t } = useTranslation();
   const isFeatureEnabled = ff.isActive(ff.FF_PREVIEW_PERFORMANCE);
 
   // Memoize tag count calculation to avoid re-computing on every render
@@ -53,7 +55,7 @@ const AdaptivePreview = React.memo(({ config, hasPendingUpdate, onUpdatePreview,
           <IconInfoOutline width={16} height={16} />
           <span>{LARGE_CONFIG_MESSAGE}</span>
           <Button size="small" onClick={onUpdatePreview} waiting={isUpdating} disabled={isUpdating}>
-            {isUpdating ? "Updating..." : "Update Preview"}
+            {isUpdating ? t("configPage.updating") : t("configPage.updatePreview")}
           </Button>
         </div>
         <Preview config={config} {...previewProps} />
@@ -64,19 +66,22 @@ const AdaptivePreview = React.memo(({ config, hasPendingUpdate, onUpdatePreview,
   return <Preview config={config} {...previewProps} />;
 });
 
-const EmptyConfigPlaceholder = () => (
+const EmptyConfigPlaceholder = () => {
+  const { t } = useTranslation();
+
+  return (
   <div className={configClass.elem("empty-config").toClassName()}>
-    <p>Your labeling configuration is empty. It is required to label your data.</p>
+    <p>{t("configPage.emptyConfig")}</p>
     <p>
-      Start from one of our predefined templates or create your own config on the Code panel. The labeling config is
-      XML-based and you can{" "}
+      {t("configPage.emptyConfigTip")}{" "}
       <a href="https://labelstud.io/tags/" target="_blank" rel="noreferrer">
-        read about the available tags in our documentation
+        {t("configPage.emptyConfigDocs")}
       </a>
       .
     </p>
   </div>
 );
+};
 
 const Label = ({ label, template, color }) => {
   const value = label.getAttribute("value");
@@ -117,6 +122,7 @@ const Label = ({ label, template, color }) => {
 };
 
 const ConfigureControl = ({ control, template }) => {
+  const { t } = useTranslation();
   const refLabels = React.useRef();
   const tagname = control.tagName;
 
@@ -138,8 +144,8 @@ const ConfigureControl = ({ control, template }) => {
   return (
     <div className={configClass.elem("labels").toClassName()}>
       <form className={configClass.elem("add-labels").toClassName()} action="">
-        <h4>{tagname === "Choices" ? "Add choices" : "Add label names"}</h4>
-        <span>Use new line as a separator to add multiple labels</span>
+        <h4>{tagname === "Choices" ? t("configPage.addChoices") : t("configPage.addLabels")}</h4>
+        <span>{t("configPage.useNewLineSep")}</span>
         <textarea
           name="labels"
           id=""
@@ -149,13 +155,13 @@ const ConfigureControl = ({ control, template }) => {
           onKeyPress={onKeyPress}
           className="lsf-textarea-ls p-2 px-3"
         />
-        <Button type="button" size="small" look="outlined" onClick={onAddLabels} aria-label="Add labels">
-          Add
+        <Button type="button" size="small" look="outlined" onClick={onAddLabels} aria-label={t("configPage.addLabelsAria")}>
+          {t("configPage.add")}
         </Button>
       </form>
       <div className={configClass.elem("current-labels").toClassName()}>
         <h3>
-          {tagname === "Choices" ? "Choices" : "Labels"} ({control.children.length})
+          {tagname === "Choices" ? t("configPage.choices") : t("configPage.labels")} ({control.children.length})
         </h3>
         <ul>
           {Array.from(control.children).map((label) => (
@@ -389,6 +395,7 @@ const Configurator = ({
   warning,
   hasChanges,
 }) => {
+  const { t } = useTranslation();
   const [configure, setConfigure] = React.useState(isEmptyConfig(config) ? "code" : "visual");
   const [visualLoaded, loadVisual] = React.useState(configure === "visual");
   const [waiting, setWaiting] = React.useState(false);
@@ -611,9 +618,9 @@ const Configurator = ({
 
   const extra = (
     <p className={configClass.elem("tags-link").toClassName()}>
-      Configure the labeling interface with tags.&nbsp;
+      {t("configPage.configureTags")}&nbsp;
       <a href="https://labelstud.io/tags/" target="_blank" rel="noreferrer">
-        See all tags
+        {t("configPage.seeAllTags")}
       </a>
       .
     </p>
@@ -629,7 +636,7 @@ const Configurator = ({
         }}
       >
         <div className="flex flex-col">
-          <h1>Labeling Interface{hasChanges ? " *" : ""}</h1>
+          <h1>{t("labelingSettings.labelingInterface")}{hasChanges ? " *" : ""}</h1>
           <header>
             <Button
               type="button"
@@ -637,11 +644,11 @@ const Configurator = ({
               onClick={onBrowse}
               size="small"
               look="outlined"
-              aria-label="Browse templates"
+              aria-label={t("configPage.browseTemplates")}
             >
-              Browse Templates
+              {t("configPage.browseTemplates")}
             </Button>
-            <ToggleItems items={{ code: "Code", visual: "Visual" }} active={configure} onSelect={onSelect} />
+            <ToggleItems items={{ code: t("configPage.code"), visual: t("configPage.visual") }} active={configure} onSelect={onSelect} />
           </header>
           <div className={configClass.elem("editor").toClassName()}>
             {configure === "code" && (
@@ -694,12 +701,12 @@ const Configurator = ({
               {saved && (
                 <div className={cn("form-indicator").toClassName()}>
                   <span className={cn("form-indicator").elem("item").mod({ type: "success" }).toClassName()}>
-                    Saved!
+                    {t("configPage.saved")}
                   </span>
                 </div>
               )}
-              <Button className="w-[120px]" onClick={onSave} waiting={waiting} aria-label="Save configuration">
-                {waiting ? "Saving..." : "Save"}
+              <Button className="w-[120px]" onClick={onSave} waiting={waiting} aria-label={t("configPage.saveConfiguration")}>
+                {waiting ? t("configPage.saving") : t("configPage.save")}
               </Button>
               {isFF(FF_UNSAVED_CHANGES) && <UnsavedChanges hasChanges={hasChanges} onSave={onSave} />}
             </Form.Actions>

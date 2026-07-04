@@ -150,6 +150,11 @@ class User(UserMixin, AbstractBaseUser, PermissionsMixin, UserLastActivityMixin)
         _('allow newsletters'), null=True, default=None, help_text=_('Allow sending newsletters to user')
     )
 
+    language = models.CharField(
+        _('language'), max_length=10, default='zh-hans', blank=True,
+        help_text=_('User preferred language code'),
+    )
+
     objects = UserManager()
 
     EMAIL_FIELD = 'email'

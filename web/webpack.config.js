@@ -267,6 +267,7 @@ module.exports = composePlugins(
       "react-joyride": path.resolve(__dirname, "node_modules/react-joyride"),
       "@humansignal/ui": path.resolve(__dirname, "libs/ui"),
       "@humansignal/core": path.resolve(__dirname, "libs/core"),
+      "@humansignal/i18n": path.resolve(__dirname, "libs/i18n"),
     };
 
     return merge(config, {

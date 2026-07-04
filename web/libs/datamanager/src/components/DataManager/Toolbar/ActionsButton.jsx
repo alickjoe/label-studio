@@ -2,6 +2,7 @@ import { IconChevronDown, IconChevronRight, IconTrash } from "@humansignal/icons
 import { Button, Spinner, Badge, EnterpriseBadge } from "@humansignal/ui";
 import { inject, observer } from "mobx-react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useActions } from "../../../hooks/useActions";
 import { cn } from "../../../utils/bem";
 import { FF_LOPS_E_3, isFF } from "../../../utils/feature-flags";
@@ -57,7 +58,7 @@ const DialogContent = ({ text, form, formRef, store, action }) => {
   );
 };
 
-const ActionButton = ({ action, parentRef, store, formRef }) => {
+const ActionButton = ({ action, parentRef, store, formRef, t }) => {
   const isDeleteAction = action.id.includes("delete");
   const hasChildren = !!action.children?.length;
   const submenuRef = useRef();
@@ -68,7 +69,7 @@ const ActionButton = ({ action, parentRef, store, formRef }) => {
       if (action.disabled) return;
       action?.callback
         ? action?.callback(store.currentView?.selected?.snapshot, action)
-        : invokeAction(action, isDeleteAction, store, formRef);
+        : invokeAction(action, isDeleteAction, store, formRef, t);
       parentRef?.current?.close?.();
     },
     [store.currentView?.selected, action, isDeleteAction, parentRef, store, formRef],
@@ -120,6 +121,7 @@ const ActionButton = ({ action, parentRef, store, formRef }) => {
                 parentRef={parentRef}
                 store={store}
                 formRef={formRef}
+                t={t}
               />
             ))}
           </ul>
@@ -154,7 +156,7 @@ const ActionButton = ({ action, parentRef, store, formRef }) => {
   );
 };
 
-const invokeAction = (action, destructive, store, formRef) => {
+const invokeAction = (action, destructive, store, formRef, t) => {
   if (action.dialog) {
     const { type: dialogType, text, form, title } = action.dialog;
     const dialog = Modal[dialogType] ?? Modal.confirm;
@@ -190,11 +192,11 @@ const invokeAction = (action, destructive, store, formRef) => {
     if (destructive && !form) {
       // Use standardized warning message for simple delete actions
       const objectType = dialogTitle ? dialogTitle.replace("Delete selected ", "").replace("?", "") : "items";
-      dialogText = `You are about to delete the selected ${objectType}.\n\nThis can't be undone.`;
+      dialogText = t("dataManager.deleteConfirm", { objectType });
     }
 
     dialog({
-      title: dialogTitle ? dialogTitle : destructive ? "Destructive action" : "Confirm action",
+      title: dialogTitle ? dialogTitle : destructive ? t("dataManager.destructiveAction") : t("dataManager.confirmAction"),
       body: <DialogContent text={dialogText} form={form} formRef={formRef} store={store} action={action} />,
       buttonLook: destructive ? "negative" : "primary",
       okText: destructive ? okButtonText : undefined,
@@ -213,6 +215,7 @@ const invokeAction = (action, destructive, store, formRef) => {
 
 export const ActionsButton = injector(
   observer(({ store, size, hasSelected, ...rest }) => {
+    const { t } = useTranslation();
     const formRef = useRef();
     const selectedCount = store.currentView.selectedCount;
     const [isOpen, setIsOpen] = useState(false);
@@ -231,9 +234,9 @@ export const ActionsButton = injector(
       return [...store.availableActions, ...serverActions].filter((a) => !a.hidden).sort((a, b) => a.order - b.order);
     }, [store.availableActions, serverActions]);
     const actionButtons = actions.map((action) => (
-      <ActionButton key={action.id} action={action} parentRef={formRef} store={store} formRef={formRef} />
+      <ActionButton key={action.id} action={action} parentRef={formRef} store={store} formRef={formRef} t={t} />
     ));
-    const recordTypeLabel = isFFLOPSE3 && store.SDK.type === "DE" ? "Record" : "Task";
+    const recordTypeLabel = isFFLOPSE3 && store.SDK.type === "DE" ? t("dataManager.record") : t("dataManager.task");
 
     return (
       <Dropdown.Trigger
@@ -241,7 +244,7 @@ export const ActionsButton = injector(
           <Menu size="compact">
             {isLoading || isFetching ? (
               <Menu.Item data-testid="loading-actions" disabled>
-                Loading actions...
+                {t("dataManager.loadingActions")}
               </Menu.Item>
             ) : (
               actionButtons
@@ -258,10 +261,10 @@ export const ActionsButton = injector(
           look="outlined"
           disabled={!hasSelected}
           trailing={<IconChevronDown />}
-          aria-label="Tasks Actions"
+          aria-label={t("dataManager.tasksActions")}
           {...rest}
         >
-          {selectedCount > 0 ? `${selectedCount} ${recordTypeLabel}${selectedCount > 1 ? "s" : ""}` : "Actions"}
+          {selectedCount > 0 ? `${selectedCount} ${recordTypeLabel}${selectedCount > 1 ? "s" : ""}` : t("dataManager.actions")}
         </Button>
       </Dropdown.Trigger>
     );

@@ -418,3 +418,38 @@ class UserHotkeysAPI(APIView):
         except Exception as e:
             logger.error(f'Error updating hotkeys for user {request.user.pk}: {str(e)}')
             return Response({'error': 'Failed to update hotkeys configuration'}, status=500)
+
+
+class UserLanguageAPI(APIView):
+    """API endpoint for getting and setting the current user's language preference."""
+    permission_classes = [IsAuthenticated]
+    parser_classes = (JSONParser, FormParser, MultiPartParser)
+
+    def get(self, request, *args, **kwargs):
+        """Retrieve the current user's language preference"""
+        return Response({
+            'language': request.user.language or 'zh-hans',
+            'available_languages': [
+                {'code': code, 'name': name}
+                for code, name in getattr(settings, 'LANGUAGES', [('zh-hans', '简体中文'), ('en', 'English')])
+            ],
+        }, status=200)
+
+    def patch(self, request, *args, **kwargs):
+        """Update the current user's language preference"""
+        language = request.data.get('language')
+        if not language:
+            return Response({'error': 'Language code is required'}, status=400)
+
+        valid_codes = [code for code, _ in getattr(settings, 'LANGUAGES', [])]
+        if language not in valid_codes:
+            return Response({'error': f'Invalid language code. Supported: {", ".join(valid_codes)}'}, status=400)
+
+        user = request.user
+        user.language = language
+        user.save(update_fields=['language'])
+
+        return Response({'language': language}, status=200)
+
+
+from django.conf import settings

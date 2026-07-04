@@ -1,6 +1,7 @@
 import { IconCross, IconPlus } from "@humansignal/icons";
 import { Button, Typography } from "@humansignal/ui";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Form, Input, Label, Toggle } from "../../components/Form";
 import { useAPI } from "../../providers/ApiProvider";
 import { cn } from "../../utils/bem";
@@ -28,6 +29,7 @@ const WebhookForm = ({
   setSendPayload,
   api,
   rootClass,
+  t,
 }) => {
   return (
     <Form
@@ -55,11 +57,11 @@ const WebhookForm = ({
       }}
     >
       <Form.Row columnCount={1}>
-        <Label text="Payload URL" large />
+        <Label text={t("webhooks.payloadUrl")} large />
         <div className="grid grid-cols-[1fr_135px] gap-tight">
-          <Input name="url" className="self-stretch w-auto" placeholder="URL" />
+          <Input name="url" className="self-stretch w-auto" placeholder={t("webhooks.urlPlaceholder")} />
           <div className="grid grid-flow-col auto-cols-max items-center justify-end gap-tight self-center">
-            <span className="text-neutral-content">Is Active</span>
+            <span className="text-neutral-content">{t("webhooks.isActive")}</span>
             <Toggle
               skip
               checked={isActive}
@@ -74,7 +76,7 @@ const WebhookForm = ({
         <div className="border border-neutral-border p-4 rounded-lg mb-4">
           <div className="flex flex-col gap-tight">
             <div className="flex items-center justify-between">
-              <Label text="Headers" large />
+              <Label text={t("webhooks.headers")} large />
               <Button
                 type="button"
                 variant="primary"
@@ -82,7 +84,7 @@ const WebhookForm = ({
                 onClick={onAddHeaderClick}
                 className="!p-0 [&_span]:!text-[var(--grape_500)]"
                 leading={<IconPlus />}
-                tooltip="Add Header"
+                tooltip={t("webhooks.addHeader")}
               />
             </div>
             {headers.map((header, index) => {
@@ -90,13 +92,13 @@ const WebhookForm = ({
                 <div key={header.id} className="grid grid-cols-[1fr_1fr_40px] gap-tight">
                   <Input
                     skip
-                    placeholder="header"
+                    placeholder={t("webhooks.header")}
                     value={header.key}
                     onChange={(e) => onHeaderChange("key", e, index)}
                   />
                   <Input
                     skip
-                    placeholder="value"
+                    placeholder={t("webhooks.value")}
                     value={header.value}
                     onChange={(e) => onHeaderChange("value", e, index)}
                   />
@@ -108,7 +110,7 @@ const WebhookForm = ({
                       type="button"
                       icon={<IconCross />}
                       onClick={() => onHeaderRemove(index)}
-                      tooltip="Remove Header"
+                      tooltip={t("webhooks.removeHeader")}
                     />
                   </div>
                 </div>
@@ -119,7 +121,7 @@ const WebhookForm = ({
       </Form.Row>
       <div className="border border-neutral-border p-4 rounded-lg mb-4">
         <div>
-          <Label text="Payload" large />
+          <Label text={t("webhooks.payload")} large />
         </div>
         <div>
           <div className="my-2">
@@ -129,14 +131,14 @@ const WebhookForm = ({
               onChange={(e) => {
                 setSendPayload(e.target.checked);
               }}
-              label="Send payload"
+              label={t("webhooks.sendPayload")}
             />
           </div>
           <div className="my-2">
             <Toggle
               skip
               checked={sendForAllActions}
-              label="Send for all actions"
+              label={t("webhooks.sendForAllActions")}
               onChange={(e) => {
                 setSendForAllActions(e.target.checked);
               }}
@@ -145,7 +147,7 @@ const WebhookForm = ({
           <div>
             {!sendForAllActions ? (
               <div>
-                <h4 className="text-neutral-content">Send Payload for</h4>
+                <h4 className="text-neutral-content">{t("webhooks.sendPayloadFor")}</h4>
                 <div>
                   {Object.entries(webhooksInfo).map(([key, value]) => {
                     return (
@@ -175,7 +177,7 @@ const WebhookForm = ({
             type="button"
             variant="negative"
             look="outlined"
-            aria-label="Delete webhook"
+            aria-label={t("webhooks.deleteWebhook")}
             onClick={() =>
               WebhookDeleteModal({
                 onDelete: async () => {
@@ -185,10 +187,11 @@ const WebhookForm = ({
                   onBack();
                   await fetchWebhooks();
                 },
+                t,
               })
             }
           >
-            Delete Webhook
+            {t("webhooks.deleteWebhook")}
           </Button>
         )}
         <div className={rootClass.elem("status").toClassName()}>
@@ -200,15 +203,15 @@ const WebhookForm = ({
           type="button"
           className="ml-auto"
           onClick={onBack}
-          aria-label="Cancel webhook edit"
+          aria-label={t("webhooks.cancel")}
         >
-          Cancel
+          {t("webhooks.cancel")}
         </Button>
         <Button
           className={rootClass.elem("save-button").toClassName()}
-          aria-label={webhook === null ? "Add Webhook" : "Save Changes"}
+          aria-label={webhook === null ? t("webhooks.addWebhook") : t("webhooks.saveChanges")}
         >
-          {webhook === null ? "Add Webhook" : "Save Changes"}
+          {webhook === null ? t("webhooks.addWebhook") : t("webhooks.saveChanges")}
         </Button>
       </div>
     </Form>
@@ -217,6 +220,7 @@ const WebhookForm = ({
 
 const WebhookDetail = ({ webhook, webhooksInfo, fetchWebhooks, onBack, onSelectActive }) => {
   const rootClass = cn("webhook-detail");
+  const { t } = useTranslation();
 
   const api = useAPI();
   const [headers, setHeaders] = useState(
@@ -318,10 +322,10 @@ const WebhookDetail = ({ webhook, webhooksInfo, fetchWebhooks, onBack, onSelectA
           onClick={() => onSelectActive(null)}
           className="cursor-pointer text-neutral-content-subtler hover:text-neutral-content-subtle"
         >
-          Webhooks
+          {t("webhooks.title")}
         </Typography>
         <Typography variant="headline" size="medium" className="text-neutral-content-subtler">
-          / {webhook === null ? "New Webhook" : "Edit Webhook"}
+          / {webhook === null ? t("webhooks.newWebhook") : t("webhooks.editWebhook")}
         </Typography>
       </header>
       <div className="mt-base">
@@ -346,6 +350,7 @@ const WebhookDetail = ({ webhook, webhooksInfo, fetchWebhooks, onBack, onSelectA
           setSendPayload={setSendPayload}
           api={api}
           rootClass={rootClass}
+          t={t}
         />
       </div>
     </>

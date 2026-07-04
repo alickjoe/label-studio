@@ -25,6 +25,7 @@ import { ff } from "@humansignal/core";
 import "@humansignal/ui/src/tailwind.css";
 import "./App.scss";
 import { AuthProvider } from "@humansignal/core/providers/AuthProvider";
+import { initI18n, LanguageProvider } from "@humansignal/i18n";
 
 const baseURL = new URL(APP_SETTINGS.hostname || location.origin);
 export const UNBLOCK_HISTORY_MESSAGE = "UNBLOCK_HISTORY";
@@ -60,6 +61,7 @@ const App = ({ content }) => {
   return (
     <ErrorBoundary>
       <Router history={browserHistory}>
+        <LanguageProvider defaultLanguage={APP_SETTINGS?.language}>
         <MultiProvider
           providers={[
             <QueryClientProvider client={queryClient} key="query" />,
@@ -80,10 +82,13 @@ const App = ({ content }) => {
             <ToastViewport />
           </AsyncPage>
         </MultiProvider>
+        </LanguageProvider>
       </Router>
     </ErrorBoundary>
   );
 };
+
+initI18n(APP_SETTINGS?.language);
 
 const root = document.querySelector(".app-wrapper");
 const content = document.querySelector("#main-content");

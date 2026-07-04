@@ -92,6 +92,7 @@ class BaseUserSerializer(FlexFieldsModelSerializer):
             'active_organization',
             'active_organization_meta',
             'allow_newsletters',
+            'language',
             'date_joined',
         )
 

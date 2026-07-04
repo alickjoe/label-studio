@@ -438,11 +438,22 @@ GRAPHIQL = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hans'
 TIME_ZONE = 'UTC'
-USE_I18N = False
+USE_I18N = True
 USE_L10N = True
 USE_TZ = True
+
+# Available languages for the application
+LANGUAGES = [
+    ('zh-hans', '简体中文'),
+    ('en', 'English'),
+]
+
+# Path to translation files
+LOCALE_PATHS = [
+    os.path.join(os.path.dirname(BASE_DIR), 'locale'),
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/

@@ -8,6 +8,7 @@ import { Menu, Pagination } from "../../components";
 import { cn } from "../../utils/bem";
 import { absoluteURL } from "../../utils/helpers";
 import { ProjectStateChip } from "@humansignal/app-common";
+import { useTranslation } from "react-i18next";
 
 const DEFAULT_CARD_COLORS = ["#FFFFFF", "#FDFDFC"];
 
@@ -36,6 +37,8 @@ export const ProjectsList = ({ projects, currentPage, totalItems, loadNextPage, 
 };
 
 export const EmptyProjectsList = ({ openModal }) => {
+  const { t } = useTranslation();
+
   return (
     <div className={cn("empty-projects-page").toClassName()}>
       <img
@@ -43,10 +46,10 @@ export const EmptyProjectsList = ({ openModal }) => {
         className={cn("empty-projects-page").elem("heidi").toClassName()}
         src={absoluteURL("/static/images/opossum_looking.png")}
       />
-      <h1 className={cn("empty-projects-page").elem("header").toClassName()}>Heidi doesn't see any projects here!</h1>
-      <p>Create one and start labeling your data.</p>
-      <Button onClick={openModal} className="my-8" aria-label="Create new project">
-        Create Project
+      <h1 className={cn("empty-projects-page").elem("header").toClassName()}>{t("projects.noProjects")}</h1>
+      <p>{t("projects.noProjectsDesc")}</p>
+      <Button onClick={openModal} className="my-8" aria-label={t("projects.createProject")}>
+        {t("projects.createProject")}
       </Button>
     </div>
   );

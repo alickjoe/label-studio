@@ -11,6 +11,7 @@ import {
   IconCloudProviderRedis,
 } from "@humansignal/icons";
 import { Button, IconExternal, Typography, Tooltip } from "@humansignal/ui";
+import { useTranslation } from "react-i18next";
 import { getDocsUrl } from "../../../../../../editor/src/utils/docs";
 import { ABILITY, useAuth } from "@humansignal/core/providers/AuthProvider";
 
@@ -162,6 +163,7 @@ const StorageProviderIcons = () => (
 
 // Documentation link component
 const DocumentationLink = () => {
+  const { t } = useTranslation();
   if (window.APP_SETTINGS?.whitelabel_is_active) {
     return null;
   }
@@ -175,7 +177,7 @@ const DocumentationLink = () => {
         className="inline-flex items-center gap-1"
         data-testid="dm-docs-data-import-link"
       >
-        See docs on importing data
+        {t("dataManager.seeDocsImport")}
         <span className="sr-only"> (opens in a new tab)</span>
         <IconExternal width={20} height={20} />
       </a>
@@ -215,6 +217,7 @@ export const EmptyState: FC<EmptyStateProps> = ({
 }) => {
   const isImportEnabled = Boolean(canImport);
   const { permissions } = useAuth();
+  const { t } = useTranslation();
 
   // If filters are applied, show the filter-specific empty state (regardless of user role)
   if (hasFilters) {
@@ -222,11 +225,11 @@ export const EmptyState: FC<EmptyStateProps> = ({
       icon: <IconSearch />,
       iconBackground: "bg-warning-background",
       iconColor: "text-warning-icon",
-      title: "No tasks found",
-      description: "Try adjusting or clearing the filters to see more results",
+      title: t("dataManager.noTasksFound"),
+      description: t("dataManager.adjustFilters"),
       actions: (
         <Button variant="primary" look="outlined" onClick={onClearFilters} data-testid="dm-clear-filters-button">
-          Clear Filters
+          {t("dataManager.clearFilters")}
         </Button>
       ),
     });
@@ -240,8 +243,8 @@ export const EmptyState: FC<EmptyStateProps> = ({
     if (userRole === "REVIEWER") {
       return renderEmptyStateLayout({
         icon: <IconCheck />,
-        title: "No tasks available for review or labeling",
-        description: "Tasks imported to this project will appear here",
+        title: t("dataManager.noTasksReview"),
+        description: t("dataManager.tasksAppearHere"),
       });
     }
 
@@ -253,8 +256,8 @@ export const EmptyState: FC<EmptyStateProps> = ({
       if (isAutoDistribution) {
         return renderEmptyStateLayout({
           icon: <IconLsLabeling />,
-          title: "Start labeling tasks",
-          description: "Tasks you've labeled will appear here",
+          title: t("dataManager.startLabeling"),
+          description: t("dataManager.tasksLabeledAppear"),
           actions: (
             <Button
               variant="primary"
@@ -263,7 +266,7 @@ export const EmptyState: FC<EmptyStateProps> = ({
               onClick={onLabelAllTasks}
               data-testid="dm-label-all-tasks-button"
             >
-              Label All Tasks
+              {t("dataManager.labelAllTasks")}
             </Button>
           ),
         });
@@ -272,16 +275,16 @@ export const EmptyState: FC<EmptyStateProps> = ({
       if (isManualDistribution) {
         return renderEmptyStateLayout({
           icon: <IconInbox />,
-          title: "No tasks available",
-          description: "Tasks assigned to you will appear here",
+          title: t("dataManager.noTasksAvailable"),
+          description: t("dataManager.tasksAssignedAppear"),
         });
       }
 
       // Fallback for annotators with unknown distribution setting
       return renderEmptyStateLayout({
         icon: <IconInbox width={40} height={40} />,
-        title: "No tasks available",
-        description: "Tasks will appear here when they become available",
+        title: t("dataManager.noTasksAvailable"),
+        description: t("dataManager.tasksAvailableSoon"),
       });
     }
   }
@@ -289,8 +292,8 @@ export const EmptyState: FC<EmptyStateProps> = ({
   // Default case: show import functionality (existing behavior for Owners/Admins/Managers)
   return renderEmptyStateLayout({
     icon: <IconUpload />,
-    title: "Import data to get your project started",
-    description: "Connect your cloud storage or upload files from your computer",
+    title: t("dataManager.importData"),
+    description: t("dataManager.connectCloud"),
     testId: "empty-state-label",
     ariaLabelledBy: "dm-empty-title",
     ariaDescribedBy: "dm-empty-desc",
@@ -305,7 +308,7 @@ export const EmptyState: FC<EmptyStateProps> = ({
             onClick={onOpenSourceStorageModal}
             data-testid="dm-connect-source-storage-button"
           >
-            Connect Cloud Storage
+            {t("dataManager.connectCloudStorage")}
           </Button>
         )}
 
@@ -317,7 +320,7 @@ export const EmptyState: FC<EmptyStateProps> = ({
             onClick={onOpenImportModal}
             data-testid="dm-import-button"
           >
-            Import
+            {t("dataManager.import")}
           </Button>
         )}
       </>

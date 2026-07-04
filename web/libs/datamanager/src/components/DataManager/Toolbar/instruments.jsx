@@ -1,5 +1,6 @@
 import { IconChevronDown } from "@humansignal/icons";
 import { isStarterCloudPlan } from "@humansignal/core";
+import { useTranslation } from "react-i18next";
 import { cn } from "../../../utils/bem";
 import { ErrorBox } from "../../Common/ErrorBox";
 import { FieldsButton } from "../../Common/FieldsButton";
@@ -26,8 +27,38 @@ const style = {
  * Checks for Starter Cloud trial expiration.
  * If expired it renders disabled Import button with a tooltip.
  */
+const ColumnsButton = ({ size }) => {
+  const { t } = useTranslation();
+  const iconProps = {
+    style: {
+      marginRight: 4,
+    },
+    icon: IconChevronDown,
+  };
+  return (
+    <FieldsButton
+      wrapper={FieldsButton.Checkbox}
+      trailingIcon={<Icon {...iconProps} />}
+      title={t("dataManager.columns")}
+      size={size}
+      style={style}
+      openUpwardForShortViewport={false}
+    />
+  );
+};
+
+const ExportButtonWrapper = ({ size }) => {
+  const { t } = useTranslation();
+  return (
+    <Interface name="export">
+      <ExportButton size={size}>{t("dataManager.export")}</ExportButton>
+    </Interface>
+  );
+};
+
 const ImportButtonWithChecks = ({ size }) => {
-  const simpleButton = <ImportButton size={size}>Import</ImportButton>;
+  const { t } = useTranslation();
+  const simpleButton = <ImportButton size={size}>{t("dataManager.import")}</ImportButton>;
   const isOpenSource = !window.APP_SETTINGS.billing;
   // Check if user is on Starter Cloud plan
   const isStarterCloud = isStarterCloudPlan();
@@ -51,7 +82,7 @@ const ImportButtonWithChecks = ({ size }) => {
   // Disabled buttons ignore hover, so we use wrapper to properly handle a tooltip
   return (
     <Tooltip
-      title="You must upgrade your plan to import data"
+      title={t("dataManager.upgradePlan")}
       style={{
         maxWidth: 200,
         textAlign: "center",
@@ -59,7 +90,7 @@ const ImportButtonWithChecks = ({ size }) => {
     >
       <div className={cn("button-wrapper").toClassName()}>
         <ImportButton disabled size={size}>
-          Import
+          {t("dataManager.import")}
         </ImportButton>
       </div>
     </Tooltip>
@@ -74,22 +105,7 @@ export const instruments = {
     return <DensityToggle size={size} />;
   },
   columns: ({ size }) => {
-    const iconProps = {
-      style: {
-        marginRight: 4,
-      },
-      icon: IconChevronDown,
-    };
-    return (
-      <FieldsButton
-        wrapper={FieldsButton.Checkbox}
-        trailingIcon={<Icon {...iconProps} />}
-        title={"Columns"}
-        size={size}
-        style={style}
-        openUpwardForShortViewport={false}
-      />
-    );
+    return <ColumnsButton size={size} />;
   },
   filters: ({ size }) => {
     return <FiltersPane size={size} style={style} />;
@@ -123,10 +139,6 @@ export const instruments = {
     );
   },
   "export-button": ({ size }) => {
-    return (
-      <Interface name="export">
-        <ExportButton size={size}>Export</ExportButton>
-      </Interface>
-    );
+    return <ExportButtonWrapper size={size} />;
   },
 };

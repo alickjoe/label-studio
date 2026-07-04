@@ -1,6 +1,8 @@
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { Button } from "@humansignal/ui";
 import { useUpdatePageTitle, createTitleFromSegments } from "@humansignal/core";
+import { useTranslation } from "react-i18next";
+import i18n from "i18next";
 import { Form, TextArea, Toggle } from "../../components/Form";
 import { MenubarContext } from "../../components/Menubar/Menubar";
 import { cn } from "../../utils/bem";
@@ -10,12 +12,13 @@ import { ProjectContext } from "../../providers/ProjectProvider";
 import { Divider } from "../../components/Divider/Divider";
 
 export const AnnotationSettings = () => {
+  const { t } = useTranslation();
   const { project, fetchProject } = useContext(ProjectContext);
   const pageContext = useContext(MenubarContext);
   const formRef = useRef();
   const [collab, setCollab] = useState(null);
 
-  useUpdatePageTitle(createTitleFromSegments([project?.title, "Annotation Settings"]));
+  useUpdatePageTitle(createTitleFromSegments([project?.title, t("annotationSettings.title")]));
 
   useEffect(() => {
     pageContext.setProps({ formRef });
@@ -28,7 +31,7 @@ export const AnnotationSettings = () => {
   return (
     <div className={cn("annotation-settings").toClassName()}>
       <div className={cn("annotation-settings").elem("wrapper").toClassName()}>
-        <h1>Annotation Settings</h1>
+        <h1>{t("annotationSettings.title")}</h1>
         <div className={cn("settings-wrapper").toClassName()}>
           <Form
             ref={formRef}
@@ -38,15 +41,15 @@ export const AnnotationSettings = () => {
             onSubmit={updateProject}
           >
             <Form.Row columnCount={1}>
-              <div className={cn("settings-wrapper").elem("header").toClassName()}>Labeling Instructions</div>
+              <div className={cn("settings-wrapper").elem("header").toClassName()}>{t("annotationSettings.labelingInstructions")}</div>
               <div class="settings-description">
-                <p style={{ marginBottom: "0" }}>Write instructions to help users complete labeling tasks.</p>
+                <p style={{ marginBottom: "0" }}>{t("annotationSettings.labelingInstructionsDesc")}</p>
                 <p style={{ marginTop: "8px" }}>
-                  The instruction field supports HTML markup and it allows use of images, iframes (pdf).
+                  {t("annotationSettings.labelingInstructionsHtml")}
                 </p>
               </div>
               <div>
-                <Toggle label="Show before labeling" name="show_instruction" />
+                <Toggle label={t("annotationSettings.showBeforeLabeling")} name="show_instruction" />
               </div>
               <TextArea name="expert_instruction" style={{ minHeight: 128, maxWidth: "520px" }} />
             </Form.Row>
@@ -55,11 +58,11 @@ export const AnnotationSettings = () => {
 
             <Form.Row columnCount={1}>
               <br />
-              <div className={cn("settings-wrapper").elem("header").toClassName()}>Prelabeling</div>
+              <div className={cn("settings-wrapper").elem("header").toClassName()}>{t("annotationSettings.prelabeling")}</div>
               <div>
                 <Toggle
-                  label="Use predictions to prelabel tasks"
-                  description={<span>Enable and select which set of predictions to use for prelabeling.</span>}
+                  label={t("annotationSettings.usePredictions")}
+                  description={<span>{t("annotationSettings.usePredictionsDesc")}</span>}
                   name="show_collab_predictions"
                   onChange={(e) => {
                     setCollab(e.target.checked);
@@ -72,10 +75,10 @@ export const AnnotationSettings = () => {
 
             <Form.Actions>
               <Form.Indicator>
-                <span case="success">Saved!</span>
+                <span case="success">{t("annotationSettings.saved")}</span>
               </Form.Indicator>
-              <Button type="submit" look="primary" className="w-[150px]" aria-label="Save annotation settings">
-                Save
+              <Button type="submit" look="primary" className="w-[150px]" aria-label={t("annotationSettings.save")}>
+                {t("annotationSettings.save")}
               </Button>
             </Form.Actions>
           </Form>
@@ -85,5 +88,5 @@ export const AnnotationSettings = () => {
   );
 };
 
-AnnotationSettings.title = "Annotation";
+AnnotationSettings.title = i18n.t("annotationSettings.title");
 AnnotationSettings.path = "/annotation";
