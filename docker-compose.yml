@@ -1,6 +1,10 @@
 services:
   nginx:
-    build: .
+    build:
+      context: .
+      args:
+        VERSION_OVERRIDE: ${VERSION_OVERRIDE:-dev}
+        BRANCH_OVERRIDE: ${BRANCH_OVERRIDE:-stable-localization}
     image: alickjoe/label-studio:latest
     restart: unless-stopped
     ports:
@@ -26,7 +30,11 @@ services:
   app:
     stdin_open: true
     tty: true
-    build: .
+    build:
+      context: .
+      args:
+        VERSION_OVERRIDE: ${VERSION_OVERRIDE:-dev}
+        BRANCH_OVERRIDE: ${BRANCH_OVERRIDE:-stable-localization}
     image: alickjoe/label-studio:latest
     restart: unless-stopped
     expose:

@@ -54,10 +54,10 @@ RUN --mount=type=cache,target=/root/web/.yarn,id=yarn-cache,sharing=locked \
 
 ################################ Stage: frontend-version-generator
 FROM frontend-builder AS frontend-version-generator
+ARG VERSION_OVERRIDE
 RUN --mount=type=cache,target=/root/web/.yarn,id=yarn-cache,sharing=locked \
     --mount=type=cache,target=/root/web/.nx,id=nx-cache,sharing=locked \
-    --mount=type=bind,source=.git,target=../.git \
-    yarn version:libs
+    sh -c 'if [ -d ../.git ]; then yarn version:libs; else echo "{\"version\": \"${VERSION_OVERRIDE:-dev}\"}" > dist/libs/editor/version.json && mkdir -p dist/apps/labelstudio dist/libs/datamanager && cp dist/libs/editor/version.json dist/apps/labelstudio/version.json && cp dist/libs/editor/version.json dist/libs/datamanager/version.json; fi'
 
 ################################ Stage: venv-builder (prepare the virtualenv)
 FROM python:${PYTHON_VERSION}-alpine AS venv-builder
@@ -121,8 +121,14 @@ ARG VERSION_OVERRIDE
 ARG BRANCH_OVERRIDE
 
 # Create version_.py and ls-version_.py
-RUN --mount=type=bind,source=.git,target=./.git \
-    VERSION_OVERRIDE=${VERSION_OVERRIDE} BRANCH_OVERRIDE=${BRANCH_OVERRIDE} poetry run python label_studio/core/version.py
+RUN sh -c 'if [ -d .git ]; then \
+    VERSION_OVERRIDE=${VERSION_OVERRIDE} BRANCH_OVERRIDE=${BRANCH_OVERRIDE} poetry run python label_studio/core/version.py; \
+else \
+    echo "{\"version\": \"${VERSION_OVERRIDE:-dev}\", \"commit\": \"unknown\", \"branch\": \"${BRANCH_OVERRIDE:-unknown}\", \"date\": \"${BUILD_DATE:-unknown}\", \"message\": \"built without git\"}" > label_studio/core/version_.py.new && \
+    python3 -c "import json; info=json.load(open(\"label_studio/core/version_.py.new\"))" && \
+    mv label_studio/core/version_.py.new label_studio/core/version_.py; \
+    cp label_studio/core/version_.py label_studio/core/ls-version_.py; \
+fi'
 
 ################################### Stage: prod
 FROM python:${PYTHON_VERSION}-alpine AS production
