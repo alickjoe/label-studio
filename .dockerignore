@@ -12,9 +12,13 @@
 label_studio/frontend
 label_studio/**/*.pyc
 
+# Re-ignore large dirs not needed for build
+.git
+postgres-data
+mydata
+
 # FRONTEND
 !web
-!.git
 # Re-ignore node_modules and nx cache
 **/node_modules
 **/.nx
