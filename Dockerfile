@@ -175,6 +175,9 @@ COPY --chown=1001:0 LICENSE LICENSE
 COPY --chown=1001:0 licenses licenses
 COPY --chown=1001:0 deploy deploy
 
+# Ensure entrypoint scripts are executable (git on Windows loses exec bit)
+RUN find deploy/docker-entrypoint.d -name "*.sh" -exec chmod +x {} \;
+
 # Copy files from build stages
 COPY --chown=1001:0 --from=venv-builder               $LS_DIR                                           $LS_DIR
 COPY --chown=1001:0 --from=py-version-generator       $LS_DIR/label_studio/core/version_.py             $LS_DIR/label_studio/core/version_.py
