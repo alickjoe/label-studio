@@ -57,7 +57,14 @@ FROM frontend-builder AS frontend-version-generator
 ARG VERSION_OVERRIDE
 RUN --mount=type=cache,target=/root/web/.yarn,id=yarn-cache,sharing=locked \
     --mount=type=cache,target=/root/web/.nx,id=nx-cache,sharing=locked \
-    sh -c 'if [ -d ../.git ]; then yarn version:libs; else echo "{\"version\": \"${VERSION_OVERRIDE:-dev}\"}" > dist/libs/editor/version.json && mkdir -p dist/apps/labelstudio dist/libs/datamanager && cp dist/libs/editor/version.json dist/apps/labelstudio/version.json && cp dist/libs/editor/version.json dist/libs/datamanager/version.json; fi'
+    if [ -d ../.git ]; then \
+        yarn version:libs; \
+    else \
+        mkdir -p dist/libs/editor dist/apps/labelstudio dist/libs/datamanager && \
+        echo "{\"version\": \"${VERSION_OVERRIDE:-dev}\"}" > dist/libs/editor/version.json && \
+        cp dist/libs/editor/version.json dist/apps/labelstudio/version.json && \
+        cp dist/libs/editor/version.json dist/libs/datamanager/version.json; \
+    fi
 
 ################################ Stage: venv-builder (prepare the virtualenv)
 FROM python:${PYTHON_VERSION}-alpine AS venv-builder
