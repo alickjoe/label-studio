@@ -131,9 +131,7 @@ ARG BRANCH_OVERRIDE
 RUN sh -c 'if [ -d .git ]; then \
     VERSION_OVERRIDE=${VERSION_OVERRIDE} BRANCH_OVERRIDE=${BRANCH_OVERRIDE} poetry run python label_studio/core/version.py; \
 else \
-    echo "{\"version\": \"${VERSION_OVERRIDE:-dev}\", \"commit\": \"unknown\", \"branch\": \"${BRANCH_OVERRIDE:-unknown}\", \"date\": \"${BUILD_DATE:-unknown}\", \"message\": \"built without git\"}" > label_studio/core/version_.py.new && \
-    python3 -c "import json; info=json.load(open(\"label_studio/core/version_.py.new\"))" && \
-    mv label_studio/core/version_.py.new label_studio/core/version_.py; \
+    echo "info = {\"version\": \"${VERSION_OVERRIDE:-dev}\", \"commit\": \"unknown\", \"branch\": \"${BRANCH_OVERRIDE:-unknown}\"}" > label_studio/core/version_.py && \
     cp label_studio/core/version_.py label_studio/core/ls-version_.py; \
 fi'
 
