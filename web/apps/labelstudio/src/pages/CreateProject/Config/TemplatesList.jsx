@@ -17,6 +17,7 @@ const Arrow = () => (
 );
 
 const TemplatesInGroup = ({ templates, group, onSelectRecipe, isEdition }) => {
+  const { t } = useTranslation();
   const picked = templates
     .filter((recipe) => recipe.group === group)
     // templates without `order` go to the end of the list
