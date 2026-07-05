@@ -197,7 +197,7 @@ export const ExportPage = () => {
               </a>
             </div>
             <div className={cn("export-page").elem("actions").toClassName()}>
-              <Button className="w-[135px]" onClick={proceedExport} waiting={downloading} aria-label="Export data">
+              <Button className="w-[135px]" onClick={proceedExport} waiting={downloading} aria-label={t("exportPage.export")}>
                 {t("exportPage.export")}
               </Button>
             </div>

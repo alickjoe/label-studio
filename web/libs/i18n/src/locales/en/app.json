@@ -433,7 +433,20 @@
     "useNewLineSep": "Use new line as a separator to add multiple labels",
     "updating": "Updating...",
     "updatePreview": "Update Preview",
-    "preview": "Preview"
+    "preview": "Preview",
+    "customTemplateAria": "Create custom template",
+    "customTemplate": "Custom template",
+    "contributeTemplatePre": "See the documentation to",
+    "contributeTemplateLink": "contribute a template",
+    "contributeTemplatePost": ".",
+    "deleteLabel": "Delete label",
+    "configureSettings": "Configure settings",
+    "configureData": "Configure data",
+    "from": "from",
+    "field": "field",
+    "templateRequiresMoreData": "This template requires more data than you have for now",
+    "uploadDataForFields": "To select which field(s) to label you need to upload the data. Alternatively, you can provide it using Code mode.",
+    "enterpriseFeatureTooltip": "Enterprise feature - Available in Label Studio Enterprise"
   },
   "labelingSettings": {
     "title": "Labeling Interface Settings",
@@ -533,5 +546,42 @@
     "storage": "Cloud Storage",
     "webhooks": "Webhooks",
     "dangerZone": "Danger Zone"
+  },
+  "filters": {
+    "where": "Where",
+    "column": "Column",
+    "and": "and",
+    "andConjunction": "And",
+    "or": "Or",
+    "condition": "Condition",
+    "min": "Min",
+    "max": "Max",
+    "noFiltersApplied": "No filters applied",
+    "addFilter": "Add Filter",
+    "addAnotherFilter": "Add Another Filter",
+    "copied": "Copied!",
+    "copyFiltersTooltip": "Copy filters to clipboard; Tip: Use it in Label Studio SDK",
+    "copyFilters": "Copy filters",
+    "pasted": "Pasted!",
+    "pasteFiltersTooltip": "Paste filters from clipboard",
+    "pasteFilters": "Paste filters",
+    "undoPasteTooltip": "Undo paste — restore previous filters",
+    "undoPaste": "Undo paste",
+    "pinToSidebar": "Pin to sidebar",
+    "unpinFilters": "Unpin filters",
+    "filters": "Filters"
+  },
+  "tabs": {
+    "openNewTab": "Open New Tab",
+    "unsaved": "unsaved",
+    "tabName": "Tab name",
+    "tabOptions": "Tab options",
+    "rename": "Rename",
+    "duplicate": "Duplicate",
+    "save": "Save",
+    "close": "Close"
+  },
+  "table": {
+    "displayAs": "Display as"
   }
 }

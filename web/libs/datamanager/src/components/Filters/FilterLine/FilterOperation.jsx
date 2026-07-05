@@ -1,6 +1,7 @@
 import { observer } from "mobx-react";
 import { getRoot } from "mobx-state-tree";
 import { useCallback, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { cn } from "../../../utils/bem";
 import { debounce } from "@humansignal/core/lib/utils/debounce";
 import { FilterDropdown } from "../FilterDropdown";
@@ -18,6 +19,7 @@ import { Common } from "../types/Common";
  * @param {{field: FieldConfig}} param0
  */
 export const FilterOperation = observer(({ filter, field, operator, value, disabled }) => {
+  const { t } = useTranslation();
   const cellView = filter.cellView;
   const types = cellView?.customOperators ?? [
     ...(FilterInputs[filter.filter.currentType] ?? FilterInputs.String),
@@ -82,7 +84,7 @@ export const FilterOperation = observer(({ filter, field, operator, value, disab
     <>
       <div className={columnClass.mix("operation").toClassName()}>
         <FilterDropdown
-          placeholder="Condition"
+          placeholder={t("filters.condition")}
           value={filter.operator}
           disabled={types.length === 1 || disabled}
           items={availableOperators ? operators.filter((op) => availableOperators.includes(op.value)) : operators}

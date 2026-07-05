@@ -433,7 +433,20 @@
     "useNewLineSep": "使用换行作为分隔符来添加多个标签",
     "updating": "更新中...",
     "updatePreview": "更新预览",
-    "preview": "预览"
+    "preview": "预览",
+    "customTemplateAria": "创建自定义模板",
+    "customTemplate": "自定义模板",
+    "contributeTemplatePre": "查看文档来",
+    "contributeTemplateLink": "贡献模板",
+    "contributeTemplatePost": "。",
+    "deleteLabel": "删除标签",
+    "configureSettings": "配置设置",
+    "configureData": "配置数据",
+    "from": "从",
+    "field": "字段",
+    "templateRequiresMoreData": "此模板需要的数据比你当前拥有的更多",
+    "uploadDataForFields": "要选择要标注的字段，你需要上传数据。或者，你也可以使用代码模式提供。",
+    "enterpriseFeatureTooltip": "企业版功能 - 在 Label Studio 企业版中可用"
   },
   "labelingSettings": {
     "title": "标注界面设置",
@@ -533,5 +546,42 @@
     "storage": "云存储",
     "webhooks": "Webhooks",
     "dangerZone": "危险区域"
+  },
+  "filters": {
+    "where": "条件",
+    "column": "列",
+    "and": "和",
+    "andConjunction": "且",
+    "or": "或",
+    "condition": "条件",
+    "min": "最小值",
+    "max": "最大值",
+    "noFiltersApplied": "未应用筛选",
+    "addFilter": "添加筛选",
+    "addAnotherFilter": "添加另一个筛选",
+    "copied": "已复制！",
+    "copyFiltersTooltip": "复制筛选到剪贴板；提示：可在 Label Studio SDK 中使用",
+    "copyFilters": "复制筛选",
+    "pasted": "已粘贴！",
+    "pasteFiltersTooltip": "从剪贴板粘贴筛选",
+    "pasteFilters": "粘贴筛选",
+    "undoPasteTooltip": "撤销粘贴 — 恢复之前的筛选",
+    "undoPaste": "撤销粘贴",
+    "pinToSidebar": "固定到侧边栏",
+    "unpinFilters": "取消固定筛选",
+    "filters": "筛选"
+  },
+  "tabs": {
+    "openNewTab": "打开新标签",
+    "unsaved": "未保存",
+    "tabName": "标签名称",
+    "tabOptions": "标签选项",
+    "rename": "重命名",
+    "duplicate": "复制",
+    "save": "保存",
+    "close": "关闭"
+  },
+  "table": {
+    "displayAs": "显示为"
   }
 }

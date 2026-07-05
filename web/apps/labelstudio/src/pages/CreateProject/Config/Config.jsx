@@ -84,6 +84,7 @@ const EmptyConfigPlaceholder = () => {
 };
 
 const Label = ({ label, template, color }) => {
+  const { t } = useTranslation();
   const value = label.getAttribute("value");
 
   return (
@@ -113,7 +114,7 @@ const Label = ({ label, template, color }) => {
         size="smaller"
         variant="negative"
         onClick={() => template.removeLabel(label)}
-        aria-label="delete label"
+        aria-label={t("configPage.deleteLabel")}
         className="hidden !p-0 z-10 absolute right-0 [&_span]:!p-0 group-hover:inline-flex"
         leading={<IconTrash className="w-4 h-4 fill-[currentColor]" />}
       />
@@ -179,6 +180,7 @@ const ConfigureControl = ({ control, template }) => {
 };
 
 const ConfigureSettings = ({ template }) => {
+  const { t } = useTranslation();
   const { settings } = template;
 
   if (!settings) return null;
@@ -267,7 +269,7 @@ const ConfigureSettings = ({ template }) => {
   return (
     <ul className={configClass.elem("settings").toClassName()}>
       <li>
-        <h4>Configure settings</h4>
+        <h4>{t("configPage.configureSettings")}</h4>
         <ul className={configClass.elem("object-settings").toClassName()}>{items}</ul>
       </li>
     </ul>
@@ -276,6 +278,7 @@ const ConfigureSettings = ({ template }) => {
 
 // configure value source for `obj` object tag
 const ConfigureColumn = ({ template, obj, columns }) => {
+  const { t } = useTranslation();
   const valueAttr = obj.hasAttribute("valueList") ? "valueList" : "value";
   const value = obj.getAttribute(valueAttr)?.replace(/^\$/, "");
   // if there is a value set already and it's not in the columns
@@ -343,8 +346,10 @@ const ConfigureColumn = ({ template, obj, columns }) => {
     <p>
       Use {obj.tagName.toLowerCase()}
       {template.objects > 1 && ` for ${obj.getAttribute("name")}`}
-      {" from "}
-      {columns?.length > 0 && columns[0] !== DEFAULT_COLUMN && "field "}
+      {" "}
+      {t("configPage.from")}
+      {" "}
+      {columns?.length > 0 && columns[0] !== DEFAULT_COLUMN && `${t("configPage.field")} `}
       <Select
         triggerClassName="border"
         onChange={selectValue}
@@ -359,20 +364,20 @@ const ConfigureColumn = ({ template, obj, columns }) => {
 };
 
 const ConfigureColumns = ({ columns, template }) => {
+  const { t } = useTranslation();
   if (!template.objects.length) return null;
 
   return (
     <div className={configClass.elem("object").toClassName()}>
-      <h4>Configure data</h4>
+      <h4>{t("configPage.configureData")}</h4>
       {template.objects.length > 1 && columns?.length > 0 && columns.length < template.objects.length && (
         <p className={configClass.elem("object-error").toClassName()}>
-          This template requires more data then you have for now
+          {t("configPage.templateRequiresMoreData")}
         </p>
       )}
       {columns?.length === 0 && (
         <p className={configClass.elem("object-error").toClassName()}>
-          To select which field(s) to label you need to upload the data. Alternatively, you can provide it using Code
-          mode.
+          {t("configPage.uploadDataForFields")}
         </p>
       )}
       {template.objects.map((obj) => (
