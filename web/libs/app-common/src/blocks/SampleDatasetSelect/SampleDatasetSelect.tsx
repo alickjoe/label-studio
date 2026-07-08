@@ -17,7 +17,7 @@ export function SampleDatasetSelect({
   onSampleApplied: (sample?: Sample) => void;
 }) {
   const title = useMemo(() => {
-    return sample?.title ?? "Select sample";
+    return sample?.title ?? "选择示例";
   }, [sample]);
 
   const onSelect = useCallback(
@@ -56,10 +56,10 @@ export function SampleDatasetSelect({
 
   return (
     <div className="flex gap-3 items-center">
-      <span className="text-neutral-content-subtler">or use a sample dataset</span>
+      <span className="text-neutral-content-subtler">或使用示例数据集</span>
       <Select
         value={sample?.url ?? undefined}
-        placeholder="Select sample"
+        placeholder="选择示例"
         onChange={onSelect}
         triggerProps={{ onClick }}
         options={options}

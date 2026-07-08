@@ -92,7 +92,7 @@ export const RowContextMenu: FC<RowContextMenuProps> = ({
   // 2. Copy cell content
   const handleCopyCellContent = useCallback(async () => {
     if (!cellValue) {
-      showToast("No content to copy", "error");
+      showToast("没有可复制的内容", "error");
       onClose();
       return;
     }
@@ -130,10 +130,10 @@ export const RowContextMenu: FC<RowContextMenuProps> = ({
       await navigator.clipboard.writeText(textToCopy);
 
       const taskId = row.id ?? row.task_id;
-      const columnName = column?.title || column?.alias || "content";
-      showToast(`Copied "${columnName}" for Task ${taskId} to clipboard`, "info");
+      const columnName = column?.title || column?.alias || "内容";
+      showToast(`已复制任务 ${taskId} 的"${columnName}"到剪贴板`, "info");
     } catch {
-      showToast("Failed to copy to clipboard", "error");
+      showToast("复制到剪贴板失败", "error");
     }
     onClose();
   }, [cellValue, column, row, onClose, showToast, view]);
@@ -143,16 +143,16 @@ export const RowContextMenu: FC<RowContextMenuProps> = ({
     const taskId = row.id ?? row.task_id;
 
     if (!taskId) {
-      showToast("Task ID not found", "error");
+      showToast("未找到任务 ID", "error");
       onClose();
       return;
     }
 
     try {
       await navigator.clipboard.writeText(String(taskId));
-      showToast(`Copied Task ID ${taskId} to clipboard`, "info");
+      showToast(`已复制任务 ID ${taskId} 到剪贴板`, "info");
     } catch {
-      showToast("Failed to copy to clipboard", "error");
+      showToast("复制到剪贴板失败", "error");
     }
     onClose();
   }, [row, onClose, showToast]);
@@ -180,7 +180,7 @@ export const RowContextMenu: FC<RowContextMenuProps> = ({
     };
 
     const modalInstance = modal({
-      title: `Source for task ${taskId}`,
+      title: `任务 ${taskId} 的源数据`,
       style: { width: 900 },
       header: null, // Will be set by renderToggle
       body: (
@@ -215,7 +215,7 @@ export const RowContextMenu: FC<RowContextMenuProps> = ({
   // Use annotators array which only contains actual annotators, not predictions
   const hasAnnotators = row.annotators && row.annotators.length > 0;
   const annotatorCount = row.annotators?.length ?? 0;
-  const annotatorLabel = annotatorCount === 1 ? "Annotator" : "Annotators";
+  const annotatorLabel = annotatorCount === 1 ? "标注员" : "标注员";
 
   // Create dropdown ref for context
   const dropdownRef = useRef(null);
@@ -247,30 +247,30 @@ export const RowContextMenu: FC<RowContextMenuProps> = ({
             data-testid="menu-item-compare-annotations"
             icon={<IconViewAll />}
           >
-            Compare All Annotations
+            比较所有标注
           </Menu.Item>
 
           <Menu.Divider />
 
           {canCopyCellContent && (
             <Menu.Item onClick={handleCopyCellContent} data-testid="menu-item-copy-cell" icon={<IconCopyOutline />}>
-              Copy Cell Contents
+              复制单元格内容
             </Menu.Item>
           )}
 
           <Menu.Item onClick={handleCopyTaskId} data-testid="menu-item-copy-task-id" icon={<IconCopyOutline />}>
-            Copy Task ID
+            复制任务 ID
           </Menu.Item>
 
           <Menu.Item onClick={handleViewTaskSource} data-testid="menu-item-view-source" icon={<IconBraces />}>
-            View Task Source
+            查看任务源数据
           </Menu.Item>
 
           {onViewAnalytics && hasAnnotators && (
             <>
               <Menu.Divider />
               <Menu.Item onClick={handleViewAnalytics} data-testid="menu-item-view-analytics" icon={<IconUserStats />}>
-                View {annotatorLabel} Performance
+                查看{annotatorLabel}绩效
               </Menu.Item>
             </>
           )}

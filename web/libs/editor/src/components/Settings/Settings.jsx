@@ -16,8 +16,8 @@ import { ff } from "@humansignal/core";
 
 const HotkeysDescription = () => {
   const columns = [
-    { title: "Shortcut", dataIndex: "combo", key: "combo" },
-    { title: "Description", dataIndex: "descr", key: "descr" },
+    { title: "快捷键", dataIndex: "combo", key: "combo" },
+    { title: "描述", dataIndex: "descr", key: "descr" },
   ];
 
   const keyNamespaces = Hotkey.namespaces();
@@ -125,37 +125,37 @@ const LayoutSettings = observer(({ store }) => {
             setTimeout(triggerResizeEvent);
           }}
         >
-          Move sidepanel to the bottom
+          将侧边栏移至底部
         </Checkbox>
       </div>
 
       <div className={cn("settings").elem("field").toClassName()}>
         <Checkbox checked={store.settings.displayLabelsByDefault} onChange={store.settings.toggleSidepanelModel}>
-          Display Labels by default in Results panel
+          默认在结果面板中显示标签
         </Checkbox>
       </div>
 
       <div className={cn("settings").elem("field").toClassName()}>
         <Checkbox
-          value="Show Annotations panel"
+          value="显示标注面板"
           defaultChecked={store.settings.showAnnotationsPanel}
           onChange={() => {
             store.settings.toggleAnnotationsPanel();
           }}
         >
-          Show Annotations panel
+          显示标注面板
         </Checkbox>
       </div>
 
       <div className={cn("settings").elem("field").toClassName()}>
         <Checkbox
-          value="Show Predictions panel"
+          value="显示预测面板"
           defaultChecked={store.settings.showPredictionsPanel}
           onChange={() => {
             store.settings.togglePredictionsPanel();
           }}
         >
-          Show Predictions panel
+          显示预测面板
         </Checkbox>
       </div>
 
@@ -176,15 +176,15 @@ const LayoutSettings = observer(({ store }) => {
 });
 
 const Settings = {
-  General: { name: "General", component: GeneralSettings },
-  Hotkeys: { name: "Hotkeys", component: HotkeysDescription },
+  General: { name: "通用", component: GeneralSettings },
+  Hotkeys: { name: "快捷键", component: HotkeysDescription },
 };
 
 const DEFAULT_ACTIVE = Object.keys(Settings)[0];
 
 const DEFAULT_MODAL_SETTINGS = {
   name: "settings-modal",
-  title: "Labeling Interface Settings",
+  title: "标注界面设置",
   closeIcon: <IconClose />,
 };
 

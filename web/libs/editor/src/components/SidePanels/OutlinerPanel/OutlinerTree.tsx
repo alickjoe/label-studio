@@ -437,7 +437,7 @@ const RootTitle: FC<any> = observer(
             )}
             {incomplete && (
               <span className={cn("outliner-item").elem("incomplete").toClassName()}>
-                <Tooltip title={`Incomplete ${item.type?.replace("region", "") ?? "region"}`}>
+                <Tooltip title={`未完成的${item.type?.replace("region", "") ?? "区域"}`}>
                   <IconWarning />
                 </Tooltip>
               </span>
@@ -547,7 +547,7 @@ const RegionControls: FC<RegionControlsProps> = injector(
       <div
         className={cn("outliner-item").elem("controls").mod({ withControls: hasControls, newUI: true }).toClassName()}
       >
-        <Tooltip title={"Confidence Score"}>
+        <Tooltip title={"置信度分数"}>
           <div className={cn("outliner-item").elem("control-wrapper").toClassName()}>
             <div className={cn("outliner-item").elem("control").mod({ type: "predict" }).toClassName()}>
               {item?.origin === "prediction" && <IconSparks style={{ width: 18, height: 18 }} />}
@@ -573,7 +573,7 @@ const RegionControls: FC<RegionControlsProps> = injector(
                 onClick={onToggleLocked}
                 variant="neutral"
                 look="string"
-                tooltip={item?.locked ? "Unlock Region" : "Lock Region"}
+                tooltip={item?.locked ? "解锁区域" : "锁定区域"}
               />
             </div>
           )}
@@ -583,8 +583,8 @@ const RegionControls: FC<RegionControlsProps> = injector(
                 variant="neutral"
                 look="string"
                 onClick={onToggleHidden}
-                aria-label={hidden ? "Show" : "Hide"}
-                title={hidden ? "Show" : "Hide"}
+                aria-label={hidden ? "显示" : "隐藏"}
+                title={hidden ? "显示" : "隐藏"}
               >
                 {hidden ? (
                   <IconEyeClosed style={{ width: 20, height: 20 }} />

@@ -3,11 +3,11 @@ import type { TipsCollection } from "./types";
 export const defaultTipsCollection: TipsCollection = {
   projectCreation: [
     {
-      title: "Did you know?",
-      content: "It’s easier to find the projects when you organize them into workspaces using Label Studio Enterprise.",
+      title: "你知道吗？",
+      content: "使用 Label Studio 企业版将项目组织到工作区中，可以更轻松地查找项目。",
       closable: true,
       link: {
-        label: "Learn more",
+        label: "了解更多",
         url: "https://docs.humansignal.com/guide/manage_projects#Create-workspaces-to-organize-projects",
         params: {
           experiment: "project_creation_tip",
@@ -16,12 +16,11 @@ export const defaultTipsCollection: TipsCollection = {
       },
     },
     {
-      title: "Unlock faster access provisioning",
-      content:
-        "Streamline assigning staff to multiple projects by assigning them to workspaces in Label Studio Enterprise.",
+      title: "解锁更快的访问配置",
+      content: "通过在 Label Studio 企业版中将员工分配到工作区，简化将员工分配到多个项目的流程。",
       closable: true,
       link: {
-        label: "Learn more",
+        label: "了解更多",
         url: "https://docs.humansignal.com/guide/manage_projects#Add-or-remove-members-to-a-workspace",
         params: {
           experiment: "project_creation_tip",
@@ -30,12 +29,12 @@ export const defaultTipsCollection: TipsCollection = {
       },
     },
     {
-      title: "Did you know?",
+      title: "你知道吗？",
       content:
-        "In the Enterprise platform, admins can view annotator performance dashboards to optimize resource allocation, improve team management, and inform compensation.",
+        "在企业版平台中，管理员可以查看标注员绩效仪表板，以优化资源分配、改进团队管理并为薪酬决策提供依据。",
       closable: true,
       link: {
-        label: "Learn more",
+        label: "了解更多",
         url: "https://docs.humansignal.com/guide/dashboard_annotator",
         params: {
           experiment: "project_creation_tip",
@@ -44,12 +43,11 @@ export const defaultTipsCollection: TipsCollection = {
       },
     },
     {
-      title: "Did you know?",
-      content:
-        "You can control access to specific projects and workspaces for internal team members and external annotators using Label Studio Enterprise.",
+      title: "你知道吗？",
+      content: "你可以使用 Label Studio 企业版控制内部团队成员和外部标注员对特定项目和工作区的访问权限。",
       closable: true,
       link: {
-        label: "Learn more",
+        label: "了解更多",
         url: "https://docs.humansignal.com/guide/manage_users#Roles-in-Label-Studio-Enterprise",
         params: {
           experiment: "project_creation_tip",
@@ -58,12 +56,12 @@ export const defaultTipsCollection: TipsCollection = {
       },
     },
     {
-      title: "Did you know?",
+      title: "你知道吗？",
       content:
-        "You can use or modify dozens or templates to configure your labeling UI, or create a custom configuration from scratch using simple XML-like tag.",
+        "你可以使用或修改数十种模板来配置标注界面，也可以使用简单的类 XML 标签从头创建自定义配置。",
       closable: true,
       link: {
-        label: "Learn more",
+        label: "了解更多",
         url: "https://labelstud.io/guide/setup",
         params: {
           experiment: "project_creation_tip",
@@ -72,12 +70,11 @@ export const defaultTipsCollection: TipsCollection = {
       },
     },
     {
-      title: "Labeling for GenAI",
-      content:
-        "Label Studio has templates available for supervised LLM fine-tuning, RAG retrieval ranking, RLHF, chatbot evaluation, and more.",
+      title: "面向 GenAI 的标注",
+      content: "Label Studio 提供用于监督式 LLM 微调、RAG 检索排序、RLHF、聊天机器人评估等场景的模板。",
       closable: true,
       link: {
-        label: "Explore templates",
+        label: "探索模板",
         url: "https://labelstud.io/templates/gallery_generative_ai",
         params: {
           experiment: "project_creation_tip",
@@ -88,12 +85,11 @@ export const defaultTipsCollection: TipsCollection = {
   ],
   organizationPage: [
     {
-      title: "It looks like your team is growing!",
-      content:
-        "Assign roles to your team using Label Studio Enterprise and control access to sensitive data at the project and workspace levels.",
+      title: "看起来你的团队正在壮大！",
+      content: "使用 Label Studio 企业版为团队分配角色，并在项目和工作区级别控制对敏感数据的访问。",
       closable: true,
       link: {
-        label: "Learn more",
+        label: "了解更多",
         url: "https://docs.humansignal.com/guide/manage_users#Roles-in-Label-Studio-Enterprise",
         params: {
           experiment: "organization_page_tip",
@@ -102,11 +98,11 @@ export const defaultTipsCollection: TipsCollection = {
       },
     },
     {
-      title: "Want to simplify and secure logging in?",
-      content: "Enable Single Sign-On for your team using SAML, SCIM2 or LDAP with Label Studio Enterprise.",
+      title: "想要简化和保护登录吗？",
+      content: "使用 Label Studio 企业版通过 SAML、SCIM2 或 LDAP 为团队启用单点登录。",
       closable: true,
       link: {
-        label: "Learn more",
+        label: "了解更多",
         url: "https://docs.humansignal.com/guide/auth_setup",
         params: {
           experiment: "organization_page_tip",
@@ -115,11 +111,11 @@ export const defaultTipsCollection: TipsCollection = {
       },
     },
     {
-      title: "Did you know?",
-      content: "Try Label Studio Starter Cloud, optimized for small teams and projects.",
+      title: "你知道吗？",
+      content: "试试专为小型团队和项目优化的 Label Studio 入门级云服务。",
       closable: true,
       link: {
-        label: "Learn more",
+        label: "了解更多",
         url: "https://humansignal.com/pricing/",
         params: {
           experiment: "organization_page_tip",
@@ -128,12 +124,11 @@ export const defaultTipsCollection: TipsCollection = {
       },
     },
     {
-      title: "Want to automate task distribution?",
-      content:
-        "Create rules, automate how tasks are distributed to annotators, and only show tasks assigned to each annotator in their view.and control task visibility for each annotator.",
+      title: "想要自动化任务分配吗？",
+      content: "创建规则，自动化任务向标注员的分配方式，并在每位标注员的视图中仅显示分配给他们的任务，同时控制每位标注员的任务可见性。",
       closable: true,
       link: {
-        label: "Learn more",
+        label: "了解更多",
         url: "https://docs.humansignal.com/guide/setup_project#Set-up-annotation-settings-for-your-project",
         params: {
           experiment: "organization_page_tip",
@@ -142,12 +137,11 @@ export const defaultTipsCollection: TipsCollection = {
       },
     },
     {
-      title: "Share knowledge with the community",
-      content:
-        "Have questions or a tip to share with other Label Studio users? Join the community slack channel for the latest updates. ",
+      title: "与社区分享知识",
+      content: "有疑问或想与其他 Label Studio 用户分享技巧？加入社区 Slack 频道获取最新更新。",
       closable: true,
       link: {
-        label: "Join the community",
+        label: "加入社区",
         url: "https://label-studio.slack.com",
         params: {
           experiment: "organization_page_tip",
@@ -156,12 +150,12 @@ export const defaultTipsCollection: TipsCollection = {
       },
     },
     {
-      title: "Did you know?",
+      title: "你知道吗？",
       content:
-        "Label Studio supports multiple points of integration with cloud storage, machine learning models, and popular tools to automate your machine learning pipeline.",
+        "Label Studio 支持与云存储、机器学习模型和常用工具的多点集成，以自动化你的机器学习流水线。",
       closable: true,
       link: {
-        label: "Check out the integrations directory",
+        label: "查看集成目录",
         url: "https://labelstud.io/integrations/",
         params: {
           experiment: "organization_page_tip",
@@ -172,12 +166,11 @@ export const defaultTipsCollection: TipsCollection = {
   ],
   projectSettings: [
     {
-      title: "Apply your AWS spend to Label Studio Enterprise",
-      content:
-        "Label Studio Enterprise is now available on the AWS Marketplace so you can use your committed spend to streamline data labeling workflows.",
+      title: "将你的 AWS 支出应用于 Label Studio 企业版",
+      content: "Label Studio 企业版现已在 AWS Marketplace 上线，你可以使用承诺支出简化数据标注工作流。",
       closable: true,
       link: {
-        label: "Learn more",
+        label: "了解更多",
         url: "https://aws.amazon.com/marketplace/pp/prodview-wjac3msf77tny",
         params: {
           experiment: "project_settings_tip",
@@ -186,12 +179,11 @@ export const defaultTipsCollection: TipsCollection = {
       },
     },
     {
-      title: "Save time with Auto-Labeling",
-      content:
-        "Use automation to instantly label large-scale datasets without sacrificing quality in the Enterprise platform.",
+      title: "使用自动标注节省时间",
+      content: "在企业版平台中使用自动化功能，在不牺牲质量的情况下即时标注大规模数据集。",
       closable: true,
       link: {
-        label: "Learn more",
+        label: "了解更多",
         url: "https://docs.humansignal.com/guide/prompts_overview#Auto-labeling-with-Prompts",
         params: {
           experiment: "project_settings_tip",
@@ -200,12 +192,11 @@ export const defaultTipsCollection: TipsCollection = {
       },
     },
     {
-      title: "Did you know?",
-      content:
-        "You can increase the quality of your labeled data with reviewer workflows and task agreement scores using Label Studio Enterprise.",
+      title: "你知道吗？",
+      content: "使用 Label Studio 企业版，你可以通过审核工作流和任务一致性分数提高标注数据的质量。",
       closable: true,
       link: {
-        label: "Learn more",
+        label: "了解更多",
         url: "https://docs.humansignal.com/guide/quality",
         params: {
           experiment: "project_settings_tip",
@@ -214,12 +205,11 @@ export const defaultTipsCollection: TipsCollection = {
       },
     },
     {
-      title: "Evaluate GenAI models",
-      content:
-        "Combine automation plus human supervision to evaluate and ensure LLM quality in the Enterprise platform.",
+      title: "评估 GenAI 模型",
+      content: "在企业版平台中结合自动化和人工监督，以评估并确保 LLM 质量。",
       closable: true,
       link: {
-        label: "Learn more",
+        label: "了解更多",
         url: "https://humansignal.com/evals/",
         params: {
           experiment: "project_settings_tip",
@@ -228,12 +218,12 @@ export const defaultTipsCollection: TipsCollection = {
       },
     },
     {
-      title: "Did you know?",
+      title: "你知道吗？",
       content:
-        "You can save time managing infrastructure and upgrades, plus access more features for automation, quality, and team management, by using the Enterprise cloud service.",
+        "使用企业版云服务，你可以节省管理基础设施和升级的时间，并访问更多用于自动化、质量和团队管理的功能。",
       closable: true,
       link: {
-        label: "Learn more",
+        label: "了解更多",
         url: "https://humansignal.com/platform/",
         params: {
           experiment: "project_settings_tip",
@@ -242,10 +232,10 @@ export const defaultTipsCollection: TipsCollection = {
       },
     },
     {
-      title: "Did you know?",
-      content: "Try Label Studio Starter Cloud, optimized for small teams and projects.",
+      title: "你知道吗？",
+      content: "试试专为小型团队和项目优化的 Label Studio 入门级云服务。",
       link: {
-        label: "Learn more",
+        label: "了解更多",
         url: "https://humansignal.com/pricing/",
         params: {
           experiment: "project_settings_tip",
@@ -254,11 +244,11 @@ export const defaultTipsCollection: TipsCollection = {
       },
     },
     {
-      title: "Did you know?",
-      content: "You can connect ML models using the backend SDK to save time with pre-labeling or active learning.",
+      title: "你知道吗？",
+      content: "你可以使用后端 SDK 连接 ML 模型，通过预标注或主动学习节省时间。",
       closable: true,
       link: {
-        label: "Learn more",
+        label: "了解更多",
         url: "https://labelstud.io/guide/ml",
         params: {
           experiment: "project_settings_tip",

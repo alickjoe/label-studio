@@ -6,14 +6,14 @@ import { cn } from "../../utils/bem";
 
 export const WebhookDeleteModal = ({ onDelete }) => {
   return modal({
-    title: "Delete",
+    title: "删除",
     body: () => {
       const ctrl = useModalControls();
       const rootClass = cn("webhook-delete-modal");
       return (
         <div className={rootClass}>
           <div className={rootClass.elem("modal-text").toClassName()}>
-            Are you sure you want to delete the webhook? This action cannot be undone.
+            你确定要删除该 webhook 吗？此操作无法撤销。
           </div>
         </div>
       );
@@ -28,9 +28,9 @@ export const WebhookDeleteModal = ({ onDelete }) => {
             onClick={() => {
               ctrl.hide();
             }}
-            aria-label="Cancel webhook deletion"
+            aria-label="取消删除 webhook"
           >
-            Cancel
+            取消
           </Button>
           <Button
             variant="negative"
@@ -38,9 +38,9 @@ export const WebhookDeleteModal = ({ onDelete }) => {
               await onDelete();
               ctrl.hide();
             }}
-            aria-label="Confirm webhook deletion"
+            aria-label="确认删除 webhook"
           >
-            Delete Webhook
+            删除 Webhook
           </Button>
         </Space>
       );

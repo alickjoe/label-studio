@@ -33,9 +33,9 @@ const loadAsyncPage = async (url) => {
       modal({
         body: () => (
           <ErrorWrapper
-            title={`Error ${response.status}: ${response.statusText}`}
+            title={`错误 ${response.status}：${response.statusText}`}
             errorId={response.status}
-            stacktrace={`Cannot load url ${url}\n\n${html}`}
+            stacktrace={`无法加载 URL ${url}\n\n${html}`}
           />
         ),
         allowClose: false,
@@ -51,8 +51,8 @@ const loadAsyncPage = async (url) => {
       body: () => (
         <ErrorWrapper
           possum={false}
-          title={"Connection refused"}
-          message={"Server not responding. Is it still running?"}
+          title={"连接被拒绝"}
+          message={"服务器无响应。它还在运行吗？"}
         />
       ),
       simple: true,

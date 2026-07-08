@@ -3,7 +3,7 @@ import { isDefined } from "../../utils/utilities";
 import { Fragment, useEffect, useState } from "react";
 import { Hotkey } from "../../core/Hotkey";
 
-const hotkeys = Hotkey("SegmentationToolbar", "Segmentation Tools");
+const hotkeys = Hotkey("SegmentationToolbar", "分割工具");
 
 const keysDictionary = {
   plus: "+",
@@ -101,7 +101,7 @@ export const FlyoutMenu = ({ items, icon }) => {
           .elem("icon")
           .mix(isClicked ? "isClicked" : "")
           .toClassName()}
-        title="Zoom presets (click to see options)"
+        title="缩放预设（点击查看选项）"
       >
         {icon}
       </div>

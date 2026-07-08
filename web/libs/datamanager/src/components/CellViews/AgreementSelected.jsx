@@ -31,7 +31,7 @@ export const AgreementSelected = (cell) => {
   const overThreshold = Number(task?.total_annotations) > Number(threshold);
 
   const content = overThreshold ? (
-    <Tooltip title={`Agreement (Selected) is not computed for tasks with more than ${threshold} annotations`}>
+    <Tooltip title={`一致性（已选）不会为标注数超过 ${threshold} 的任务计算`}>
       <span className="inline-flex items-center text-neutral-content-subtler">
         <IconInfoOutline />
       </span>

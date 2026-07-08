@@ -356,7 +356,7 @@ describe("AnnotationButton", () => {
     const trigger = container.querySelector(".ls-annotation-button__trigger");
     expect(trigger).toBeInTheDocument();
     fireEvent.click(trigger!);
-    expect(screen.getByText("Copy Annotation ID")).toBeInTheDocument();
+    expect(screen.getByText("复制标注 ID")).toBeInTheDocument();
   });
 
   it("shows Copy Annotation Link when store has annotations:copy-link", () => {
@@ -380,7 +380,7 @@ describe("AnnotationButton", () => {
       </Provider>,
     );
     fireEvent.click(container.querySelector(".ls-annotation-button__trigger")!);
-    expect(screen.getByText("Copy Annotation Link")).toBeInTheDocument();
+    expect(screen.getByText("复制标注链接")).toBeInTheDocument();
   });
 
   it("calls setGroundTruth when Set as Ground Truth is clicked", () => {
@@ -397,7 +397,7 @@ describe("AnnotationButton", () => {
       </Provider>,
     );
     fireEvent.click(container.querySelector(".ls-annotation-button__trigger")!);
-    fireEvent.click(screen.getByText("Set as Ground Truth"));
+    fireEvent.click(screen.getByText("设为标准答案"));
     expect(setGroundTruth).toHaveBeenCalledWith(true);
   });
 
@@ -420,7 +420,7 @@ describe("AnnotationButton", () => {
       </Provider>,
     );
     fireEvent.click(container.querySelector(".ls-annotation-button__trigger")!);
-    fireEvent.click(screen.getByText("Show Other Annotations"));
+    fireEvent.click(screen.getByText("显示其他标注"));
     expect(toggleViewingAllAnnotations).toHaveBeenCalled();
   });
 
@@ -437,11 +437,11 @@ describe("AnnotationButton", () => {
       </Provider>,
     );
     fireEvent.click(container.querySelector(".ls-annotation-button__trigger")!);
-    fireEvent.click(screen.getByText("Delete Annotation"));
+    fireEvent.click(screen.getByText("删除标注"));
     expect(confirm).toHaveBeenCalledWith(
       expect.objectContaining({
-        title: "Delete annotation?",
-        okText: "Delete",
+        title: "删除标注？",
+        okText: "删除",
       }),
     );
   });
@@ -459,9 +459,9 @@ describe("AnnotationButton", () => {
       </Provider>,
     );
     fireEvent.click(container.querySelector(".ls-annotation-button__trigger")!);
-    fireEvent.click(screen.getByText("Copy Annotation ID"));
+    fireEvent.click(screen.getByText("复制标注 ID"));
     expect(mockToastShow).toHaveBeenCalledWith(
-      expect.objectContaining({ message: "Annotation ID copied to clipboard", type: "info" }),
+      expect.objectContaining({ message: "标注 ID 已复制到剪贴板", type: "info" }),
     );
   });
 
@@ -482,9 +482,9 @@ describe("AnnotationButton", () => {
       </Provider>,
     );
     fireEvent.click(container.querySelector(".ls-annotation-button__trigger")!);
-    fireEvent.click(screen.getByText("Copy Annotation Link"));
+    fireEvent.click(screen.getByText("复制标注链接"));
     expect(mockToastShow).toHaveBeenCalledWith(
-      expect.objectContaining({ message: "Annotation link copied to clipboard", type: "info" }),
+      expect.objectContaining({ message: "标注链接已复制到剪贴板", type: "info" }),
     );
   });
 
@@ -511,7 +511,7 @@ describe("AnnotationButton", () => {
       </Provider>,
     );
     fireEvent.click(container.querySelector(".ls-annotation-button__trigger")!);
-    fireEvent.click(screen.getByText("Duplicate Annotation"));
+    fireEvent.click(screen.getByText("复制标注"));
     expect(addAnnotationFromPrediction).toHaveBeenCalledWith(entity);
     jest.runAllTimers();
     expect(selectAnnotation).toHaveBeenCalledWith(99, { exitViewAll: true });
@@ -532,7 +532,7 @@ describe("AnnotationButton", () => {
       </Provider>,
     );
     fireEvent.click(container.querySelector(".ls-annotation-button__trigger")!);
-    fireEvent.click(screen.getByText("Unset as Ground Truth"));
+    fireEvent.click(screen.getByText("取消标准答案"));
     expect(setGroundTruth).toHaveBeenCalledWith(false);
   });
 

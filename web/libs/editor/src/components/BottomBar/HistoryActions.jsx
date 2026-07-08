@@ -9,11 +9,11 @@ export const EditingHistory = observer(({ entity }) => {
 
   return (
     <div className={cn("history-buttons").toClassName()}>
-      <Tooltip title="Undo">
+      <Tooltip title="撤销">
         <Button
           variant="neutral"
           size="small"
-          aria-label="Undo"
+          aria-label="撤销"
           look="string"
           disabled={!history?.canUndo}
           onClick={() => entity.undo()}
@@ -22,12 +22,12 @@ export const EditingHistory = observer(({ entity }) => {
           data-testid="bottombar-undo-button"
         />
       </Tooltip>
-      <Tooltip title="Redo">
+      <Tooltip title="重做">
         <Button
           variant="neutral"
           size="small"
           look="string"
-          aria-label="Redo"
+          aria-label="重做"
           disabled={!history?.canRedo}
           onClick={() => entity.redo()}
           className="aspect-square"
@@ -35,12 +35,12 @@ export const EditingHistory = observer(({ entity }) => {
           data-testid="bottombar-redo-button"
         />
       </Tooltip>
-      <Tooltip title="Reset">
+      <Tooltip title="重置">
         <Button
           variant="negative"
           look="string"
           size="small"
-          aria-label="Reset"
+          aria-label="重置"
           disabled={!history?.canUndo}
           onClick={() => history?.reset()}
           className="aspect-square"

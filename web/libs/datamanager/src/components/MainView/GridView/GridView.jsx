@@ -25,7 +25,7 @@ export const GridHeader = observer(({ row, selected, onSelect }) => {
       <Space>
         <Checkbox
           checked={isSelected}
-          ariaLabel={`${isSelected ? "Unselect" : "Select"} Task ${row.id}`}
+          ariaLabel={`${isSelected ? "取消选择" : "选择"}任务 ${row.id}`}
           onChange={() => onSelect?.(row.id)}
         />
         <span>{row.id}</span>

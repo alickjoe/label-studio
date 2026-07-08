@@ -72,24 +72,24 @@ export const CurrentTask = observer(({ store }) => {
 
   // Memoized messages for previous button
   const prevButtonMessage = useMemo(() => {
-    return !store.canGoPrevTask ? "No previous task" : "Previous task";
+    return !store.canGoPrevTask ? "没有上一个任务" : "上一个任务";
   }, [store.canGoPrevTask]);
 
   // Memoized messages for next button
   const nextButtonMessage = useMemo(() => {
     if (requiresAnnotationSubmission) {
-      return "Submit an annotation to continue";
+      return "请提交标注以继续";
     }
     if (canNavigateNext) {
-      return "Next task";
+      return "下一个任务";
     }
     if (canPostponeTask) {
-      return "Postpone task";
+      return "推迟任务";
     }
     if (!canSkipOrPostpone) {
-      return "Cannot postpone: task cannot be skipped";
+      return "无法推迟：此任务不可跳过";
     }
-    return "No next task available";
+    return "没有可用的下一个任务";
   }, [requiresAnnotationSubmission, canNavigateNext, canPostponeTask, canSkipOrPostpone]);
 
   if (store.hasInterface("annotations:comments") && isFF(FF_DEV_4174)) {
@@ -105,11 +105,11 @@ export const CurrentTask = observer(({ store }) => {
             showCounter &&
             (isFF(FF_TASK_COUNT_FIX) ? (
               <div className={cn("current-task").elem("task-count").toClassName()}>
-                {store.queuePosition} of {store.queueTotal}
+                {store.queuePosition} / {store.queueTotal}
               </div>
             ) : (
               <div className={cn("current-task").elem("task-count").toClassName()}>
-                {currentIndex} of {store.taskHistory.length}
+                {currentIndex} / {store.taskHistory.length}
               </div>
             ))}
         </div>

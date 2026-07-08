@@ -34,7 +34,7 @@ export function StateHistoryPopoverContent({ entityType, entityId, isOpen, onClo
           <div className="flex items-center gap-2">
             <IconHistoryRewind className="w-4 h-4" />
             <Typography variant="body" size="small" className="font-medium text-neutral-foreground">
-              State History
+              状态历史
             </Typography>
           </div>
           {onClose && (
@@ -46,7 +46,7 @@ export function StateHistoryPopoverContent({ entityType, entityId, isOpen, onClo
               leading={<IconCross />}
               look="string"
               size="small"
-              aria-label="Close"
+              aria-label="关闭"
             />
           )}
         </div>
@@ -58,7 +58,7 @@ export function StateHistoryPopoverContent({ entityType, entityId, isOpen, onClo
           <div className="flex flex-col items-center justify-center py-8 gap-3">
             <IconSync className="w-8 h-8 text-primary-icon animate-spin" />
             <Typography variant="body" size="small" className="text-neutral-content-subtle">
-              Loading...
+              加载中...
             </Typography>
           </div>
         )}
@@ -67,10 +67,10 @@ export function StateHistoryPopoverContent({ entityType, entityId, isOpen, onClo
           <div className="flex flex-col items-center justify-center py-8 gap-3">
             <IconError className="w-8 h-8 text-negative-icon" />
             <Typography variant="body" size="small" className="text-neutral-foreground">
-              Failed to load history
+              加载历史记录失败
             </Typography>
             <Typography variant="body" size="smallest" className="text-neutral-content-subtle text-center">
-              {error instanceof Error ? error.message : "Unknown error"}
+              {error instanceof Error ? error.message : "未知错误"}
             </Typography>
             <Button
               onClick={(e) => {
@@ -82,7 +82,7 @@ export function StateHistoryPopoverContent({ entityType, entityId, isOpen, onClo
               variant="primary"
               type="button"
             >
-              Retry
+              重试
             </Button>
           </div>
         )}
@@ -91,7 +91,7 @@ export function StateHistoryPopoverContent({ entityType, entityId, isOpen, onClo
           <div className="flex flex-col items-center justify-center py-8 gap-3">
             <IconHistoryRewind className="w-8 h-8 text-neutral-content-subtler" />
             <Typography variant="body" size="small" className="text-neutral-content-subtle">
-              No history available
+              暂无历史记录
             </Typography>
           </div>
         )}

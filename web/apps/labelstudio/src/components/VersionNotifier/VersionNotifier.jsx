@@ -54,9 +54,9 @@ export const VersionNotifier = ({ showNewVersion, showCurrentVersion }) => {
         </div>
         <div className={cn("version-notifier").elem("content").toClassName()}>
           <div className={cn("version-notifier").elem("title").toClassName()} data-date={updateTime}>
-            {latestVersion} Available
+            {latestVersion} 可用
           </div>
-          <div className={cn("version-notifier").elem("description").toClassName()}>Current version: {version}</div>
+          <div className={cn("version-notifier").elem("description").toClassName()}>当前版本：{version}</div>
         </div>
       </a>
     </li>

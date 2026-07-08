@@ -222,21 +222,21 @@ describe("ConfigControl", () => {
 
   it("shows Hide/Show timeline and audio wave buttons in modal", () => {
     renderWithContext({ configModal: true });
-    expect(screen.getByText("Hide timeline")).toBeInTheDocument();
-    expect(screen.getByText("Hide audio wave")).toBeInTheDocument();
+    expect(screen.getByText("隐藏时间线")).toBeInTheDocument();
+    expect(screen.getByText("隐藏音频波形")).toBeInTheDocument();
   });
 
   it("calls toggleVisibility when Hide timeline is clicked", async () => {
     const toggleVisibility = jest.fn();
     renderWithContext({ configModal: true, toggleVisibility });
-    await userEvent.click(screen.getByText("Hide timeline"));
+    await userEvent.click(screen.getByText("隐藏时间线"));
     expect(toggleVisibility).toHaveBeenCalledWith("timeline", false);
   });
 
   it("calls toggleVisibility for waveform and regions when Hide audio wave is clicked", async () => {
     const toggleVisibility = jest.fn();
     renderWithContext({ configModal: true, toggleVisibility });
-    await userEvent.click(screen.getByText("Hide audio wave"));
+    await userEvent.click(screen.getByText("隐藏音频波形"));
     expect(toggleVisibility).toHaveBeenCalledWith("waveform", false);
     expect(toggleVisibility).toHaveBeenCalledWith("regions", false);
   });
@@ -248,8 +248,8 @@ describe("ConfigControl", () => {
       ["spectrogram", true],
     ]);
     renderWithContext({ configModal: true, layerVisibility });
-    expect(screen.getByText("Show timeline")).toBeInTheDocument();
-    expect(screen.getByText("Show audio wave")).toBeInTheDocument();
+    expect(screen.getByText("显示时间线")).toBeInTheDocument();
+    expect(screen.getByText("显示音频波形")).toBeInTheDocument();
   });
 
   it("stops propagation when modal content is clicked", async () => {
@@ -281,9 +281,9 @@ describe("ConfigControl", () => {
     const { isFF } = require("../../../../utils/feature-flags");
     (isFF as jest.Mock).mockReturnValue(true);
     renderWithContext({ configModal: true });
-    expect(screen.getByText("Spectrogram Settings")).toBeInTheDocument();
+    expect(screen.getByText("频谱图设置")).toBeInTheDocument();
     expect(screen.getByTestId("spectrogram-control")).toBeInTheDocument();
-    expect(screen.getByText("Show spectrogram")).toBeInTheDocument();
+    expect(screen.getByText("显示频谱图")).toBeInTheDocument();
   });
 
   it("calls toggleVisibility for spectrogram when Show spectrogram is clicked and FF on", async () => {
@@ -291,13 +291,13 @@ describe("ConfigControl", () => {
     (isFF as jest.Mock).mockReturnValue(true);
     const toggleVisibility = jest.fn();
     renderWithContext({ configModal: true, toggleVisibility });
-    await userEvent.click(screen.getByText("Show spectrogram"));
+    await userEvent.click(screen.getByText("显示频谱图"));
     expect(toggleVisibility).toHaveBeenCalledWith("spectrogram", true);
   });
 
   it("renders without toggleVisibility when not provided", async () => {
     renderWithContext({ configModal: true });
-    await userEvent.click(screen.getByText("Hide timeline"));
-    expect(screen.getByText("Show timeline")).toBeInTheDocument();
+    await userEvent.click(screen.getByText("隐藏时间线"));
+    expect(screen.getByText("显示时间线")).toBeInTheDocument();
   });
 });

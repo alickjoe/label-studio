@@ -39,9 +39,9 @@ const RangeInput = observer(({ schema, value, onChange }) => {
 
   return (
     <div className="flex w-full min-w-[100px]">
-      <NumberInput placeholder="Min" value={min} onChange={onChangeMin} schema={schema} style={{ flex: 1 }} />
-      <span style={{ padding: "0 10px" }}>and</span>
-      <NumberInput placeholder="Max" value={max} onChange={onChangeMax} schema={schema} style={{ flex: 1 }} />
+      <NumberInput placeholder="最小值" value={min} onChange={onChangeMin} schema={schema} style={{ flex: 1 }} />
+      <span style={{ padding: "0 10px" }}>至</span>
+      <NumberInput placeholder="最大值" value={max} onChange={onChangeMax} schema={schema} style={{ flex: 1 }} />
     </div>
   );
 });
@@ -85,13 +85,13 @@ export const NumberFilter = [
   },
   {
     key: "in",
-    label: "is between",
+    label: "介于",
     valueType: "range",
     input: (props) => <RangeInput {...props} />,
   },
   {
     key: "not_in",
-    label: "not between",
+    label: "不介于",
     valueType: "range",
     input: (props) => <RangeInput {...props} />,
   },

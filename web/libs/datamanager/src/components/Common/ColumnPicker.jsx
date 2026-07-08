@@ -65,7 +65,7 @@ export function columnsToPickerGroups(columns, filterFn) {
     result.push({ key: "__root__", title: null, items: rootItems });
   }
   if (agreementItems.length) {
-    result.push({ key: "__agreement__", title: "Agreement", items: agreementItems });
+    result.push({ key: "__agreement__", title: "一致性", items: agreementItems });
   }
   result.push(...groups.values());
   return result;
@@ -77,9 +77,9 @@ export function columnsToPickerGroups(columns, filterFn) {
  * for items shown in the "Recent" group.
  */
 export function getFilterGroupTitle(field) {
-  if (isAgreementAlias(field.alias)) return "Agreement";
+  if (isAgreementAlias(field.alias)) return "一致性";
   if (field.parent) return field.parent.title;
-  return "Task";
+  return "任务";
 }
 
 /**
@@ -154,16 +154,16 @@ export function filtersToPickerGroups(availableFilters, recentEntries = []) {
       .filter(Boolean);
 
     if (recentItems.length > 0) {
-      result.push({ key: "__recent__", title: "Recent", items: recentItems });
+      result.push({ key: "__recent__", title: "最近使用", items: recentItems });
     }
   }
 
   // Ungrouped root filters are labelled "Task" so they have a visible section heading.
   if (rootItems.length) {
-    result.push({ key: "__root__", title: "Task", items: rootItems });
+    result.push({ key: "__root__", title: "任务", items: rootItems });
   }
   if (agreementItems.length) {
-    result.push({ key: "__agreement__", title: "Agreement", items: agreementItems });
+    result.push({ key: "__agreement__", title: "一致性", items: agreementItems });
   }
   result.push(...groups.values());
   return result;
@@ -183,7 +183,7 @@ function shouldShowBadge(col) {
  * regardless of the underlying readableType.  Returns null for all other columns.
  */
 function agreementBadgeLabel(col) {
-  if (typeof col.alias === "string" && col.alias.startsWith("dimension_agreement_")) return "agreement";
+  if (typeof col.alias === "string" && col.alias.startsWith("dimension_agreement_")) return "一致性";
   return null;
 }
 
@@ -365,7 +365,7 @@ export function ColumnPicker({
       onChange={handleChange}
       multiple={multiple}
       searchable
-      searchPlaceholder="Search columns"
+      searchPlaceholder="搜索列"
       searchFilter={searchFilterByLabel}
       groupBy="group"
       optionRenderer={ColumnPickerOptionContent}

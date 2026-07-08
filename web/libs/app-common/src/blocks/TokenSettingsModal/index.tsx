@@ -9,7 +9,7 @@ import { type ChangeEvent, useState } from "react";
 export const TokenSettingsModal = ({ showTTL, onSaved }: { showTTL?: boolean; onSaved?: () => void }) => {
   const settings = useAtomValue(settingsAtom);
   if (!settings.isSuccess || settings.isError || "error" in settings.data) {
-    return <div>Error loading settings.</div>;
+    return <div>加载设置出错。</div>;
   }
   return (
     <TokenSettingsModalView
@@ -40,18 +40,18 @@ function TokenSettingsModalView({
     <Form action="accessTokenUpdateSettings" onSubmit={reloadSettings}>
       <Form.Row columnCount={1}>
         <Toggle
-          label="Personal Access Tokens"
+          label="个人访问令牌"
           name="api_tokens_enabled"
-          description="Enable increased token authentication security"
+          description="启用增强的令牌认证安全性"
           checked={settings.api_tokens_enabled ?? true}
           onChange={(e: ChangeEvent<HTMLInputElement>) => setEnableTTL(e.target.checked)}
         />
       </Form.Row>
       <Form.Row columnCount={1}>
         <Toggle
-          label="Legacy Tokens"
+          label="旧版令牌"
           name="legacy_api_tokens_enabled"
-          description="Enable legacy access tokens, these do not expire"
+          description="启用旧版访问令牌，这些令牌不会过期"
           checked={settings.legacy_api_tokens_enabled ?? false}
         />
       </Form.Row>
@@ -59,11 +59,10 @@ function TokenSettingsModalView({
         <Form.Row columnCount={1}>
           <Input
             name="api_token_ttl_days"
-            label="Time-to-Live (optional, Personal Access Token only)"
-            description="The number of days, after creation, that the token will be valid for. After this time period a user will need to create a new access token"
+            label="有效期（可选，仅适用于个人访问令牌）"
+            description="令牌创建后有效的天数。超过此时间后，用户需要创建新的访问令牌"
             labelProps={{
-              description:
-                "The number of days, after creation, that the token will be valid for. After this time period a user will need to create a new access token",
+              description: "令牌创建后有效的天数。超过此时间后，用户需要创建新的访问令牌",
             }}
             disabled={!enableTTL}
             type="number"
@@ -75,7 +74,7 @@ function TokenSettingsModalView({
       )}
       <Form.Actions>
         <Button variant="primary" look="filled" type="submit">
-          Save Changes
+          保存更改
         </Button>
       </Form.Actions>
     </Form>

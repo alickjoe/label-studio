@@ -208,6 +208,6 @@ export const FieldRenderer: React.FC<FieldRendererProps> = ({
     }
 
     default:
-      return <div className="text-red-500">Unknown field type: {field.type}</div>;
+      return <div className="text-red-500">未知字段类型：{field.type}</div>;
   }
 };

@@ -51,21 +51,21 @@ const typeShortMap = {
 export const ViewColumnTypeShort = (type) => typeShortMap[type] || "str";
 
 const typeNameMap = {
-  String: "String",
-  Number: "Number",
-  Boolean: "Boolean",
-  Datetime: "Date Time",
-  Image: "Image",
-  Audio: "Audio",
-  AudioPlus: "Audio",
-  Video: "Video",
-  Text: "Text",
-  HyperText: "Hyper Text",
-  TimeSeries: "Time Series",
-  Time: "Time",
+  String: "字符串",
+  Number: "数字",
+  Boolean: "布尔值",
+  Datetime: "日期时间",
+  Image: "图片",
+  Audio: "音频",
+  AudioPlus: "音频",
+  Video: "视频",
+  Text: "文本",
+  HyperText: "超文本",
+  TimeSeries: "时间序列",
+  Time: "时间",
 };
 
-export const ViewColumnTypeName = (type) => typeNameMap[type] || "String";
+export const ViewColumnTypeName = (type) => typeNameMap[type] || "字符串";
 
 export const TabColumn = types
   .model("ViewColumn", {
@@ -199,7 +199,7 @@ export const TabColumn = types
       // Show a friendly tag for per-dimension agreement columns
       if (typeof self.alias === "string") {
         if (self.alias.startsWith("dimension_agreement_")) {
-          return "agreement";
+          return "一致性";
         }
       }
       return ViewColumnTypeShort(self.currentType);

@@ -82,10 +82,10 @@ describe("Controls", () => {
       </Provider>,
     );
 
-    const skipButton = getByText(/Skip/i).closest("button");
+    const skipButton = getByText(/跳过/i).closest("button");
     // In LSO, skip button should NOT be disabled even when allow_skip=false
     expect(skipButton).not.toBeDisabled();
-    expect(skipButton).toHaveAttribute("title", "Cancel (skip) task: [ Ctrl+Space ]");
+    expect(skipButton).toHaveAttribute("title", "取消（跳过）任务：[ Ctrl+Space ]");
   });
 
   test("Skip button disabled when allow_skip=false in LSE (enterprise)", () => {
@@ -106,9 +106,9 @@ describe("Controls", () => {
       </Provider>,
     );
 
-    const skipButton = getByText(/Skip/i).closest("button");
+    const skipButton = getByText(/跳过/i).closest("button");
     expect(skipButton).toBeDisabled();
-    expect(skipButton).toHaveAttribute("title", "This task cannot be skipped");
+    expect(skipButton).toHaveAttribute("title", "此任务无法跳过");
   });
 
   test("Skip button enabled when allow_skip=true in LSE (enterprise)", () => {
@@ -129,9 +129,9 @@ describe("Controls", () => {
       </Provider>,
     );
 
-    const skipButton = getByText(/Skip/i).closest("button");
+    const skipButton = getByText(/跳过/i).closest("button");
     expect(skipButton).not.toBeDisabled();
-    expect(skipButton).toHaveAttribute("title", "Cancel (skip) task: [ Ctrl+Space ]");
+    expect(skipButton).toHaveAttribute("title", "取消（跳过）任务：[ Ctrl+Space ]");
   });
 
   test("Skip button onClick is blocked when allow_skip=false in LSE (enterprise)", () => {
@@ -152,7 +152,7 @@ describe("Controls", () => {
       </Provider>,
     );
 
-    const skipButton = getByText(/Skip/i).closest("button");
+    const skipButton = getByText(/跳过/i).closest("button");
     expect(skipButton).toBeDisabled();
     // When disabled and onClick is undefined, clicking should not trigger skipTask
     fireEvent.click(skipButton!);
@@ -177,7 +177,7 @@ describe("Controls", () => {
       </Provider>,
     );
 
-    const skipButton = getByText(/Skip/i).closest("button");
+    const skipButton = getByText(/跳过/i).closest("button");
     fireEvent.click(skipButton!);
 
     expect(mockStore.skipTask).toHaveBeenCalled();
@@ -202,9 +202,9 @@ describe("Controls", () => {
       </Provider>,
     );
 
-    const skipButton = getByText(/Skip/i).closest("button");
+    const skipButton = getByText(/跳过/i).closest("button");
     expect(skipButton).not.toBeDisabled();
-    expect(skipButton).toHaveAttribute("title", "Cancel (skip) task: [ Ctrl+Space ]");
+    expect(skipButton).toHaveAttribute("title", "取消（跳过）任务：[ Ctrl+Space ]");
   });
 
   test("Skip button enabled when allow_skip=false but user is Manager (MA) in LSE", () => {
@@ -225,7 +225,7 @@ describe("Controls", () => {
       </Provider>,
     );
 
-    const skipButton = getByText(/Skip/i).closest("button");
+    const skipButton = getByText(/跳过/i).closest("button");
     expect(skipButton).not.toBeDisabled();
   });
 
@@ -247,7 +247,7 @@ describe("Controls", () => {
       </Provider>,
     );
 
-    const skipButton = getByText(/Skip/i).closest("button");
+    const skipButton = getByText(/跳过/i).closest("button");
     expect(skipButton).toBeDisabled();
   });
 
@@ -269,7 +269,7 @@ describe("Controls", () => {
       </Provider>,
     );
 
-    const skipButton = getByText(/Skip/i).closest("button");
+    const skipButton = getByText(/跳过/i).closest("button");
     fireEvent.click(skipButton!);
 
     expect(mockStore.skipTask).toHaveBeenCalled();

@@ -39,7 +39,7 @@ export interface TaskSourceViewerProps {
 const TASK_SOURCE_FILTERS: FilterConfig[] = [
   {
     id: "annotations",
-    label: "Annotations",
+    label: "标注",
     filterFn: (nodeData) => {
       const path = nodeData.path;
       return path && path.includes("annotations");
@@ -47,7 +47,7 @@ const TASK_SOURCE_FILTERS: FilterConfig[] = [
   },
   {
     id: "predictions",
-    label: "Predictions",
+    label: "预测",
     filterFn: (nodeData) => {
       const path = nodeData.path;
       return path && path.includes("predictions");
@@ -55,7 +55,7 @@ const TASK_SOURCE_FILTERS: FilterConfig[] = [
   },
   {
     id: "data",
-    label: "Data",
+    label: "数据",
     filterFn: (nodeData) => {
       const path = nodeData.path;
       return path && path.includes("data");
@@ -170,7 +170,7 @@ export const TaskSourceViewer: FC<TaskSourceViewerProps> = ({
             storageKey={storageKey}
             toolbarExtra={
               <div style={{ marginLeft: "auto" }}>
-                <Toggle label="Resolve URIs" checked={resolveUrls} onChange={handleResolveUrlsChange} />
+                <Toggle label="解析 URI" checked={resolveUrls} onChange={handleResolveUrlsChange} />
               </div>
             }
           />

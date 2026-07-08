@@ -138,7 +138,7 @@ export const useHotkeys = () => {
       // Show non-blocking error notification
       if (toast) {
         toast.show({
-          message: "Could not load custom hotkeys from server, using cached settings",
+          message: "无法从服务器加载自定义快捷键，使用缓存的设置",
           type: ToastType.error,
         });
       }
@@ -197,20 +197,20 @@ export const useHotkeys = () => {
         console.error(`Error ${operation} hotkeys:`, error);
 
         // Provide more specific error messages
-        let errorMessage = `Failed to ${isReset ? "reset" : "save"} hotkeys`;
+        let errorMessage = `${isReset ? "重置" : "保存"}快捷键失败`;
         if (error && typeof error === "object" && "response" in error) {
           const err = error as any;
           // Server responded with error status
           if (err.response?.status === 400) {
-            errorMessage = err.response.data?.error || `Invalid ${isReset ? "reset request" : "hotkeys configuration"}`;
+            errorMessage = err.response.data?.error || `${isReset ? "重置请求" : "快捷键配置"}无效`;
           } else if (err.response?.status === 401) {
-            errorMessage = "Authentication required";
+            errorMessage = "需要身份验证";
           } else if (err.response?.status >= 500) {
-            errorMessage = "Server error - please try again later";
+            errorMessage = "服务器错误 - 请稍后重试";
           }
         } else if (error && typeof error === "object" && "request" in error) {
           // Network error
-          errorMessage = "Network error - please check your connection";
+          errorMessage = "网络错误 - 请检查您的连接";
         }
 
         return {
@@ -225,9 +225,9 @@ export const useHotkeys = () => {
   // Handle resetting all hotkeys to defaults
   const handleResetToDefaults = useCallback(() => {
     confirm({
-      title: "Reset Hotkeys to Defaults?",
-      body: "Are you sure you want to reset all hotkeys and settings to their default values? This action cannot be undone.",
-      okText: "Reset to Defaults",
+      title: "将快捷键重置为默认值？",
+      body: "确定要将所有快捷键和设置重置为默认值吗？此操作无法撤销。",
+      okText: "重置为默认值",
       buttonLook: "negative",
       style: { width: 500 },
       onOk: async () => {
@@ -240,7 +240,7 @@ export const useHotkeys = () => {
           if (result.ok) {
             if (toast) {
               toast.show({
-                message: "All hotkeys and settings have been reset to defaults and saved",
+                message: "所有快捷键和设置已重置为默认值并保存",
                 type: ToastType.info,
               });
             }
@@ -249,16 +249,16 @@ export const useHotkeys = () => {
           } else {
             if (toast) {
               toast.show({
-                message: `Failed to save reset hotkeys: ${result.error || "Unknown error"}`,
+                message: `保存重置快捷键失败：${result.error || "未知错误"}`,
                 type: ToastType.error,
               });
             }
           }
         } catch (error: unknown) {
           if (toast) {
-            const errorMessage = error instanceof Error ? error.message : "Unknown error";
+            const errorMessage = error instanceof Error ? error.message : "未知错误";
             toast.show({
-              message: `Error resetting hotkeys: ${errorMessage}`,
+              message: `重置快捷键出错：${errorMessage}`,
               type: ToastType.error,
             });
           }
@@ -299,7 +299,7 @@ export const useHotkeys = () => {
 
     if (toast) {
       toast.show({
-        message: "Hotkeys exported successfully",
+        message: "快捷键导出成功",
         type: ToastType.info,
       });
     }
@@ -319,7 +319,7 @@ export const useHotkeys = () => {
         const result = await saveHotkeysToAPI(importedHotkeys, importedSettings);
 
         if (!result.ok) {
-          throw new Error(result.error || "Failed to save imported hotkeys");
+          throw new Error(result.error || "保存导入的快捷键失败");
         }
 
         // Update local state
@@ -327,7 +327,7 @@ export const useHotkeys = () => {
 
         if (toast) {
           toast.show({
-            message: "Hotkeys imported successfully",
+            message: "快捷键导入成功",
             type: ToastType.info,
           });
         }
@@ -336,9 +336,9 @@ export const useHotkeys = () => {
         await loadHotkeysFromAPI();
       } catch (error: unknown) {
         if (toast) {
-          const errorMessage = error instanceof Error ? error.message : "Unknown error";
+          const errorMessage = error instanceof Error ? error.message : "未知错误";
           toast.show({
-            message: `Error importing hotkeys: ${errorMessage}`,
+            message: `导入快捷键出错：${errorMessage}`,
             type: ToastType.error,
           });
         }

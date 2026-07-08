@@ -155,16 +155,16 @@ const HotkeyHelpModal = ({ sectionsToShow }: HotkeyHelpModalProps) => {
       <div className="max-w-3xl max-h-[90vh] h-full overflow-hidden w-full mx-4 flex flex-col">
         <div className="px-wide py-base border-b border-neutral-border">
           <div className="flex justify-between items-center">
-            <h2 className="text-lg font-semibold">Keyboard Shortcuts</h2>
+            <h2 className="text-lg font-semibold">键盘快捷键</h2>
           </div>
           <p className="text-sm text-neutral-content-subtler mt-1">
-            View all available keyboard shortcuts.&nbsp;
+            查看所有可用的键盘快捷键。&nbsp;
             <a
               href="/user/account/hotkeys"
               onClick={handleCustomizeClick}
               className="text-primary-content hover:underline hover:text-primary-content-hover"
             >
-              Customize
+              自定义
             </a>
           </p>
         </div>
@@ -256,7 +256,7 @@ export const openHotkeyHelp = (sectionOrUrl?: string | string[]): ModalReturn =>
   const sectionsToShow = determineSectionsToShow(sectionOrUrl);
 
   const modalInstance = modal({
-    title: "Keyboard Shortcuts",
+    title: "键盘快捷键",
     body: () => <HotkeyHelpModal sectionsToShow={sectionsToShow} />,
     bare: true,
     allowClose: true,

@@ -46,7 +46,7 @@ export const FormFooter = ({
   return (
     <div className="flex items-center justify-between p-wide border-t border-neutral-border bg-neutral-background">
       <Button look="outlined" onClick={onPrevious} disabled={currentStep === 0}>
-        Previous
+        上一步
       </Button>
 
       <div className="flex gap-tight items-center">
@@ -62,14 +62,14 @@ export const FormFooter = ({
               })}
               style={connectionChecked ? { textShadow: "none" } : {}}
             >
-              {connectionChecked ? "Connection Verified" : "Test Connection"}
+              {connectionChecked ? "连接已验证" : "测试连接"}
             </Button>
           </>
         )}
 
         {(isEditMode ? currentStep === 1 : currentStep === 2) && (
           <Button waiting={loadPreview.isLoading} onClick={loadPreview.mutate} disabled={filesPreview !== null}>
-            {filesPreview !== null ? "✓ Preview Loaded" : "Load Preview"}
+            {filesPreview !== null ? "✓ 预览已加载" : "加载预览"}
           </Button>
         )}
 
@@ -82,18 +82,18 @@ export const FormFooter = ({
           look={currentStep === totalSteps - 1 && target !== "export" ? "outlined" : undefined}
           tooltip={
             currentStep === 1 && !connectionChecked
-              ? "Test connection before continuing"
+              ? "继续前请先测试连接"
               : currentStep === 0 && isProviderDisabled
-                ? "This provider is not available in the current version"
+                ? "此提供商在当前版本中不可用"
                 : undefined
           }
         >
-          {currentStep < totalSteps - 1 ? "Next" : target === "export" ? "Save" : "Save & Sync"}
+          {currentStep < totalSteps - 1 ? "下一步" : target === "export" ? "保存" : "保存并同步"}
         </Button>
 
         {currentStep === totalSteps - 1 && target !== "export" && onSave && (
           <Button onClick={onSave} waiting={saveStorage?.isLoading}>
-            Save
+            保存
           </Button>
         )}
       </div>

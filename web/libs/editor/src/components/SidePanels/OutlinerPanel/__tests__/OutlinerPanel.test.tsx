@@ -125,7 +125,7 @@ describe("OutlinerPanel", () => {
 
       render(<OutlinerPanel {...defaultProps} regions={regionsWithNoData} />);
 
-      expect(screen.getByTestId("empty-state-header")).toHaveTextContent("Labeled regions will appear here");
+      expect(screen.getByTestId("empty-state-header")).toHaveTextContent("已标注的区域将显示在此处");
     });
 
     it("renders the description text correctly", () => {
@@ -139,8 +139,8 @@ describe("OutlinerPanel", () => {
 
       const description = screen.getByTestId("empty-state-description");
       expect(description).toBeInTheDocument();
-      expect(description).toHaveTextContent("Start labeling and track your results");
-      expect(description).toHaveTextContent("using this panel");
+      expect(description).toHaveTextContent("开始标注并使用此面板");
+      expect(description).toHaveTextContent("跟踪您的标注结果");
     });
 
     it("renders the learn more link with correct attributes", () => {
@@ -157,7 +157,7 @@ describe("OutlinerPanel", () => {
       expect(learnMoreLink).toHaveAttribute("href", "https://docs.example.com/guide/labeling");
       expect(learnMoreLink).toHaveAttribute("target", "_blank");
       expect(learnMoreLink).toHaveAttribute("rel", "noopener noreferrer");
-      expect(learnMoreLink).toHaveTextContent("Learn more");
+      expect(learnMoreLink).toHaveTextContent("了解更多");
     });
 
     it("renders empty state when regions array is empty", () => {
@@ -171,7 +171,7 @@ describe("OutlinerPanel", () => {
 
       expect(screen.getByTestId("empty-state")).toBeInTheDocument();
       expect(screen.queryByTestId("outliner-tree")).not.toBeInTheDocument();
-      expect(screen.queryByText("All regions hidden")).not.toBeInTheDocument(); // No filters-info message
+      expect(screen.queryByText("所有区域已隐藏")).not.toBeInTheDocument(); // No filters-info message
     });
 
     it("does not render empty state when regions exist", () => {
@@ -199,8 +199,8 @@ describe("OutlinerPanel", () => {
       render(<OutlinerPanel {...defaultProps} regions={regionsAllHidden} />);
 
       expect(screen.getByTestId("icon-info")).toBeInTheDocument();
-      expect(screen.getByText("All regions hidden")).toBeInTheDocument();
-      expect(screen.getByText("Adjust or remove the filters to view")).toBeInTheDocument();
+      expect(screen.getByText("所有区域已隐藏")).toBeInTheDocument();
+      expect(screen.getByText("调整或移除筛选条件以查看")).toBeInTheDocument();
     });
 
     it("shows hidden regions count in footer when some regions are filtered", () => {
@@ -221,8 +221,8 @@ describe("OutlinerPanel", () => {
       expect(footer).toBeInTheDocument();
 
       // Check for hidden regions count message
-      expect(footer.textContent).toContain("There are 2 hidden regions");
-      expect(footer.textContent).toContain("Adjust or remove filters to view");
+      expect(footer.textContent).toContain("有 2 个隐藏区域");
+      expect(footer.textContent).toContain("调整或移除筛选条件以查看");
     });
 
     it("shows singular form for single hidden region", () => {
@@ -238,7 +238,7 @@ describe("OutlinerPanel", () => {
       render(<OutlinerPanel {...defaultProps} regions={regionsOneHidden} />);
 
       const footer = screen.getByTestId("outliner-tree-footer");
-      expect(footer.textContent).toContain("There is 1 hidden region");
+      expect(footer.textContent).toContain("有 1 个隐藏区域");
       expect(footer.textContent).not.toContain("regions"); // Check singular form
     });
 

@@ -79,7 +79,7 @@ describe("SkipButton", () => {
     const button = getByTestId("skip-button");
     // In LSO, skip button should NOT be disabled even when allow_skip=false
     expect(button).not.toBeDisabled();
-    expect(button).toHaveAttribute("title", "Cancel (skip) task [ Ctrl+Space ]");
+    expect(button).toHaveAttribute("title", "取消（跳过）任务 [ Ctrl+Space ]");
   });
 
   test("Skip button disabled when allow_skip=false in LSE (enterprise)", () => {
@@ -97,7 +97,7 @@ describe("SkipButton", () => {
 
     const button = getByTestId("skip-button");
     expect(button).toBeDisabled();
-    expect(button).toHaveAttribute("title", "This task cannot be skipped");
+    expect(button).toHaveAttribute("title", "此任务无法跳过");
   });
 
   test("Skip button enabled when allow_skip=true in LSE (enterprise)", () => {
@@ -115,7 +115,7 @@ describe("SkipButton", () => {
 
     const button = getByTestId("skip-button");
     expect(button).not.toBeDisabled();
-    expect(button).toHaveAttribute("title", "Cancel (skip) task [ Ctrl+Space ]");
+    expect(button).toHaveAttribute("title", "取消（跳过）任务 [ Ctrl+Space ]");
   });
 
   test("Skip button enabled when allow_skip is undefined (default behavior)", () => {
@@ -132,7 +132,7 @@ describe("SkipButton", () => {
 
     const button = getByTestId("skip-button");
     expect(button).not.toBeDisabled();
-    expect(button).toHaveAttribute("title", "Cancel (skip) task [ Ctrl+Space ]");
+    expect(button).toHaveAttribute("title", "取消（跳过）任务 [ Ctrl+Space ]");
   });
 
   test("Skip button enabled when allow_skip=null", () => {
@@ -149,7 +149,7 @@ describe("SkipButton", () => {
 
     const button = getByTestId("skip-button");
     expect(button).not.toBeDisabled();
-    expect(button).toHaveAttribute("title", "Cancel (skip) task [ Ctrl+Space ]");
+    expect(button).toHaveAttribute("title", "取消（跳过）任务 [ Ctrl+Space ]");
   });
 
   test("Skip button onClick doesn't trigger when allow_skip=false in LSE (enterprise)", () => {
@@ -225,7 +225,7 @@ describe("SkipButton", () => {
 
     const button = getByTestId("skip-button");
     expect(button).not.toBeDisabled();
-    expect(button).toHaveAttribute("title", "Cancel (skip) task [ Ctrl+Space ]");
+    expect(button).toHaveAttribute("title", "取消（跳过）任务 [ Ctrl+Space ]");
     // Check that info icon is shown for managers when task is unskippable
     expect(getByTestId("info-icon")).toBeInTheDocument();
   });
@@ -245,7 +245,7 @@ describe("SkipButton", () => {
 
     const button = getByTestId("skip-button");
     expect(button).not.toBeDisabled();
-    expect(button).toHaveAttribute("title", "Cancel (skip) task [ Ctrl+Space ]");
+    expect(button).toHaveAttribute("title", "取消（跳过）任务 [ Ctrl+Space ]");
     // Check that info icon is shown for managers when task is unskippable
     expect(getByTestId("info-icon")).toBeInTheDocument();
   });
@@ -265,7 +265,7 @@ describe("SkipButton", () => {
 
     const button = getByTestId("skip-button");
     expect(button).not.toBeDisabled();
-    expect(button).toHaveAttribute("title", "Cancel (skip) task [ Ctrl+Space ]");
+    expect(button).toHaveAttribute("title", "取消（跳过）任务 [ Ctrl+Space ]");
     // Check that info icon is shown for managers when task is unskippable
     expect(getByTestId("info-icon")).toBeInTheDocument();
   });
@@ -285,7 +285,7 @@ describe("SkipButton", () => {
 
     const button = getByTestId("skip-button");
     expect(button).toBeDisabled();
-    expect(button).toHaveAttribute("title", "This task cannot be skipped");
+    expect(button).toHaveAttribute("title", "此任务无法跳过");
   });
 
   test("Skip button disabled when allow_skip=false and user is Reviewer (RE) in LSE", () => {
@@ -303,7 +303,7 @@ describe("SkipButton", () => {
 
     const button = getByTestId("skip-button");
     expect(button).toBeDisabled();
-    expect(button).toHaveAttribute("title", "This task cannot be skipped");
+    expect(button).toHaveAttribute("title", "此任务无法跳过");
   });
 
   test("Skip button onClick triggers when allow_skip=false but user is Manager in LSE", () => {
@@ -342,7 +342,7 @@ describe("SkipButton", () => {
     const button = getByTestId("skip-button");
     expect(button).not.toBeDisabled();
     // When task allows skip, show normal tooltip even if user is manager
-    expect(button).toHaveAttribute("title", "Cancel (skip) task [ Ctrl+Space ]");
+    expect(button).toHaveAttribute("title", "取消（跳过）任务 [ Ctrl+Space ]");
     // Info icon should not be shown when task allows skip
     expect(queryByTestId("info-icon")).not.toBeInTheDocument();
   });

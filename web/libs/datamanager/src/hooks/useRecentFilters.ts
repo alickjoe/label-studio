@@ -153,15 +153,15 @@ export function useRecentFilters(
       if (recentOptions.length > 0) {
         const recentHeader: FilterGroupHeader = {
           value: "__recent_header__",
-          title: "Recent",
-          original: { _isHeader: true, field: { title: "Recent" } },
+          title: "最近使用",
+          original: { _isHeader: true, field: { title: "最近使用" } },
           disabled: true,
           height: 34,
         };
         const allFieldsHeader: FilterGroupHeader = {
           value: "__all_fields_header__",
-          title: "All fields",
-          original: { _isHeader: true, field: { title: "All fields" } },
+          title: "全部字段",
+          original: { _isHeader: true, field: { title: "全部字段" } },
           disabled: true,
           height: 34,
         };

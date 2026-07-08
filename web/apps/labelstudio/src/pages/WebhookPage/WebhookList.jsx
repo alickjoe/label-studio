@@ -37,13 +37,13 @@ const WebhookListItem = ({ webhook, onSelectActive, onActiveChange, onDelete, ca
           </div>
         </div>
         <div className="text-neutral-content-subtler text-sm mt-1">
-          Created {format(new Date(webhook.created_at), "dd MMM yyyy, HH:mm")}
+          创建于 {format(new Date(webhook.created_at), "yyyy年MM月dd日 HH:mm")}
         </div>
       </div>
       {canChangeWebhooks && (
         <div className="hidden group-hover:flex gap-2">
           <Button variant="primary" look="outlined" onClick={() => onSelectActive(webhook.id)} icon={<IconPencil />}>
-            Edit
+            编辑
           </Button>
           <Button
             variant="negative"
@@ -55,7 +55,7 @@ const WebhookListItem = ({ webhook, onSelectActive, onActiveChange, onDelete, ca
             }
             icon={<IconCross />}
           >
-            Delete
+            删除
           </Button>
         </div>
       )}
@@ -92,8 +92,8 @@ const WebhookList = ({ onSelectActive, onAddWebhook, webhooks, fetchWebhooks }) 
         </Typography>
         {webhooks.length > 0 && (
           <Typography size="small" className="text-neutral-content-subtler">
-            Setup integrations that subscribe to certain events using Webhooks. When an event is triggered, {"app name"}{" "}
-            sends an HTTP POST request to the configured webhook URL.
+            设置使用 Webhooks 订阅特定事件的集成。当事件触发时，{"应用名"}
+            会向配置的 webhook URL 发送 HTTP POST 请求。
           </Typography>
         )}
       </header>
@@ -104,16 +104,16 @@ const WebhookList = ({ onSelectActive, onAddWebhook, webhooks, fetchWebhooks }) 
               size="medium"
               variant="primary"
               icon={<IconWebhook />}
-              title="Add your first webhook"
-              description="Setup integrations that subscribe to certain events using Webhooks. When an event is triggered, Label Studio sends an HTTP POST request to the configured webhook URL."
+              title="添加你的第一个 webhook"
+              description="设置使用 Webhooks 订阅特定事件的集成。当事件触发时，Label Studio 会向配置的 webhook URL 发送 HTTP POST 请求。"
               actions={
                 canChangeWebhooks ? (
                   <Button variant="primary" look="filled" onClick={onAddWebhook}>
-                    Add Webhook
+                    添加 Webhook
                   </Button>
                 ) : (
                   <Typography variant="body" size="small">
-                    Contact your administrator to create Webhooks
+                    请联系管理员以创建 Webhooks
                   </Typography>
                 )
               }
@@ -125,9 +125,9 @@ const WebhookList = ({ onSelectActive, onAddWebhook, webhooks, fetchWebhooks }) 
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1 hover:underline"
-                      aria-label="Learn more about webhooks (opens in new window)"
+                      aria-label="了解更多关于 webhooks 的信息（在新窗口中打开）"
                     >
-                      Learn more
+                      了解更多
                       <IconExternal width={16} height={16} />
                     </a>
                   </Typography>
@@ -158,7 +158,7 @@ const WebhookList = ({ onSelectActive, onAddWebhook, webhooks, fetchWebhooks }) 
       {webhooks.length > 0 && canChangeWebhooks && (
         <div className="flex justify-end w-full mt-base">
           <Button variant="primary" look="filled" onClick={onAddWebhook}>
-            Add Webhook
+            添加 Webhook
           </Button>
         </div>
       )}

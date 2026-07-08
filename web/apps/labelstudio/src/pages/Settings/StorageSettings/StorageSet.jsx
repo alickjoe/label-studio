@@ -36,9 +36,9 @@ export const StorageSet = forwardRef(
 
     const showStorageFormModal = useCallback(
       (storage) => {
-        const action = storage ? "Edit" : "Connect";
-        const actionTarget = target === "export" ? "Target" : "Source";
-        const title = `${action} ${actionTarget} Storage`;
+        const action = storage ? "编辑" : "连接";
+        const actionTarget = target === "export" ? "目标" : "源";
+        const title = `${action}${actionTarget}存储`;
 
         const modalRef = modal({
           title,
@@ -104,8 +104,8 @@ export const StorageSet = forwardRef(
     const onDeleteStorage = useCallback(
       async (storage) => {
         confirm({
-          title: "Deleting storage",
-          body: "This action cannot be undone. Are you sure?",
+          title: "删除存储",
+          body: "此操作无法撤销。确定要继续吗？",
           buttonLook: "negative",
           onOk: async () => {
             const response = await api.callApi("deleteStorage", {
@@ -131,7 +131,7 @@ export const StorageSet = forwardRef(
             disabled={loading}
             look="outlined"
             data-testid={`add-${target === "export" ? "target" : "source"}-storage-button`}
-            aria-label={`Add ${target === "export" ? "Target" : "Source"} Storage`}
+            aria-label={`添加${target === "export" ? "目标" : "源"}存储`}
           >
             {buttonLabel}
           </Button>

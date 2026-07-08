@@ -333,12 +333,12 @@ export const AppStore = types
 
       if (isFF(FF_DEV_2887) && self.LSF?.lsf?.annotationStore?.selected?.commentStore?.hasUnsaved) {
         Modal.confirm({
-          title: "You have unsaved changes",
-          body: "There are comments which are not persisted. Please submit the annotation. Continuing will discard these comments.",
+          title: "您有未保存的更改",
+          body: "存在尚未保存的评论。请提交标注。继续操作将丢弃这些评论。",
           onOk() {
             nextAction();
           },
-          okText: "Discard and continue",
+          okText: "丢弃并继续",
         });
         return;
       }
@@ -379,12 +379,12 @@ export const AppStore = types
 
       if (isFF(FF_DEV_2887) && self.LSF?.lsf?.annotationStore?.selected?.commentStore?.hasUnsaved) {
         Modal.confirm({
-          title: "You have unsaved changes",
-          body: "There are comments which are not persisted. Please submit the annotation. Continuing will discard these comments.",
+          title: "您有未保存的更改",
+          body: "存在尚未保存的评论。请提交标注。继续操作将丢弃这些评论。",
           onOk() {
             nextAction();
           },
-          okText: "Discard and continue",
+          okText: "丢弃并继续",
         });
         return;
       }
@@ -395,12 +395,12 @@ export const AppStore = types
     confirmLabelingConfigured() {
       if (!self.labelingIsConfigured) {
         Modal.confirm({
-          title: "You're almost there!",
-          body: "Before you can annotate the data, set up labeling configuration",
+          title: "就差一步了！",
+          body: "在标注数据之前，请先设置标注配置",
           onOk() {
             self.SDK.invoke("settingsClicked");
           },
-          okText: "Go to setup",
+          okText: "前往设置",
         });
         return false;
       }
@@ -677,7 +677,7 @@ export const AppStore = types
         if (result.response) {
           try {
             self.serverError.set(methodName, {
-              error: "Something went wrong",
+              error: "出错了",
               response: result.response,
             });
           } catch {
@@ -686,7 +686,7 @@ export const AppStore = types
         }
 
         console.warn({
-          message: "Error occurred when loading data",
+          message: "加载数据时出错",
           description: result?.response?.detail ?? result.error,
         });
 

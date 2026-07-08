@@ -269,7 +269,7 @@ export const Tabs = (
                 cursor: "pointer",
               }}
               onClick={() => props.setBottomCollapsed?.(!props.bottomCollapsed)}
-              title={props.bottomCollapsed ? "Expand Bottom Panel" : "Collapse Bottom Panel"}
+              title={props.bottomCollapsed ? "展开底部面板" : "折叠底部面板"}
             >
               {props.bottomCollapsed ? <IconExpandSmall /> : <IconCollapseSmall />}
             </Button>

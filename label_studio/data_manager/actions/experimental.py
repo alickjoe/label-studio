@@ -61,8 +61,8 @@ def propagate_annotations_form(user, project):
     field = {
         'type': 'number',
         'name': 'source_annotation_id',
-        'label': 'Enter source annotation ID'
-        + (f' [first ID: {str(first_annotation.id)}]' if first_annotation else ''),
+        'label': '输入源标注 ID'
+        + (f' [第一个 ID：{str(first_annotation.id)}]' if first_annotation else ''),
     }
     return [{'columnCount': 1, 'fields': [field]}]
 
@@ -139,16 +139,16 @@ def rename_labels_form(user, project):
                 {
                     'type': 'select',
                     'name': 'control_tag',
-                    'label': 'Choose a label control tag',
+                    'label': '选择标签控件标签',
                     'options': control_tags,
                 },
                 {
                     'type': 'select',
                     'name': 'old_label_name',
-                    'label': 'Old label name',
+                    'label': '旧标签名称',
                     'options': list(set(old_names)),
                 },
-                {'type': 'input', 'name': 'new_label_name', 'label': 'New label name'},
+                {'type': 'input', 'name': 'new_label_name', 'label': '新标签名称'},
             ],
         }
     ]
@@ -284,14 +284,14 @@ def add_data_field_form(user, project):
         {
             'columnCount': 1,
             'fields': [
-                {'type': 'input', 'name': 'value_name', 'label': 'Name'},
+                {'type': 'input', 'name': 'value_name', 'label': '名称'},
                 {
                     'type': 'select',
                     'name': 'value_type',
-                    'label': 'Type',
-                    'options': ['String', 'Number', 'Expression'],
+                    'label': '类型',
+                    'options': ['字符串', '数字', '表达式'],
                 },
-                {'type': 'input', 'name': 'value', 'label': 'Value'},
+                {'type': 'input', 'name': 'value', 'label': '值'},
             ],
         }
     ]
@@ -301,13 +301,13 @@ actions: list[DataManagerAction] = [
     {
         'entry_point': add_data_field,
         'permission': all_permissions.projects_change,
-        'title': 'Add Or Modify Data Field',
+        'title': '添加或修改数据字段',
         'order': 1,
         'experimental': True,
         'dialog': {
-            'text': 'Confirm that you want to add a new field in tasks. '
-            'After this operation you must refresh the Data Manager page fully to see the new column! '
-            'You can use the following expressions: ' + add_data_field_examples,
+            'text': '确认您要在任务中添加新字段。'
+            '此操作后，您必须完全刷新数据管理器页面才能看到新列！'
+            '您可以使用以下表达式：' + add_data_field_examples,
             'type': 'confirm',
             'form': add_data_field_form,
         },
@@ -315,15 +315,15 @@ actions: list[DataManagerAction] = [
     {
         'entry_point': propagate_annotations,
         'permission': all_permissions.tasks_change,
-        'title': 'Propagate Annotations',
+        'title': '传播标注',
         'order': 1,
         'experimental': True,
         'dialog': {
-            'text': 'Confirm that you want to copy the source annotation to all selected tasks. '
-            'Note: this action can be applied only for similar source objects: '
-            'images with the same width and height, '
-            'texts with the same length, '
-            'audios with the same durations.',
+            'text': '确认您要将源标注复制到所有选定的任务。'
+            '注意：此操作仅适用于相似的源对象：'
+            '具有相同宽度和高度的图像，'
+            '具有相同长度的文本，'
+            '具有相同时长的音频。',
             'type': 'confirm',
             'form': propagate_annotations_form,
         },
@@ -331,12 +331,12 @@ actions: list[DataManagerAction] = [
     {
         'entry_point': rename_labels,
         'permission': all_permissions.tasks_change,
-        'title': 'Rename Labels',
+        'title': '重命名标签',
         'order': 1,
         'experimental': True,
         'dialog': {
-            'text': 'Confirm that you want to rename a label in all annotations. '
-            'Also you have to change label names in the labeling config manually.',
+            'text': '确认您要重命名所有标注中的标签。'
+            '此外，您需要手动修改标注配置中的标签名称。',
             'type': 'confirm',
             'form': rename_labels_form,
         },

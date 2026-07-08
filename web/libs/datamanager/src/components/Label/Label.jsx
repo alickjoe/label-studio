@@ -23,12 +23,12 @@ const LabelingHeader = ({ SDK, onClick, isExplorerMode }) => {
             onClick={onClick}
             style={{ fontSize: 18, padding: 0, color: "black" }}
           >
-            Back
+            返回
           </Button>
         )}
 
         {isExplorerMode ? (
-          <FieldsButton multiSelect={true} icon={<Icon icon={IconGearNewUI} />} title={"Fields"} />
+          <FieldsButton multiSelect={true} icon={<Icon icon={IconGearNewUI} />} title={"字段"} />
         ) : null}
       </Space>
     </div>

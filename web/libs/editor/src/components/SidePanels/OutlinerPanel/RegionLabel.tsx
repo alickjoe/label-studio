@@ -9,7 +9,7 @@ export const RegionLabel = memo(
   observer(({ item }: RegionLabelProps) => {
     const { type } = item ?? {};
     if (!type) {
-      return "No Label";
+      return "无标签";
     }
     if (type.includes("label")) {
       return item.value;
@@ -43,7 +43,7 @@ export const RegionLabel = memo(
               // This comes from an Elem tag that was set without a name. The CSS was fixed to make it work,
               // but this is clearly bad CSS usage.
               <div key={label.id} className={cn("labels-list").toClassName()} style={{ color }}>
-                {label.value || "No label"}
+                {label.value || "无标签"}
               </div>,
             ];
           })}

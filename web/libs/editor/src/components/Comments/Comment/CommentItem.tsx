@@ -76,7 +76,7 @@ export const CommentItem: FC<CommentItemProps> = observer(
     const currentUser = window.APP_SETTINGS?.user;
     const isCreator = currentUser?.id === createdBy.id;
     const infoIsHidden = comment.commentsStore?.store?.hasInterface("annotations:hide-info");
-    const hiddenUser = infoIsHidden ? { email: isCreator ? "Me" : "User" } : null;
+    const hiddenUser = infoIsHidden ? { email: isCreator ? "我" : "用户" } : null;
     const [text, setText] = useState(initialText);
 
     const [linkingComment, setLinkingComment] = useState();
@@ -147,7 +147,7 @@ export const CommentItem: FC<CommentItemProps> = observer(
         return (
           <div className={cn("comment-item").elem("date").toClassName()}>
             <Tooltip alignment="top-right" title={new Date(time).toLocaleString()}>
-              <span>{`${isEdited ? "updated" : ""} ${humanDateDiff(time)}`}</span>
+              <span>{`${isEdited ? "已更新" : ""} ${humanDateDiff(time)}`}</span>
             </Tooltip>
           </div>
         );
@@ -205,19 +205,19 @@ export const CommentItem: FC<CommentItemProps> = observer(
               </>
             ) : isConfirmDelete ? (
               <div className={cn("comment-item").elem("confirmForm").toClassName()}>
-                <div className={cn("comment-item").elem("question").toClassName()}>Are you sure?</div>
+                <div className={cn("comment-item").elem("question").toClassName()}>确定要删除吗？</div>
                 <div className={cn("comment-item").elem("controls").toClassName()}>
                   <Button
                     onClick={() => deleteComment()}
                     size="small"
                     look="danger"
                     autoFocus
-                    aria-label="Delete comment"
+                    aria-label="删除评论"
                   >
-                    Yes
+                    是
                   </Button>
-                  <Button onClick={() => setConfirmMode(false)} size="small" aria-label="Cancel delete">
-                    No
+                  <Button onClick={() => setConfirmMode(false)} size="small" aria-label="取消删除">
+                    否
                   </Button>
                 </div>
               </div>
@@ -251,7 +251,7 @@ export const CommentItem: FC<CommentItemProps> = observer(
               <Dropdown.Trigger
                 content={
                   <Menu size="auto">
-                    <Menu.Item onClick={toggleResolve}>{resolved ? "Unresolve" : "Resolve"}</Menu.Item>
+                    <Menu.Item onClick={toggleResolve}>{resolved ? "取消解决" : "解决"}</Menu.Item>
                     {isCreator && (
                       <>
                         <Menu.Item
@@ -264,16 +264,16 @@ export const CommentItem: FC<CommentItemProps> = observer(
                             }
                           }}
                         >
-                          {isEditMode ? "Cancel edit" : "Edit"}
+                          {isEditMode ? "取消编辑" : "编辑"}
                         </Menu.Item>
-                        <Menu.Item onClick={toggleLink}>{regionRef?.region ? "Unlink" : "Link to..."}</Menu.Item>
+                        <Menu.Item onClick={toggleLink}>{regionRef?.region ? "取消链接" : "链接到..."}</Menu.Item>
                         {!isConfirmDelete && (
                           <Menu.Item
                             onClick={() => {
                               setConfirmMode(true);
                             }}
                           >
-                            Delete
+                            删除
                           </Menu.Item>
                         )}
                       </>
@@ -281,7 +281,7 @@ export const CommentItem: FC<CommentItemProps> = observer(
                   </Menu>
                 }
               >
-                <Button size="small" look="string" icon={<IconEllipsis />} aria-label="Comment options" />
+                <Button size="small" look="string" icon={<IconEllipsis />} aria-label="评论选项" />
               </Dropdown.Trigger>
             )}
           </div>

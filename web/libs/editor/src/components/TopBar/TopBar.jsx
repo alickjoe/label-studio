@@ -34,11 +34,11 @@ export const TopBar = observer(({ store }) => {
           <Button
             className={cn("topbar").elem("button").toClassName()}
             type={isViewAll ? undefined : "text"}
-            aria-label="Create an annotation"
+            aria-label="创建标注"
             variant="neutral"
             size="small"
             look="outlined"
-            tooltip="Create a new annotation"
+            tooltip="创建新标注"
             onClick={(event) => {
               event.preventDefault();
               const created = store.annotationStore.createAnnotation();

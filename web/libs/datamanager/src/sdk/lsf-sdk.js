@@ -297,11 +297,11 @@ export class LSFWrapper {
     if (params) {
       const task = await api.call("task", { params });
       const noData = !task || (!task.annotations?.length && !task.drafts?.length);
-      const body = `Task #${taskID}${commentId ? ` with comment #${commentId}` : ""} was not found!`;
+      const body = `任务 #${taskID}${commentId ? `（评论 #${commentId}）` : ""} 未找到！`;
 
       if (noData) {
         Modal.modal({
-          title: "Can't find task",
+          title: "找不到任务",
           body,
         });
         return false;
@@ -351,12 +351,12 @@ export class LSFWrapper {
 
     if (isFF(FF_DEV_2887) && this.lsf?.commentStore?.hasUnsaved) {
       Modal.confirm({
-        title: "You have unsaved changes",
-        body: "There are comments which are not persisted. Please submit the annotation. Continuing will discard these comments.",
+        title: "您有未保存的更改",
+        body: "存在尚未保存的评论。请提交标注。继续操作将丢弃这些评论。",
         onOk() {
           nextAction();
         },
-        okText: "Discard and continue",
+        okText: "丢弃并继续",
       });
       return;
     }
@@ -853,7 +853,7 @@ export class LSFWrapper {
     );
     const status = result?.$meta?.status;
 
-    this.showOperationToast(status, "Annotation saved successfully", "Annotation is not saved", result);
+    this.showOperationToast(status, "标注已成功保存", "标注未保存", result);
 
     // FIT-720: Invalidate caches after successful submit
     if (status < 400) {
@@ -894,7 +894,7 @@ export class LSFWrapper {
     });
     const status = result?.$meta?.status;
 
-    this.showOperationToast(status, "Annotation updated successfully", "Annotation is not updated", result);
+    this.showOperationToast(status, "标注已成功更新", "标注未更新", result);
 
     this.datamanager.invoke("updateAnnotation", ls, annotation, result);
 
@@ -963,7 +963,7 @@ export class LSFWrapper {
   };
 
   draftToast = (status, result = null) => {
-    this.showOperationToast(status, "Draft saved successfully", "Draft is not saved", result);
+    this.showOperationToast(status, "草稿已成功保存", "草稿未保存", result);
   };
 
   needsDraftSave = (annotation) => {
@@ -1048,8 +1048,8 @@ export class LSFWrapper {
     const canSkip = !skipDisabled || hasForceSkipPermission;
     if (!canSkip) {
       console.warn("Task cannot be skipped: allow_skip is false and user lacks manager role");
-      this.showOperationToast(400, null, "This task cannot be skipped", {
-        error: "Task cannot be skipped",
+      this.showOperationToast(400, null, "此任务无法跳过", {
+        error: "任务无法跳过",
       });
       return;
     }
@@ -1076,7 +1076,7 @@ export class LSFWrapper {
     );
     const status = result?.$meta?.status;
 
-    this.showOperationToast(status, "Task skipped successfully", "Task is not skipped", result);
+    this.showOperationToast(status, "任务已成功跳过", "任务未跳过", result);
   };
 
   onUnskipTask = async () => {

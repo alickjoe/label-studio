@@ -52,102 +52,102 @@ const NodeViews: Record<string, NodeViewProps> = {
   },
 
   ParagraphsRegionModel: {
-    name: "Paragraphs",
+    name: "段落",
     icon: IconText,
     getContent: (node) => <span style={{ color: "#5a5a5a" }}>{node.text}</span>,
   },
 
   AudioRegionModel: {
-    name: "Audio",
+    name: "音频",
     icon: AudioOutlined,
   },
 
   TimeSeriesRegionModel: {
-    name: "TimeSeries",
+    name: "时间序列",
     icon: LineChartOutlined,
   },
 
   TextAreaRegionModel: {
-    name: "Input",
+    name: "输入",
     icon: MessageOutlined,
     getContent: (node) => <span style={{ color: "#5a5a5a" }}>{node._value}</span>,
   },
 
   RectRegionModel: {
-    name: "Rect",
+    name: "矩形",
     icon: IconRectangleTool,
     altIcon: IconRectangleToolSmart,
   },
 
   Rect3PointRegionModel: {
-    name: "Rect3Point",
+    name: "三点矩形",
     icon: IconRectangle3PointTool,
     altIcon: IconRectangle3PointToolSmart,
   },
 
   VideoRectangleRegionModel: {
-    name: "Video Rect",
+    name: "视频矩形",
     icon: IconRectangleTool,
     altIcon: IconRectangleToolSmart,
-    getContent: (node) => <span style={{ color: "#5a5a5a" }}>from {node.sequence[0]?.frame} frame</span>,
+    getContent: (node) => <span style={{ color: "#5a5a5a" }}>从 {node.sequence[0]?.frame} 帧</span>,
   },
 
   VideoVectorRegionModel: {
-    name: "Video Vector",
+    name: "视频向量",
     icon: IconPolygonTool,
     altIcon: IconPolygonToolSmart,
-    getContent: (node) => <span style={{ color: "#5a5a5a" }}>from {node.sequence[0]?.frame} frame</span>,
+    getContent: (node) => <span style={{ color: "#5a5a5a" }}>从 {node.sequence[0]?.frame} 帧</span>,
   },
 
   PolygonRegionModel: {
-    name: "Polygon",
+    name: "多边形",
     icon: IconPolygonTool,
     altIcon: IconPolygonToolSmart,
   },
 
   VectorRegionModel: {
-    name: "Vector",
+    name: "向量",
     icon: IconPolygonTool,
     altIcon: IconPolygonToolSmart,
   },
 
   EllipseRegionModel: {
-    name: "Ellipse",
+    name: "椭圆",
     icon: IconCircleTool,
     altIcon: IconCircleToolSmart,
   },
 
   // @todo add coords
   KeyPointRegionModel: {
-    name: "KeyPoint",
+    name: "关键点",
     icon: IconKeypointsTool,
     altIcon: IconKeypointsToolSmart,
   },
 
   BrushRegionModel: {
-    name: "Brush",
+    name: "画笔",
     icon: IconBrushTool,
     altIcon: IconBrushToolSmart,
   },
 
   BitmaskRegionModel: {
-    name: "Brush",
+    name: "画笔",
     icon: IconBrushTool,
     altIcon: IconBrushToolSmart,
   },
 
   ChoicesModel: {
-    name: "Classification",
+    name: "分类",
     icon: ApartmentOutlined,
   },
 
   TextAreaModel: {
-    name: "Input",
+    name: "输入",
     icon: MessageOutlined,
   },
 
   TimelineRegionModel: {
-    name: "Timeline Span",
+    name: "时间线段",
     icon: IconTimelineRegion,
   },
 

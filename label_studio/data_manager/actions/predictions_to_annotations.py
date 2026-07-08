@@ -90,7 +90,7 @@ def predictions_to_annotations_form(user, project):
                 {
                     'type': 'select',
                     'name': 'model_version',
-                    'label': 'Choose predictions',
+                    'label': '选择预测',
                     'options': versions,
                     'value': first,
                 }
@@ -103,13 +103,12 @@ actions: list[DataManagerAction] = [
     {
         'entry_point': predictions_to_annotations,
         'permission': all_permissions.tasks_change,
-        'title': 'Create Annotations From Predictions',
+        'title': '从预测创建标注',
         'order': 91,
         'dialog': {
-            'title': 'Create Annotations From Predictions',
-            'text': 'Create annotations from predictions using selected predictions set '
-            'for each selected task. '
-            'Your account will be assigned as an owner to those annotations. ',
+            'title': '从预测创建标注',
+            'text': '使用每个所选任务的选定预测集，从预测创建标注。'
+            '您的账户将被指定为这些标注的所有者。',
             'type': 'confirm',
             'form': predictions_to_annotations_form,
         },

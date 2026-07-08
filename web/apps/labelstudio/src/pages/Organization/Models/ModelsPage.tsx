@@ -6,7 +6,7 @@ import type { Page } from "../../types/Page";
 import { EmptyList } from "./@components/EmptyList";
 
 export const ModelsPage: Page = () => {
-  useUpdatePageTitle("Models");
+  useUpdatePageTitle("模型");
 
   return (
     <div className={cn("prompter").toClassName()}>
@@ -15,15 +15,15 @@ export const ModelsPage: Page = () => {
   );
 };
 
-ModelsPage.title = () => "Models";
-ModelsPage.titleRaw = "Models";
+ModelsPage.title = () => "模型";
+ModelsPage.titleRaw = "模型";
 ModelsPage.path = "/models";
 
 ModelsPage.context = () => {
   return (
     <Space size="small">
       <Link to="/prompt/settings" className={buttonVariant({ size: "small" })}>
-        Create Model
+        创建模型
       </Link>
     </Space>
   );

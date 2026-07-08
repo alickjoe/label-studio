@@ -218,15 +218,15 @@ actions: list[DataManagerAction] = [
     {
         'entry_point': remove_duplicates,
         'permission': [all_permissions.projects_change, all_permissions.tasks_delete],
-        'title': 'Remove Duplicated Tasks',
+        'title': '移除重复任务',
         'order': 95,
         'experimental': False,
         'dialog': {
             'text': (
-                'Confirm that you want to remove duplicated tasks with the same data fields. '
-                'Duplicated tasks will be deleted and all annotations will be moved to the first task from duplicated tasks. '
-                'Also Source Storage Links will be restored if at least one duplicated task has a storage link. '
-                "Warning: Task assignments (enterprise only) won't be saved."
+                '确认您要移除具有相同数据字段的重复任务。'
+                '重复任务将被删除，所有标注将移动到重复任务中的第一个任务。'
+                '如果至少有一个重复任务具有存储链接，则源存储链接将被恢复。'
+                '警告：任务分配（仅企业版）不会被保存。'
             ),
             'type': 'confirm',
         },

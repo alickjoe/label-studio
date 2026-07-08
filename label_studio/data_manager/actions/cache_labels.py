@@ -119,25 +119,25 @@ def cache_labels_form(user, project):
                 {
                     'type': 'select',
                     'name': 'control_tag',
-                    'label': 'Choose a control tag',
+                    'label': '选择控件标签',
                     'options': control_tags,
                 },
                 {
                     'type': 'input',
                     'name': 'custom_control_tag',
-                    'label': "Custom control tag if it's not in label config",
+                    'label': '如果标签配置中没有，请输入自定义控件标签',
                 },
                 {
                     'type': 'select',
                     'name': 'with_counters',
-                    'label': 'With counters',
-                    'options': ['Yes', 'No'],
+                    'label': '是否包含计数器',
+                    'options': ['是', '否'],
                 },
                 {
                     'type': 'select',
                     'name': 'source',
-                    'label': 'Source',
-                    'options': ['Annotations', 'Predictions'],
+                    'label': '来源',
+                    'options': ['标注', '预测'],
                 },
             ],
         }
@@ -148,13 +148,13 @@ actions: list[DataManagerAction] = [
     {
         'entry_point': cache_labels,
         'permission': all_permissions.projects_change,
-        'title': 'Cache Labels',
+        'title': '缓存标签',
         'order': 1,
         'experimental': True,
         'dialog': {
-            'text': 'Confirm that you want to add a new task.data field with cached labels from annotations. '
-            'This field will help you to quickly filter or order tasks by labels. '
-            'After this operation you must refresh the Data Manager page fully to see the new column!',
+            'text': '确认您要添加一个新的 task.data 字段，其中包含从标注缓存的标签。'
+            '此字段将帮助您按标签快速筛选或排序任务。'
+            '此操作后，您必须完全刷新数据管理器页面才能看到新列！',
             'type': 'confirm',
             'form': cache_labels_form,
         },

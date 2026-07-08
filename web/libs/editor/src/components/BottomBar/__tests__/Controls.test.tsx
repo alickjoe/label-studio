@@ -104,7 +104,7 @@ describe("Controls", () => {
 
     expect(mockStore.skipTask).not.toHaveBeenCalled();
     expect(mockStore.commentStore.commentFormSubmit).not.toHaveBeenCalled();
-    expect(mockStore.commentStore.setTooltipMessage).toHaveBeenCalledWith("Please enter a comment before skipping");
+    expect(mockStore.commentStore.setTooltipMessage).toHaveBeenCalledWith("请在跳过前输入评论");
   });
 
   test("When skip button is clicked, but there is an empty message on currentComment and annotators must leave a comment on skip, it must not submit and setToolTipMessage", () => {
@@ -122,7 +122,7 @@ describe("Controls", () => {
 
     expect(mockStore.skipTask).not.toHaveBeenCalled();
     expect(mockStore.commentStore.commentFormSubmit).not.toHaveBeenCalled();
-    expect(mockStore.commentStore.setTooltipMessage).toHaveBeenCalledWith("Please enter a comment before skipping");
+    expect(mockStore.commentStore.setTooltipMessage).toHaveBeenCalledWith("请在跳过前输入评论");
   });
 
   test("When skip button is clicked, if there is no currentComment and annotators doesn't need to leave a comment on skip, it must submit", async () => {

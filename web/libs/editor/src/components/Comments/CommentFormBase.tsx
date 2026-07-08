@@ -49,7 +49,7 @@ export const CommentFormBase: FC<CommentFormProps> = observer(
         <TextArea
           actionRef={actionRef}
           name="comment"
-          placeholder="Add a comment"
+          placeholder="添加评论"
           value={value}
           rows={rows}
           maxRows={maxRows}
@@ -66,7 +66,7 @@ export const CommentFormBase: FC<CommentFormProps> = observer(
           onBlur={(e) => onBlur?.(e)}
         />
         <div className={cn("comment-form").elem("primary-action").toClassName()}>
-          <Button type="submit" aria-label="Submit comment" variant="neutral" look="string">
+          <Button type="submit" aria-label="提交评论" variant="neutral" look="string">
             <IconSend />
           </Button>
         </div>
