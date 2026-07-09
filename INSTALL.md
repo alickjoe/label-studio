@@ -55,15 +55,38 @@ label-studio/
 
 该脚本依次执行：
 
-1. `cd label_studio/frontend && npm ci && npm run build:production`（旧前端构建路径，主仓已迁移到 `web/`）
-2. `python label_studio/manage.py collectstatic --no-input`
-3. `python label_studio/core/version.py`（生成 `version_.py`）
+1. `cd web && yarn install --frozen-lockfile && yarn build`（构建前端到 `web/dist/`）
+2. `poetry run python label_studio/manage.py collectstatic --no-input`（收集静态资源）
+3. `poetry run python label_studio/core/version.py`（生成 `version_.py`）
+
+> **Python 调用说明**：脚本会自动检测可用的 Python 调用方式，优先级为 `poetry run python` > `python3` > `python`。在 Windows Git Bash 中，`python3` 可能是 Microsoft Store 的无效 stub，脚本会自动回退到 `python`。使用 `poetry run python` 时需确保依赖已通过 `poetry install` 安装。
 
 如需跳过前端构建（仅刷新静态资源与版本号），使用 [deploy/prebuild_wo_frontend.sh](deploy/prebuild_wo_frontend.sh)：
 
 ```bash
 ./deploy/prebuild_wo_frontend.sh
 ```
+
+#### 一键生产打包（含 sdist/wheel 生成与校验）
+
+[scripts/build.sh](scripts/build.sh) 在 `prebuild.sh` 基础上额外执行 `poetry build` + `twine check`，直接产出可发布的 `dist/` 目录：
+
+```bash
+./scripts/build.sh                  # 完整构建（含前端）
+./scripts/build.sh --skip-frontend  # 跳过前端构建（仅刷新静态资源 + 版本 + 打包）
+VERSION_OVERRIDE=1.24.0 ./scripts/build.sh   # 指定版本号
+```
+
+脚本流程：
+
+| 步骤 | 操作 | 产物 |
+| - | - | - |
+| 1/4 | 调用 `prebuild.sh`（或 `prebuild_wo_frontend.sh`） | `web/dist/`、`static_build/`、`version_.py` |
+| 2/4 | `poetry build`（先清空旧 `dist/`） | `dist/*.whl` + `dist/*.tar.gz` |
+| 3/4 | `poetry run twine check dist/*` | 元数据校验（PASSED/FAILED） |
+| 4/4 | 列出产物与安装提示 | 总大小、文件数 |
+
+> **注**：`--skip-frontend`（简写 `-s`）适用于前端已构建、仅修改了后端代码的场景，可显著缩短构建时间。
 
 ### 3.2 分步构建
 
@@ -77,6 +100,8 @@ poetry install --extras uwsgi --with test
 
 > **注意**：`--extras uwsgi` 是必须的，因为 Poetry 存在已知 bug（[python-poetry/poetry#7302](https://github.com/python-poetry/poetry/issues/7302)）。
 
+> **Windows 平台说明**：`pyuwsgi` 在 Windows 上需要 MSVC 编译，耗时较长或可能失败。若仅用于**构建发布包**（`poetry build`），可省略 `--extras uwsgi`，直接执行 `poetry install`——wheel/sdist 的元数据已通过 `pyproject.toml` 的 `[project.optional-dependencies]` 正确声明 `uwsgi` extras，部署端执行 `pip install label_studio[uwsgi]` 即可安装。若需在 Windows 本机以 uWSGI 模式运行，建议改用 WSL2 或 Docker。
+
 #### Step 2: 构建前端
 
 ```bash
@@ -87,6 +112,10 @@ yarn build                 # 等价于 NODE_ENV=production yarn ls:build
 yarn version:libs
 cd ..
 ```
+
+> **Windows 平台说明**：
+> 1. `yarn build` 脚本使用了 `NODE_ENV=production yarn ls:build` 这种 Unix 行内环境变量语法，在 cmd.exe/PowerShell 下会报 `'NODE_ENV' 不是内部或外部命令`。Git Bash 中可直接使用 `yarn build`；PowerShell 请改用 `$env:NODE_ENV="production"; yarn ls:build`。
+> 2. `yarn install --frozen-lockfile` 在 Windows 上有一个已知问题：当 node_modules 已存在时，重新运行会触发 "Cleaning modules" 阶段，可能误删 `node_modules/.bin/nx` 导致后续构建报 `'nx' 不是内部或外部命令`。**解决方式**：依赖已安装时跳过 `yarn install`，或改用不带 `--frozen-lockfile` 的 `yarn install`（[prebuild.sh](deploy/prebuild.sh) 已做此处理）。
 
 产物输出到 `web/dist/`，包括：
 
@@ -102,6 +131,12 @@ DJANGO_SETTINGS_MODULE=core.settings.label_studio \
 ```
 
 输出到 `label_studio/core/static_build/`。
+
+> **Windows 平台说明**：上述 Unix 风格的 `VAR=value cmd ...` 行内环境变量语法在 PowerShell 中不可用。请改用以下任一方式：
+>
+> - **PowerShell**：`$env:DJANGO_SETTINGS_MODULE="core.settings.label_studio"; poetry run python label_studio/manage.py collectstatic --no-input`
+> - **Git Bash**（推荐，可直接使用上方原始命令）：需确保 `poetry` 在 PATH 中（通常位于 `%APPDATA%\Python\Python<ver>\Scripts`，可在 `~/.bashrc` 中 `export PATH`）
+> - **CMD**：`set DJANGO_SETTINGS_MODULE=core.settings.label_studio && poetry run python label_studio/manage.py collectstatic --no-input`
 
 #### Step 4: 生成版本文件
 
@@ -366,7 +401,32 @@ CI 还会：
 | `make fmt-check` | pre-commit pre-push 检查 |
 | `make configure-hooks` | 安装 pre-push hook |
 
-## 9. 端口与运行时配置参考
+## 9. 项目清理
+
+[scripts/clean.sh](scripts/clean.sh) 提供三个级别的清理，按需选择：
+
+```bash
+./scripts/clean.sh           # 默认 light：仅清理缓存与日志
+./scripts/clean.sh light     # 清理缓存与日志（最安全，不影响构建/发布）
+./scripts/clean.sh mid       # 额外清理构建产物（重新构建后才能发布）
+./scripts/clean.sh deep      # 额外清理依赖（需重新安装才能构建，all 为别名）
+```
+
+### 清理范围
+
+| 级别 | 清理内容 | 重新构建命令 |
+| - | - | - |
+| `light`（默认） | `__pycache__/`、`.pytest_cache/`、`.ruff_cache/`、`.mypy_cache/`、`.nx/`、`web/.nx/`、`web/node_modules/.cache/`、`*.log`、`dist/` | `poetry build` |
+| `mid` | 上述 + `build/`、`*.egg-info`、`web/dist/`、`label_studio/core/static_build/`、`label_studio/core/version_.py`、`label_studio/core/ls-version_.py` | `./deploy/prebuild.sh && poetry build` |
+| `deep` | 上述 + `web/node_modules/`、poetry 虚拟环境 | `poetry install && cd web && yarn install && cd ..` 后再构建 |
+
+> **说明**：
+> - `light` 级别删除缓存与 `dist/` 打包产物（可通过 `poetry build` 快速重新生成）。
+> - `mid` 级别删除所有构建产物，执行后需要重新运行 `./deploy/prebuild.sh` 才能再次 `poetry build`。
+> - `deep` 级别会删除前端依赖（`web/node_modules/`，约 1-2GB）和 Python 虚拟环境，重装耗时较长，仅在需要完全重置环境时使用。
+> - Git 仓库内容（`.git/`）在任何级别下都不会被清理。
+
+## 10. 端口与运行时配置参考
 
 | 服务 | 端口 | 说明 |
 | - | - | - |
@@ -396,7 +456,7 @@ CI 还会：
 | `CMD_WRAPPER` | — | 启动命令包装器（如 APM agent） |
 | `ENV_INJECT_SOURCES` | — | 逗号分隔的 env 文件列表，启动前 source |
 
-## 10. 常见问题
+## 11. 常见问题
 
 **Q: 构建时 `version_.py` 报错或版本异常？**
 A: `version.py` 依赖 `git describe --tags`。确保：1）在 Git 仓库内构建；2）已拉取 tags（`git fetch --tags`）；3）或通过 `VERSION_OVERRIDE` / `BRANCH_OVERRIDE` 显式指定。
@@ -404,11 +464,42 @@ A: `version.py` 依赖 `git describe --tags`。确保：1）在 Git 仓库内构
 **Q: Poetry 安装报 `pyuwsgi` 编译失败？**
 A: 必须带 `--extras uwsgi`，并确保系统有 `build-base` / `python3-dev` / `linux-headers`（Alpine）或 `build-essential`（Debian）。容器构建已处理这些依赖。
 
+> **Windows 补充**：`pyuwsgi` 在 Windows 上需 MSVC 工具链编译，常见报错为 `fatal error: Python.h: No such file` 或链接错误。**构建发布包不需要安装 pyuwsgi**——直接 `poetry install`（不带 `--extras uwsgi`）即可执行 `poetry build`，wheel/sdist 元数据已正确声明 `uwsgi` extras，部署端 `pip install label_studio[uwsgi]` 会自动拉取预编译的 pyuwsgi wheel。若必须在本机跑 uWSGI，建议使用 WSL2 或 Docker。
+
+**Q: Git Bash 中 `poetry: command not found`？**
+A: Poetry 通过 `pip --user` 安装时，可执行文件位于 `%APPDATA%\Python\Python<ver>\Scripts`，该目录默认不在 Git Bash 的 PATH 中。在 `~/.bashrc` 中添加 `export PATH="$PATH:/c/Users/<user>/AppData/Roaming/Python/Python<ver>/Scripts"`，并确保 `~/.bash_profile` 中 `source ~/.bashrc` 即可。
+
 **Q: 前端构建 OOM？**
 A: Dockerfile 已设 `NODE_OPTIONS="--max-old-space-size=4096"`。本地构建可在 shell 中导出相同环境变量。
 
+**Q: Windows 下 `yarn build` 报 `'NODE_ENV' 不是内部或外部命令`？**
+A：[web/package.json](web/package.json) 中 `build` 脚本定义为 `NODE_ENV=production yarn ls:build`，使用了 Unix 风格的行内环境变量语法，Windows cmd.exe 无法识别。两种解决方式：
+
+- **Git Bash 中直接调用 `ls:build`**（`prebuild.sh` 已采用此法）：
+  ```bash
+  export NODE_ENV=production
+  yarn ls:build
+  ```
+- **PowerShell 中手动设置**：
+  ```powershell
+  $env:NODE_ENV="production"; yarn ls:build
+  ```
+
+> 注：`ls:build` 等价于 `nx run labelstudio:build:production`，本身就是 production 构建，`NODE_ENV` 主要供 webpack.config.js 中的条件判断使用。
+
 **Q: collectstatic 报缺少前端文件？**
 A: 必须先执行 `yarn build` 生成 `web/dist/`，再执行 collectstatic。`prebuild.sh` 已按正确顺序执行。
+
+**Q: Python 3.14 下 `ImportError: cannot import name 'validate_core_schema' from 'pydantic_core'`？**
+A: 这是 `pydantic` 与 `pydantic-core` 版本不匹配导致的。Python 3.14 较新，`poetry.lock` 中锁定的 `pydantic-core==2.23.4` 无预编译 wheel，若手动装了较新的 `pydantic-core`（如 2.46.x），则需同时升级 `pydantic`：
+
+```bash
+poetry run pip install -U pydantic
+# 验证
+poetry run python -c "import pydantic; print(pydantic.VERSION)"
+```
+
+升级后 `pydantic` 2.10+ 不再依赖 `validate_core_schema`，问题即解决。注意这会偏离 `poetry.lock`，正式提交前应执行 `poetry lock --no-update` 同步锁文件。
 
 **Q: Docker 镜像构建慢？**
 A: 使用 BuildKit（`DOCKER_BUILDKIT=1`）启用缓存挂载。CI 已配置 `cache-from/to: type=gha`。本地可改用 `Dockerfile.development`（基于 slim 镜像，构建更快但体积更大）。
@@ -416,13 +507,14 @@ A: 使用 BuildKit（`DOCKER_BUILDKIT=1`）启用缓存挂载。CI 已配置 `ca
 **Q: 多平台构建（arm64）失败？**
 A: 参考 [docker-build.yml](.github/workflows/docker-build.yml)，arm64 在 `ubuntu-24.04-arm` runner 上原生构建（非 QEMU 模拟）。本地构建 arm64 需启用 binfmt 并使用 `--platform linux/arm64`。
 
-## 11. 参考文档
+## 12. 参考文档
 
 - [README.md](README.md) — 用户安装与使用
 - [CONTRIBUTING.md](CONTRIBUTING.md) — 贡献指南
 - [Makefile](Makefile) — 所有构建命令封装
 - [Dockerfile](Dockerfile) — 默认生产镜像构建逻辑
-- [deploy/](deploy/) — 部署脚本目录（docker-entrypoint、uwsgi.ini、nginx.conf）
+- [deploy/](deploy/) — 部署脚本目录（docker-entrypoint、uwsgi.ini、nginx.conf、prebuild.sh）
+- [scripts/](scripts/) — 辅助脚本目录（[build.sh](scripts/build.sh) 一键打包、[clean.sh](scripts/clean.sh) 项目清理）
 - [pyproject.toml](pyproject.toml) — Poetry 打包配置与依赖
 - [web/package.json](web/package.json) — 前端构建脚本
 - [web/README.md](web/README.md) — 前端开发指南
