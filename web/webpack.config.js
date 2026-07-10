@@ -157,7 +157,10 @@ module.exports = composePlugins(
         );
 
         const innerTest = oneOfRule.test?.toString() ?? "";
-        const cssLoader = oneOfRule.use.find((use) => use.loader?.includes("/css-loader/"));
+        // Normalize backslashes to forward slashes for cross-platform compatibility (Windows uses \)
+        const cssLoader = oneOfRule.use.find(
+          (use) => use.loader && use.loader.replace(/\\/g, "/").includes("/css-loader/"),
+        );
 
         if (innerTest.includes("module") && cssLoader?.options) {
           cssLoader.options.modules = {
@@ -173,7 +176,10 @@ module.exports = composePlugins(
       rule.oneOf.forEach((oneOfRule, idx) => {
         if (!oneOfRule.test || !oneOfRule.use) return;
         const t = oneOfRule.test.toString();
-        if (/^\/\\\.css\$\/$/.test(t) && oneOfRule.use.some((u) => u.loader?.includes("/css-loader/"))) {
+        if (
+          /^\/\\\.css\$\/$/.test(t) &&
+          oneOfRule.use.some((u) => u.loader && u.loader.replace(/\\/g, "/").includes("/css-loader/"))
+        ) {
           insertions.push(idx);
         }
       });
@@ -183,7 +189,7 @@ module.exports = composePlugins(
         const template = rule.oneOf[idx];
         const prefixUse = template.use.map((u) => {
           if (typeof u === "string") return u;
-          if (u.loader?.includes("/css-loader/")) {
+          if (u.loader && u.loader.replace(/\\/g, "/").includes("/css-loader/")) {
             return {
               ...u,
               options: {
