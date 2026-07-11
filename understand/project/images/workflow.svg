@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 600" font-family="Microsoft YaHei,Arial,sans-serif">
+  <defs>
+    <linearGradient id="wfBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fefce8"/>
+      <stop offset="100%" stop-color="#fef3c7"/>
+    </linearGradient>
+    <linearGradient id="stepGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f1f5f9"/>
+    </linearGradient>
+    <marker id="wArr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0f172a"/>
+    </marker>
+  </defs>
+
+  <rect width="1400" height="600" fill="url(#wfBg)"/>
+  <text x="700" y="40" text-anchor="middle" font-size="26" font-weight="700" fill="#0f172a">Label Studio 标注业务工作流</text>
+
+  <!-- 流程框 -->
+  <g>
+    <rect x="40" y="80" width="200" height="120" rx="10" fill="url(#stepGrad)" stroke="#0f172a" stroke-width="2"/>
+    <text x="140" y="110" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">1. 创建项目</text>
+    <text x="55" y="132" font-size="11" fill="#334155">CreateProject 页面</text>
+    <text x="55" y="150" font-size="11" fill="#334155">- 选择模板/导入配置</text>
+    <text x="55" y="168" font-size="11" fill="#334155">- 设置项目名/描述</text>
+    <text x="55" y="186" font-size="11" fill="#334155">- is_draft → is_published</text>
+  </g>
+
+  <line x1="240" y1="140" x2="280" y2="140" stroke="#0f172a" stroke-width="2" marker-end="url(#wArr)"/>
+
+  <g>
+    <rect x="280" y="80" width="220" height="120" rx="10" fill="url(#stepGrad)" stroke="#0f172a" stroke-width="2"/>
+    <text x="390" y="110" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">2. 配置标签 (XML)</text>
+    <text x="295" y="132" font-size="11" fill="#334155">label_config (XML 声明式)</text>
+    <text x="295" y="150" font-size="11" fill="#334155">- View: 视图布局</text>
+    <text x="295" y="168" font-size="11" fill="#334155">- object tag: 图像/文本/音频</text>
+    <text x="295" y="186" font-size="11" fill="#334155">- control tag: 标注类型</text>
+  </g>
+
+  <line x1="500" y1="140" x2="540" y2="140" stroke="#0f172a" stroke-width="2" marker-end="url(#wArr)"/>
+
+  <g>
+    <rect x="540" y="80" width="220" height="120" rx="10" fill="url(#stepGrad)" stroke="#0f172a" stroke-width="2"/>
+    <text x="650" y="110" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">3. 导入数据</text>
+    <text x="555" y="132" font-size="11" fill="#334155">data_import / io_storages</text>
+    <text x="555" y="150" font-size="11" fill="#334155">- 文件上传 FileUpload</text>
+    <text x="555" y="168" font-size="11" fill="#334155">- JSON/CSV/TSV/ZIP 批量</text>
+    <text x="555" y="186" font-size="11" fill="#334155">- 云存储同步 (S3/GCS/...)</text>
+  </g>
+
+  <line x1="760" y1="140" x2="800" y2="140" stroke="#0f172a" stroke-width="2" marker-end="url(#wArr)"/>
+
+  <g>
+    <rect x="800" y="80" width="220" height="120" rx="10" fill="url(#stepGrad)" stroke="#0f172a" stroke-width="2"/>
+    <text x="910" y="110" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">4. (可选) ML 预标注</text>
+    <text x="815" y="132" font-size="11" fill="#334155">ml / ml_models</text>
+    <text x="815" y="150" font-size="11" fill="#334155">- 连接 ML Backend</text>
+    <text x="815" y="168" font-size="11" fill="#334155">- 拉取预测 → Prediction</text>
+    <text x="815" y="186" font-size="11" fill="#334155">- 显示为预标注</text>
+  </g>
+
+  <line x1="1020" y1="140" x2="1060" y2="140" stroke="#0f172a" stroke-width="2" marker-end="url(#wArr)"/>
+
+  <g>
+    <rect x="1060" y="80" width="300" height="120" rx="10" fill="url(#stepGrad)" stroke="#0f172a" stroke-width="2"/>
+    <text x="1210" y="110" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">5. 标注员执行标注</text>
+    <text x="1075" y="132" font-size="11" fill="#334155">LSF (web/libs/editor)</text>
+    <text x="1075" y="150" font-size="11" fill="#334155">- next_task 采样分配任务</text>
+    <text x="1075" y="168" font-size="11" fill="#334155">- TaskLock 并发锁</text>
+    <text x="1075" y="186" font-size="11" fill="#334155">- AnnotationDraft → Annotation</text>
+  </g>
+
+  <!-- 第二行 -->
+  <line x1="1210" y1="200" x2="1210" y2="260" stroke="#0f172a" stroke-width="2" marker-end="url(#wArr)"/>
+
+  <g>
+    <rect x="1060" y="260" width="300" height="120" rx="10" fill="url(#stepGrad)" stroke="#0f172a" stroke-width="2"/>
+    <text x="1210" y="290" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">6. 质量控制</text>
+    <text x="1075" y="312" font-size="11" fill="#334155">多标注员 overlap</text>
+    <text x="1075" y="330" font-size="11" fill="#334155">- ground_truth 比较</text>
+    <text x="1075" y="348" font-size="11" fill="#334155">- agreement 计算</text>
+    <text x="1075" y="366" font-size="11" fill="#334155">- control_weights 权重</text>
+  </g>
+
+  <line x1="1060" y1="320" x2="1020" y2="320" stroke="#0f172a" stroke-width="2" marker-end="url(#wArr)"/>
+
+  <g>
+    <rect x="800" y="260" width="220" height="120" rx="10" fill="url(#stepGrad)" stroke="#0f172a" stroke-width="2"/>
+    <text x="910" y="290" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">7. 触发 Webhook</text>
+    <text x="815" y="312" font-size="11" fill="#334155">webhooks 应用</text>
+    <text x="815" y="330" font-size="11" fill="#334155">- 标注完成事件</text>
+    <text x="815" y="348" font-size="11" fill="#334155">- 异步 HTTP 通知外部</text>
+    <text x="815" y="366" font-size="11" fill="#334155">- 项目/组织级订阅</text>
+  </g>
+
+  <line x1="800" y1="320" x2="760" y2="320" stroke="#0f172a" stroke-width="2" marker-end="url(#wArr)"/>
+
+  <g>
+    <rect x="540" y="260" width="220" height="120" rx="10" fill="url(#stepGrad)" stroke="#0f172a" stroke-width="2"/>
+    <text x="650" y="290" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">8. (可选) 模型训练</text>
+    <text x="555" y="312" font-size="11" fill="#334155">ml.api_connector</text>
+    <text x="555" y="330" font-size="11" fill="#334155">- 推送标注到 ML Backend</text>
+    <text x="555" y="348" font-size="11" fill="#334155">- 异步 RQ 训练任务</text>
+    <text x="555" y="366" font-size="11" fill="#334155">- ModelRun 记录</text>
+  </g>
+
+  <line x1="540" y1="320" x2="500" y2="320" stroke="#0f172a" stroke-width="2" marker-end="url(#wArr)"/>
+
+  <g>
+    <rect x="280" y="260" width="220" height="120" rx="10" fill="url(#stepGrad)" stroke="#0f172a" stroke-width="2"/>
+    <text x="390" y="290" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">9. 导出数据</text>
+    <text x="295" y="312" font-size="11" fill="#334155">data_export 应用</text>
+    <text x="295" y="330" font-size="11" fill="#334155">- JSON / CSV / COCO</text>
+    <text x="295" y="348" font-size="11" fill="#334155">- 同步到云存储 ExportStorage</text>
+    <text x="295" y="366" font-size="11" fill="#334155">- 通过 SDK 自动化</text>
+  </g>
+
+  <line x1="280" y1="320" x2="240" y2="320" stroke="#0f172a" stroke-width="2" marker-end="url(#wArr)"/>
+
+  <g>
+    <rect x="40" y="260" width="200" height="120" rx="10" fill="url(#stepGrad)" stroke="#0f172a" stroke-width="2"/>
+    <text x="140" y="290" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">10. 模型迭代</text>
+    <text x="55" y="312" font-size="11" fill="#334155">主动学习循环</text>
+    <text x="55" y="330" font-size="11" fill="#334155">- uncertainty 采样</text>
+    <text x="55" y="348" font-size="11" fill="#334155">- 新预测 → 回到步骤 4</text>
+    <text x="55" y="366" font-size="11" fill="#334155">- 形成闭环</text>
+  </g>
+
+  <!-- 关键技术说明 -->
+  <g>
+    <rect x="40" y="430" width="1320" height="150" rx="10" fill="#fff" stroke="#0f172a" stroke-width="1.5"/>
+    <text x="700" y="455" text-anchor="middle" font-size="15" font-weight="700" fill="#0f172a">关键技术机制</text>
+    <text x="60" y="480" font-size="11" fill="#334155">• <tspan font-weight="600">采样策略 sampling</tspan>: SEQUENCE(DataManager 排序) / UNIFORM(随机) / UNCERTAINTY(模型不确定性,主动学习)</text>
+    <text x="60" y="500" font-size="11" fill="#334155">• <tspan font-weight="600">skip_queue</tspan>: REQUEUE_FOR_ME(放回本人队尾) / REQUEUE_FOR_OTHERS(给其他标注员) / IGNORE_SKIPPED(视为完成)</text>
+    <text x="60" y="520" font-size="11" fill="#334155">• <tspan font-weight="600">overlap</tspan>: 多标注员覆盖同一任务,达到 maximum_annotations 后 is_labeled=True</text>
+    <text x="60" y="540" font-size="11" fill="#334155">• <tspan font-weight="600">TaskLock</tspan>: 并发标注时锁定任务,expire_at 自动过期,custom_task_lock_ttl 可配置 TTL</text>
+    <text x="60" y="560" font-size="11" fill="#334155">• <tspan font-weight="600">异步任务</tspan>: start_job_async_or_sync → RQ worker (Redis),存储同步/ML 训练/stats 计算均异步</text>
+    <text x="60" y="580" font-size="11" fill="#334155">• <tspan font-weight="600">存储代理</tspan>: /tasks/&lt;id&gt;/resolve/ 与 /projects/&lt;id&gt;/resolve/ 解析云 URI,presign 重定向或 proxy 流式传输</text>
+  </g>
+</svg>

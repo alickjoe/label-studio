@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 880" font-family="Microsoft YaHei,Arial,sans-serif">
+  <defs>
+    <linearGradient id="bmBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f0fdf4"/>
+      <stop offset="100%" stop-color="#dcfce7"/>
+    </linearGradient>
+    <linearGradient id="coreGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fef3c7"/>
+      <stop offset="100%" stop-color="#fbbf24"/>
+    </linearGradient>
+    <linearGradient id="domainGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#dbeafe"/>
+      <stop offset="100%" stop-color="#60a5fa"/>
+    </linearGradient>
+    <linearGradient id="integGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f3e8ff"/>
+      <stop offset="100%" stop-color="#a78bfa"/>
+    </linearGradient>
+    <linearGradient id="authGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffe4e6"/>
+      <stop offset="100%" stop-color="#fb7185"/>
+    </linearGradient>
+    <marker id="bmArr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0f172a"/>
+    </marker>
+  </defs>
+
+  <rect width="1400" height="880" fill="url(#bmBg)"/>
+  <text x="700" y="40" text-anchor="middle" font-size="26" font-weight="700" fill="#0f172a">Label Studio 后端模块依赖关系</text>
+  <text x="700" y="65" text-anchor="middle" font-size="13" fill="#475569">Django Apps  |  INSTALLED_APPS 顺序: fsm → projects → tasks → data_* → io_storages → ml → 其他</text>
+
+  <!-- 入口 -->
+  <g>
+    <rect x="540" y="90" width="320" height="70" rx="10" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+    <text x="700" y="118" text-anchor="middle" font-size="15" font-weight="700" fill="#0f172a">server.py (CLI main)</text>
+    <text x="700" y="140" text-anchor="middle" font-size="12" fill="#334155">label-studio 命令入口 / wsgi.py / manage.py</text>
+  </g>
+
+  <line x1="700" y1="160" x2="700" y2="195" stroke="#0f172a" stroke-width="2" marker-end="url(#bmArr)"/>
+
+  <!-- core 层 -->
+  <g>
+    <rect x="40" y="200" width="1320" height="140" rx="10" fill="url(#coreGrad)" stroke="#d97706" stroke-width="2"/>
+    <text x="700" y="228" text-anchor="middle" font-size="17" font-weight="700" fill="#7c2d12">core/ — 基础设施层</text>
+
+    <rect x="60" y="245" width="180" height="80" rx="6" fill="#fff" stroke="#b45309" stroke-width="1.5"/>
+    <text x="150" y="268" text-anchor="middle" font-size="13" font-weight="600" fill="#7c2d12">settings/</text>
+    <text x="150" y="288" text-anchor="middle" font-size="10" fill="#334155">base.py + label_studio.py</text>
+    <text x="150" y="304" text-anchor="middle" font-size="10" fill="#334155">DJANGO_SETTINGS_MODULE</text>
+    <text x="150" y="320" text-anchor="middle" font-size="10" fill="#64748b">PROJECT_MIXIN / TASK_MIXIN</text>
+
+    <rect x="260" y="245" width="180" height="80" rx="6" fill="#fff" stroke="#b45309" stroke-width="1.5"/>
+    <text x="350" y="268" text-anchor="middle" font-size="13" font-weight="600" fill="#7c2d12">redis.py</text>
+    <text x="350" y="288" text-anchor="middle" font-size="10" fill="#334155">start_job_async_or_sync</text>
+    <text x="350" y="304" text-anchor="middle" font-size="10" fill="#334155">RQ 队列调度</text>
+    <text x="350" y="320" text-anchor="middle" font-size="10" fill="#64748b">异步 fallback sync</text>
+
+    <rect x="460" y="245" width="180" height="80" rx="6" fill="#fff" stroke="#b45309" stroke-width="1.5"/>
+    <text x="550" y="268" text-anchor="middle" font-size="13" font-weight="600" fill="#7c2d12">feature_flags/</text>
+    <text x="550" y="288" text-anchor="middle" font-size="10" fill="#334155">flag_set(name)</text>
+    <text x="550" y="304" text-anchor="middle" font-size="10" fill="#334155">LaunchDarkly + offline</text>
+    <text x="550" y="320" text-anchor="middle" font-size="10" fill="#64748b">OSS 默认 True</text>
+
+    <rect x="660" y="245" width="180" height="80" rx="6" fill="#fff" stroke="#b45309" stroke-width="1.5"/>
+    <text x="750" y="268" text-anchor="middle" font-size="13" font-weight="600" fill="#7c2d12">current_request.py</text>
+    <text x="750" y="288" text-anchor="middle" font-size="10" fill="#334155">CurrentContext</text>
+    <text x="750" y="304" text-anchor="middle" font-size="10" fill="#334155">线程本地用户/请求</text>
+    <text x="750" y="320" text-anchor="middle" font-size="10" fill="#64748b">conftest 测试间清理</text>
+
+    <rect x="860" y="245" width="180" height="80" rx="6" fill="#fff" stroke="#b45309" stroke-width="1.5"/>
+    <text x="950" y="268" text-anchor="middle" font-size="13" font-weight="600" fill="#7c2d12">label_config.py</text>
+    <text x="950" y="288" text-anchor="middle" font-size="10" fill="#334155">XML 配置解析校验</text>
+    <text x="950" y="304" text-anchor="middle" font-size="10" fill="#334155">extract_data_types</text>
+    <text x="950" y="320" text-anchor="middle" font-size="10" fill="#64748b">get_all_control_tag_tuples</text>
+
+    <rect x="1060" y="245" width="180" height="80" rx="6" fill="#fff" stroke="#b45309" stroke-width="1.5"/>
+    <text x="1150" y="268" text-anchor="middle" font-size="13" font-weight="600" fill="#7c2d12">mixins.py + utils/</text>
+    <text x="1150" y="288" text-anchor="middle" font-size="10" fill="#334155">load_func 动态加载</text>
+    <text x="1150" y="304" text-anchor="middle" font-size="10" fill="#334155">db.py / common.py / io.py</text>
+    <text x="1150" y="320" text-anchor="middle" font-size="10" fill="#64748b">Enterprise 扩展点</text>
+
+    <rect x="1260" y="245" width="100" height="80" rx="6" fill="#fff" stroke="#b45309" stroke-width="1.5"/>
+    <text x="1310" y="268" text-anchor="middle" font-size="13" font-weight="600" fill="#7c2d12">urls.py</text>
+    <text x="1310" y="288" text-anchor="middle" font-size="10" fill="#334155">顶层路由</text>
+    <text x="1310" y="304" text-anchor="middle" font-size="10" fill="#334155">/api/*</text>
+    <text x="1310" y="320" text-anchor="middle" font-size="10" fill="#64748b">DRF Router</text>
+  </g>
+
+  <line x1="700" y1="340" x2="700" y2="375" stroke="#0f172a" stroke-width="2" marker-end="url(#bmArr)"/>
+
+  <!-- FSM 框架 -->
+  <g>
+    <rect x="40" y="380" width="320" height="120" rx="10" fill="url(#integGrad)" stroke="#7c3aed" stroke-width="2"/>
+    <text x="200" y="408" text-anchor="middle" font-size="16" font-weight="700" fill="#5b21b6">fsm/ — 状态机框架</text>
+    <text x="60" y="432" font-size="11" fill="#334155">• models.py: FsmHistoryStateModel (基类)</text>
+    <text x="60" y="450" font-size="11" fill="#334155">• state_models.py: TaskState / AnnotationState</text>
+    <text x="60" y="468" font-size="11" fill="#334155">• transitions.py + registry.py + state_manager.py</text>
+    <text x="60" y="486" font-size="11" fill="#64748b">必须先于 projects/tasks 注册</text>
+  </g>
+
+  <!-- 项目/任务核心 -->
+  <g>
+    <rect x="380" y="380" width="500" height="120" rx="10" fill="url(#domainGrad)" stroke="#1d4ed8" stroke-width="2"/>
+    <text x="630" y="408" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">领域核心 — projects + tasks</text>
+    <text x="400" y="432" font-size="11" fill="#334155">• projects/models.py: Project (label_config, sampling, skip_queue, 软删除)</text>
+    <text x="400" y="450" font-size="11" fill="#334155">• tasks/models.py: Task, Annotation, Prediction, AnnotationDraft, TaskLock</text>
+    <text x="400" y="468" font-size="11" fill="#334155">• projects/signals.py: ProjectSignals (生命周期信号)</text>
+    <text x="400" y="486" font-size="11" fill="#64748b">ProjectVisibleManager 默认隐藏 deleted_at IS NOT NULL</text>
+  </g>
+
+  <!-- 数据管理 -->
+  <g>
+    <rect x="900" y="380" width="460" height="120" rx="10" fill="url(#domainGrad)" stroke="#1d4ed8" stroke-width="2"/>
+    <text x="1130" y="408" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">data_manager + data_import + data_export</text>
+    <text x="920" y="432" font-size="11" fill="#334155">• data_manager: View/Tab/Filter + actions/(next_task, cache_labels...)</text>
+    <text x="920" y="450" font-size="11" fill="#334155">• data_import: FileUpload + uploader.py (JSON/CSV/TSV/ZIP)</text>
+    <text x="920" y="468" font-size="11" fill="#334155">• data_export: serializers.py (多格式: JSON/CSV/COCO/YOLO...)</text>
+    <text x="920" y="486" font-size="11" fill="#64748b">prepare_params.py: Data Manager 查询参数解析</text>
+  </g>
+
+  <line x1="200" y1="500" x2="200" y2="535" stroke="#0f172a" stroke-width="2" marker-end="url(#bmArr)"/>
+  <line x1="630" y1="500" x2="630" y2="535" stroke="#0f172a" stroke-width="2" marker-end="url(#bmArr)"/>
+  <line x1="1130" y1="500" x2="1130" y2="535" stroke="#0f172a" stroke-width="2" marker-end="url(#bmArr)"/>
+
+  <!-- 集成层 -->
+  <g>
+    <rect x="40" y="540" width="440" height="180" rx="10" fill="url(#integGrad)" stroke="#7c3aed" stroke-width="2"/>
+    <text x="260" y="568" text-anchor="middle" font-size="16" font-weight="700" fill="#5b21b6">io_storages/ — 云存储集成</text>
+    <text x="60" y="592" font-size="11" fill="#334155">• base_models.py: ImportStorage / ExportStorage 抽象基类</text>
+    <text x="60" y="610" font-size="11" fill="#334155">• 子目录: s3/ gcs/ azure_blob/ redis/ localfiles/</text>
+    <text x="60" y="628" font-size="11" fill="#334155">• 每个含: models.py, api.py, serializers.py, form_layout.yml</text>
+    <text x="60" y="646" font-size="11" fill="#334155">• proxy_api.py: /tasks/&lt;id&gt;/resolve/ /projects/&lt;id&gt;/resolve/</text>
+    <text x="60" y="664" font-size="11" fill="#334155">• utils.py: presign vs proxy streaming 决策</text>
+    <text x="60" y="682" font-size="11" fill="#64748b">• StorageLink 模型记录 storage ↔ task 关联</text>
+    <text x="60" y="700" font-size="11" fill="#64748b">• functions.py: sync_storage 异步同步</text>
+  </g>
+
+  <g>
+    <rect x="500" y="540" width="440" height="180" rx="10" fill="url(#integGrad)" stroke="#7c3aed" stroke-width="2"/>
+    <text x="720" y="568" text-anchor="middle" font-size="16" font-weight="700" fill="#5b21b6">ml/ + ml_models/ — ML 集成</text>
+    <text x="520" y="592" font-size="11" fill="#334155">• ml/models.py: MLBackend 连接(url, title, is_active)</text>
+    <text x="520" y="610" font-size="11" fill="#334155">• ml/api_connector.py: 与外部 ML Backend HTTP 通信</text>
+    <text x="520" y="628" font-size="11" fill="#334155">• ml/mixins.py: 预测同步、训练触发钩子</text>
+    <text x="520" y="646" font-size="11" fill="#334155">• ml_models/: ModelRun, ModelVersion 模型管理</text>
+    <text x="520" y="664" font-size="11" fill="#334155">• tasks.Prediction.model FK → MLBackend</text>
+    <text x="520" y="682" font-size="11" fill="#64748b">• interactive ML: 实时预测(is_interactive)</text>
+    <text x="520" y="700" font-size="11" fill="#64748b">• 训练 min_annotations_to_start_training 触发</text>
+  </g>
+
+  <g>
+    <rect x="960" y="540" width="400" height="180" rx="10" fill="url(#integGrad)" stroke="#7c3aed" stroke-width="2"/>
+    <text x="1160" y="568" text-anchor="middle" font-size="16" font-weight="700" fill="#5b21b6">webhooks/ + labels_manager</text>
+    <text x="980" y="592" font-size="11" fill="#334155">• webhooks/models.py: Webhook (项目/组织级)</text>
+    <text x="980" y="610" font-size="11" fill="#334155">• webhooks/utils.py: 异步 HTTP 分发</text>
+    <text x="980" y="628" font-size="11" fill="#334155">• 事件: 标注创建/删除/项目更新等</text>
+    <text x="980" y="646" font-size="11" fill="#334155">• labels_manager/models.py: Label 字典</text>
+    <text x="980" y="664" font-size="11" fill="#334155">• annotation_templates/: 内置 XML 模板</text>
+    <text x="980" y="682" font-size="11" fill="#64748b">• Webhook 支持 send_for_all_actions</text>
+    <text x="980" y="700" font-size="11" fill="#64748b">• 可配置 headers / is_active</text>
+  </g>
+
+  <line x1="260" y1="720" x2="260" y2="755" stroke="#0f172a" stroke-width="2" marker-end="url(#bmArr)"/>
+  <line x1="720" y1="720" x2="720" y2="755" stroke="#0f172a" stroke-width="2" marker-end="url(#bmArr)"/>
+  <line x1="1160" y1="720" x2="1160" y2="755" stroke="#0f172a" stroke-width="2" marker-end="url(#bmArr)"/>
+
+  <!-- 认证层 -->
+  <g>
+    <rect x="40" y="760" width="440" height="110" rx="10" fill="url(#authGrad)" stroke="#be123c" stroke-width="2"/>
+    <text x="260" y="788" text-anchor="middle" font-size="16" font-weight="700" fill="#831843">认证与多租户</text>
+    <text x="60" y="812" font-size="11" fill="#334155">• users/models.py: User (AbstractBaseUser + PermissionsMixin)</text>
+    <text x="60" y="830" font-size="11" fill="#334155">• organizations/models.py: Organization, active_organization</text>
+    <text x="60" y="848" font-size="11" fill="#334155">• jwt_auth/: LSAPIToken, JWTSettings, middleware</text>
+    <text x="60" y="866" font-size="11" fill="#64748b">• session_policy/: 会话策略 API</text>
+  </g>
+
+  <g>
+    <rect x="500" y="760" width="440" height="110" rx="10" fill="url(#authGrad)" stroke="#be123c" stroke-width="2"/>
+    <text x="720" y="788" text-anchor="middle" font-size="16" font-weight="700" fill="#831843">权限与可见性</text>
+    <text x="520" y="812" font-size="11" fill="#334155">• core/permissions.py + api_permissions.py</text>
+    <text x="520" y="830" font-size="11" fill="#334155">• projects/README.md: TaskLock 行为说明</text>
+    <text x="520" y="848" font-size="11" fill="#334155">• for_user(user) QuerySet 按 active_organization 过滤</text>
+    <text x="520" y="866" font-size="11" fill="#64748b">• Project.all_objects 可访问软删除项</text>
+  </g>
+
+  <g>
+    <rect x="960" y="760" width="400" height="110" rx="10" fill="url(#authGrad)" stroke="#be123c" stroke-width="2"/>
+    <text x="1160" y="788" text-anchor="middle" font-size="16" font-weight="700" fill="#831843">测试与部署</text>
+    <text x="980" y="812" font-size="11" fill="#334155">• conftest.py: 全局 pytest fixtures</text>
+    <text x="980" y="830" font-size="11" fill="#334155">• tests/: tavern API 测试 + SDK 测试</text>
+    <text x="980" y="848" font-size="11" fill="#334155">• Dockerfile* + docker-compose.yml</text>
+    <text x="980" y="866" font-size="11" fill="#64748b">• CI: ruff/biome/bandit/gitleaks/codeql</text>
+  </g>
+</svg>

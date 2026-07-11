@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" font-family="Microsoft YaHei,Arial,sans-serif">
+  <defs>
+    <linearGradient id="fsmBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fdf4ff"/>
+      <stop offset="100%" stop-color="#fae8ff"/>
+    </linearGradient>
+    <linearGradient id="stateDraft" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e0e7ff"/>
+      <stop offset="100%" stop-color="#a5b4fc"/>
+    </linearGradient>
+    <linearGradient id="stateActive" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#dcfce7"/>
+      <stop offset="100%" stop-color="#86efac"/>
+    </linearGradient>
+    <linearGradient id="stateLabeled" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fef3c7"/>
+      <stop offset="100%" stop-color="#fcd34d"/>
+    </linearGradient>
+    <linearGradient id="stateFinal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fecaca"/>
+      <stop offset="100%" stop-color="#f87171"/>
+    </linearGradient>
+    <marker id="fArr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0f172a"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="620" fill="url(#fsmBg)"/>
+  <text x="600" y="40" text-anchor="middle" font-size="26" font-weight="700" fill="#0f172a">FSM 状态机框架 — Task 状态转换示例</text>
+  <text x="600" y="65" text-anchor="middle" font-size="13" fill="#475569">fsm 应用: Pydantic 声明式 transitions + Registry + StateManager + UUID7 优化</text>
+
+  <!-- 状态节点 -->
+  <g>
+    <rect x="60" y="120" width="180" height="80" rx="40" fill="url(#stateDraft)" stroke="#4338ca" stroke-width="2"/>
+    <text x="150" y="155" text-anchor="middle" font-size="14" font-weight="700" fill="#312e81">DRAFT</text>
+    <text x="150" y="178" text-anchor="middle" font-size="11" fill="#3730a3">草稿/未发布</text>
+  </g>
+
+  <g>
+    <rect x="320" y="120" width="180" height="80" rx="40" fill="url(#stateActive)" stroke="#15803d" stroke-width="2"/>
+    <text x="410" y="155" text-anchor="middle" font-size="14" font-weight="700" fill="#14532d">ACTIVE</text>
+    <text x="410" y="178" text-anchor="middle" font-size="11" fill="#166534">进行中</text>
+  </g>
+
+  <g>
+    <rect x="580" y="120" width="180" height="80" rx="40" fill="url(#stateLabeled)" stroke="#b45309" stroke-width="2"/>
+    <text x="670" y="155" text-anchor="middle" font-size="14" font-weight="700" fill="#78350f">LABELED</text>
+    <text x="670" y="178" text-anchor="middle" font-size="11" fill="#92400e">已标注</text>
+  </g>
+
+  <g>
+    <rect x="840" y="120" width="180" height="80" rx="40" fill="url(#stateFinal)" stroke="#991b1b" stroke-width="2"/>
+    <text x="930" y="155" text-anchor="middle" font-size="14" font-weight="700" fill="#7f1d1d">ARCHIVED</text>
+    <text x="930" y="178" text-anchor="middle" font-size="11" fill="#991b1b">归档/删除</text>
+  </g>
+
+  <!-- 转换箭头 -->
+  <line x1="240" y1="160" x2="320" y2="160" stroke="#0f172a" stroke-width="2" marker-end="url(#fArr)"/>
+  <text x="280" y="150" text-anchor="middle" font-size="10" fill="#0f172a">publish</text>
+
+  <line x1="500" y1="160" x2="580" y2="160" stroke="#0f172a" stroke-width="2" marker-end="url(#fArr)"/>
+  <text x="540" y="150" text-anchor="middle" font-size="10" fill="#0f172a">annotate</text>
+
+  <line x1="760" y1="160" x2="840" y2="160" stroke="#0f172a" stroke-width="2" marker-end="url(#fArr)"/>
+  <text x="800" y="150" text-anchor="middle" font-size="10" fill="#0f172a">archive</text>
+
+  <!-- 反向转换 -->
+  <line x1="580" y1="190" x2="500" y2="190" stroke="#0f172a" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#fArr)"/>
+  <text x="540" y="210" text-anchor="middle" font-size="10" fill="#0f172a">reopen</text>
+
+  <line x1="320" y1="190" x2="240" y2="190" stroke="#0f172a" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#fArr)"/>
+  <text x="280" y="210" text-anchor="middle" font-size="10" fill="#0f172a">unpublish</text>
+
+  <!-- FSM 框架组件 -->
+  <g>
+    <rect x="40" y="270" width="1120" height="330" rx="10" fill="#fff" stroke="#7c3aed" stroke-width="2"/>
+    <text x="600" y="300" text-anchor="middle" font-size="16" font-weight="700" fill="#5b21b6">FSM 框架核心组件 (label_studio/fsm/)</text>
+
+    <rect x="70" y="320" width="220" height="130" rx="8" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.5"/>
+    <text x="180" y="345" text-anchor="middle" font-size="13" font-weight="700" fill="#5b21b6">state_models.py</text>
+    <text x="85" y="368" font-size="11" fill="#334155">BaseState (抽象)</text>
+    <text x="85" y="386" font-size="11" fill="#334155">  - TaskState</text>
+    <text x="85" y="404" font-size="11" fill="#334155">  - AnnotationState</text>
+    <text x="85" y="422" font-size="11" fill="#334155">  - ProjectState</text>
+    <text x="85" y="440" font-size="11" fill="#64748b">UUID7 主键优化</text>
+
+    <rect x="310" y="320" width="220" height="130" rx="8" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.5"/>
+    <text x="420" y="345" text-anchor="middle" font-size="13" font-weight="700" fill="#5b21b6">transitions.py</text>
+    <text x="325" y="368" font-size="11" fill="#334155">Pydantic Transition 模型</text>
+    <text x="325" y="386" font-size="11" fill="#334155">  - from_state / to_state</text>
+    <text x="325" y="404" font-size="11" fill="#334155">  - conditions (callable)</text>
+    <text x="325" y="422" font-size="11" fill="#334155">  - on_execute hooks</text>
+    <text x="325" y="440" font-size="11" fill="#64748b">声明式定义转换</text>
+
+    <rect x="550" y="320" width="220" height="130" rx="8" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.5"/>
+    <text x="660" y="345" text-anchor="middle" font-size="13" font-weight="700" fill="#5b21b6">registry.py</text>
+    <text x="565" y="368" font-size="11" fill="#334155">TransitionRegistry</text>
+    <text x="565" y="386" font-size="11" fill="#334155">  - 按 (model, key) 注册</text>
+    <text x="565" y="404" font-size="11" fill="#334155">  - 全局单例</text>
+    <text x="565" y="422" font-size="11" fill="#334155">  - 启动时扫描装饰器</text>
+    <text x="565" y="440" font-size="11" fill="#64748b">@register_transition</text>
+
+    <rect x="790" y="320" width="220" height="130" rx="8" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.5"/>
+    <text x="900" y="345" text-anchor="middle" font-size="13" font-weight="700" fill="#5b21b6">state_manager.py</text>
+    <text x="805" y="368" font-size="11" fill="#334155">StateManager 扩展点</text>
+    <text x="805" y="386" font-size="11" fill="#334155">  - execute_transition()</text>
+    <text x="805" y="404" font-size="11" fill="#334155">  - 历史记录 FsmHistoryStateModel</text>
+    <text x="805" y="422" font-size="11" fill="#334155">  - 与 Django signals 协作</text>
+    <text x="805" y="440" font-size="11" fill="#64748b">queryset_mixins: with_state()</text>
+
+    <rect x="1030" y="320" width="120" height="130" rx="8" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.5"/>
+    <text x="1090" y="345" text-anchor="middle" font-size="13" font-weight="700" fill="#5b21b6">api.py</text>
+    <text x="1045" y="368" font-size="11" fill="#334155">DRF ViewSet</text>
+    <text x="1045" y="386" font-size="11" fill="#334155">/api/fsm/</text>
+    <text x="1045" y="404" font-size="11" fill="#334155">查询状态</text>
+    <text x="1045" y="422" font-size="11" fill="#334155">触发转换</text>
+    <text x="1045" y="440" font-size="11" fill="#64748b">权限校验</text>
+
+    <!-- 使用方 -->
+    <rect x="70" y="470" width="1080" height="110" rx="8" fill="#faf5ff" stroke="#7c3aed" stroke-width="1.5"/>
+    <text x="600" y="495" text-anchor="middle" font-size="14" font-weight="700" fill="#5b21b6">使用 FSM 的应用</text>
+    <text x="100" y="520" font-size="12" fill="#334155">• <tspan font-weight="600">projects</tspan>: ProjectTransitions (project_transitions.py) — 项目发布/归档/重开</text>
+    <text x="100" y="540" font-size="12" fill="#334155">• <tspan font-weight="600">tasks</tspan>: TaskTransitions (task_transitions.py) — 任务标注流程状态</text>
+    <text x="100" y="560" font-size="12" fill="#334155">• <tspan font-weight="600">tasks</tspan>: AnnotationTransitions (annotation_transitions.py) — 标注接受/拒绝/提交</text>
+    <text x="650" y="520" font-size="12" fill="#334155">• <tspan font-weight="600">FSM 必须先于 projects/tasks 注册</tspan>(INSTALLED_APPS 顺序)</text>
+    <text x="650" y="540" font-size="12" fill="#334155">• <tspan font-weight="600">with_state()</tspan> 注解避免 N+1 查询</text>
+    <text x="650" y="560" font-size="12" fill="#334155">• <tspan font-weight="600">FSMStateQuerySetMixin</tspan> 提供统一的查询集混入</text>
+  </g>
+</svg>
