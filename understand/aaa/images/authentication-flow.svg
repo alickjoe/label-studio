@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 880" font-family="'Segoe UI', 'Microsoft YaHei', sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#475569"/>
+    </marker>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#eef2f7"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1100" height="880" fill="url(#bgGrad)"/>
+
+  <text x="550" y="34" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a">Label Studio 身份验证流程</text>
+
+  <!-- Client -->
+  <rect x="40" y="70" width="200" height="70" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="140" y="100" text-anchor="middle" font-size="15" font-weight="600" fill="#1e3a8a">客户端 / 浏览器</text>
+  <text x="140" y="122" text-anchor="middle" font-size="12" fill="#1e40af">携带凭证发起请求</text>
+
+  <!-- Middleware stack -->
+  <rect x="290" y="70" width="500" height="290" rx="12" fill="#ffffff" stroke="#64748b" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="540" y="94" text-anchor="middle" font-size="14" font-weight="700" fill="#334155">Django 中间件链 (settings.MIDDLEWARE)</text>
+
+  <rect x="310" y="108" width="460" height="44" rx="6" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="330" y="135" font-size="12" font-weight="600" fill="#78350f">XApiKeySupportMiddleware</text>
+  <text x="760" y="135" text-anchor="end" font-size="11" fill="#92400e">X-Api-Key → Authorization</text>
+
+  <rect x="310" y="160" width="460" height="44" rx="6" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="330" y="187" font-size="12" font-weight="600" fill="#4c1d95">JWTAuthenticationMiddleware</text>
+  <text x="760" y="187" text-anchor="end" font-size="11" fill="#5b21b6">Bearer JWT → request.user</text>
+
+  <rect x="310" y="212" width="460" height="44" rx="6" fill="#fce7f3" stroke="#be185d" stroke-width="1.5"/>
+  <text x="330" y="239" font-size="12" font-weight="600" fill="#831843">InactivitySessionTimeoutMiddleware</text>
+  <text x="760" y="239" text-anchor="end" font-size="11" fill="#9d174d">超时登出</text>
+
+  <rect x="310" y="264" width="460" height="44" rx="6" fill="#dcfce7" stroke="#15803d" stroke-width="1.5"/>
+  <text x="330" y="291" font-size="12" font-weight="600" fill="#14532d">UpdateLastActivityMiddleware</text>
+  <text x="760" y="291" text-anchor="end" font-size="11" fill="#166534">更新最后活动时间</text>
+
+  <rect x="310" y="316" width="460" height="36" rx="6" fill="#f1f5f9" stroke="#475569" stroke-width="1.5"/>
+  <text x="540" y="338" text-anchor="middle" font-size="12" font-weight="600" fill="#334155">…其余中间件 (CSRF / Session / Common …)</text>
+
+  <!-- DRF Auth classes -->
+  <rect x="40" y="400" width="1020" height="180" rx="12" fill="#ffffff" stroke="#0ea5e9" stroke-width="2"/>
+  <text x="550" y="424" text-anchor="middle" font-size="14" font-weight="700" fill="#0369a1">DRF 认证类 (DEFAULT_AUTHENTICATION_CLASSES)</text>
+
+  <rect x="60" y="442" width="300" height="120" rx="8" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+  <text x="210" y="466" text-anchor="middle" font-size="13" font-weight="700" fill="#075985">TokenAuthenticationPhaseout</text>
+  <text x="80" y="490" font-size="11" fill="#0c4a6e">• 继承 DRF TokenAuthentication</text>
+  <text x="80" y="508" font-size="11" fill="#0c4a6e">• 读取 "Authorization: Token xxx"</text>
+  <text x="80" y="526" font-size="11" fill="#0c4a6e">• 特性开关启用时拒绝旧 Token</text>
+  <text x="80" y="544" font-size="11" fill="#0c4a6e">• 设置 CurrentContext.user</text>
+  <text x="80" y="558" font-size="10" fill="#475569">jwt_auth/auth.py:10</text>
+
+  <rect x="400" y="442" width="300" height="120" rx="8" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+  <text x="550" y="466" text-anchor="middle" font-size="13" font-weight="700" fill="#075985">SessionAuthentication</text>
+  <text x="420" y="490" font-size="11" fill="#0c4a6e">• 基于 Django Session Cookie</text>
+  <text x="420" y="508" font-size="11" fill="#0c4a6e">• 浏览器登录场景</text>
+  <text x="420" y="526" font-size="11" fill="#0c4a6e">• request.user = session 用户</text>
+  <text x="420" y="558" font-size="10" fill="#475569">rest_framework.authentication</text>
+
+  <rect x="740" y="442" width="300" height="120" rx="8" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+  <text x="890" y="466" text-anchor="middle" font-size="13" font-weight="700" fill="#075985">JWTAuthentication (simple-jwt)</text>
+  <text x="760" y="490" font-size="11" fill="#0c4a6e">• "Authorization: Bearer xxx"</text>
+  <text x="760" y="508" font-size="11" fill="#0c4a6e">• 由中间件提前触发</text>
+  <text x="760" y="526" font-size="11" fill="#0c4a6e">• 校验签名 / 过期 / 黑名单</text>
+  <text x="760" y="558" font-size="10" fill="#475569">rest_framework_simplejwt</text>
+
+  <!-- Decision -->
+  <polygon points="550,610 660,665 550,720 440,665" fill="#fef9c3" stroke="#ca8a04" stroke-width="2"/>
+  <text x="550" y="660" text-anchor="middle" font-size="12" font-weight="600" fill="#713f12">认证成功?</text>
+
+  <!-- Success -->
+  <rect x="40" y="740" width="280" height="70" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="180" y="768" text-anchor="middle" font-size="14" font-weight="600" fill="#14532d">认证通过</text>
+  <text x="180" y="790" text-anchor="middle" font-size="11" fill="#166534">request.user 注入 → 视图层</text>
+
+  <!-- Fail -->
+  <rect x="780" y="740" width="280" height="70" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+  <text x="920" y="768" text-anchor="middle" font-size="14" font-weight="600" fill="#7f1d1d">认证失败</text>
+  <text x="920" y="790" text-anchor="middle" font-size="11" fill="#991b1b">返回 401 Unauthorized</text>
+
+  <!-- Arrows -->
+  <line x1="240" y1="105" x2="310" y2="130" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="540" y1="360" x2="540" y2="400" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="540" y1="580" x2="540" y2="610" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="440" y1="665" x2="180" y2="740" stroke="#16a34a" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="280" y="700" font-size="11" fill="#15803d" font-weight="600">是</text>
+  <line x1="660" y1="665" x2="920" y2="740" stroke="#dc2626" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="800" y="700" font-size="11" fill="#b91c1c" font-weight="600">否</text>
+
+  <!-- Legend note -->
+  <text x="550" y="845" text-anchor="middle" font-size="11" fill="#64748b">配置位置: label_studio/core/settings/base.py:268-282 (REST_FRAMEWORK) / :265 (MIDDLEWARE)</text>
+</svg>
