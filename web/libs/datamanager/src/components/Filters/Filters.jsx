@@ -48,7 +48,7 @@ export const Filters = injector(({ store, views, currentView, filters, projectId
     try {
       text = await navigator.clipboard.readText();
     } catch {
-      showToast("Cannot read clipboard. Please allow clipboard access and try again.");
+      showToast("无法读取剪贴板。请允许剪贴板访问后重试。");
       return;
     }
 
@@ -56,12 +56,12 @@ export const Filters = injector(({ store, views, currentView, filters, projectId
     try {
       snapshot = JSON.parse(text);
     } catch {
-      showToast("Clipboard does not contain valid JSON.");
+      showToast("剪贴板内容不是有效的 JSON。");
       return;
     }
 
     if (!snapshot || typeof snapshot !== "object" || !Array.isArray(snapshot.items)) {
-      showToast('Invalid filter format. Expected { "conjunction": "and"|"or", "items": [...] }');
+      showToast('筛选格式无效。应为 { "conjunction": "and"|"or", "items": [...] }');
       return;
     }
 
@@ -69,7 +69,7 @@ export const Filters = injector(({ store, views, currentView, filters, projectId
 
     const result = currentView.importFilters(snapshot);
     if (result === false) {
-      showToast("No matching filter columns found in this project. Filters may be from a different project.");
+      showToast("未在此项目中找到匹配的筛选列。筛选可能来自其他项目。");
       return;
     }
 
@@ -105,7 +105,7 @@ export const Filters = injector(({ store, views, currentView, filters, projectId
             />
           ))
         ) : (
-          <div className={cn("filters").elem("empty").toClassName()}>No filters applied</div>
+          <div className={cn("filters").elem("empty").toClassName()}>未应用任何筛选</div>
         )}
       </div>
       <div className={cn("filters").elem("actions").toClassName()}>
@@ -115,7 +115,7 @@ export const Filters = injector(({ store, views, currentView, filters, projectId
           onClick={() => currentView.createFilter()}
           leading={<IconPlus className="!h-3 !w-3" />}
         >
-          Add {filters.length ? "Another Filter" : "Filter"}
+          {filters.length ? "添加另一个筛选" : "添加筛选"}
         </Button>
 
         <div className={cn("filters").elem("actions-right").toClassName()}>
@@ -123,9 +123,9 @@ export const Filters = injector(({ store, views, currentView, filters, projectId
             <Button
               size="small"
               look="string"
-              tooltip={copyFeedback ? "Copied!" : "Copy filters to clipboard; Tip: Use it in Label Studio SDK"}
+              tooltip={copyFeedback ? "已复制！" : "复制筛选到剪贴板；提示：可在 Label Studio SDK 中使用"}
               onClick={handleCopyFilters}
-              aria-label="Copy filters"
+              aria-label="复制筛选"
             >
               <IconCopyOutline className="!w-4 !h-4" />
             </Button>
@@ -134,9 +134,9 @@ export const Filters = injector(({ store, views, currentView, filters, projectId
           <Button
             size="small"
             look="string"
-            tooltip={pasteFeedback ? "Pasted!" : "Paste filters from clipboard"}
+            tooltip={pasteFeedback ? "已粘贴！" : "从剪贴板粘贴筛选"}
             onClick={handlePasteFilters}
-            aria-label="Paste filters"
+            aria-label="粘贴筛选"
           >
             <IconClipboardCheck className="!w-4 !h-4" />
           </Button>
@@ -145,9 +145,9 @@ export const Filters = injector(({ store, views, currentView, filters, projectId
             <Button
               size="small"
               look="string"
-              tooltip="Undo paste — restore previous filters"
+              tooltip="撤销粘贴 — 恢复之前的筛选"
               onClick={handleUndoPaste}
-              aria-label="Undo paste"
+              aria-label="撤销粘贴"
             >
               <IconUndo className="!w-4 !h-4" />
             </Button>
@@ -158,9 +158,9 @@ export const Filters = injector(({ store, views, currentView, filters, projectId
               look="string"
               type="link"
               size="small"
-              tooltip="Pin to sidebar"
+              tooltip="固定到侧边栏"
               onClick={() => views.expandFilters()}
-              aria-label="Pin filters to sidebar"
+              aria-label="将筛选固定到侧边栏"
             >
               <IconChevronRight className="!w-4 !h-4" />
             </Button>

@@ -39,7 +39,7 @@ jobs:
 
       # Nx db cache ties artifacts to machine ID; restored cache from other runners is not used.
       - name: Cache Nx
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         with:
           path: ${{ env.FRONTEND_MONOREPO_DIR }}/.nx/cache
           key: nx-v2-${{ runner.os }}-${{ env.NODE }}-${{ hashFiles('web/package.json', 'web/yarn.lock') }}
@@ -55,7 +55,7 @@ jobs:
 
       - name: Upload coverage to Codecov
         if: ${{ always() && github.event.pull_request.head.repo.fork == false && github.event.pull_request.user.login != 'dependabot[bot]' }}
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@v7
         with:
           name: lsf-unit
           flags: lsf-unit

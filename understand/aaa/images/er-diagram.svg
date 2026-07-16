@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 920" font-family="'Segoe UI', 'Microsoft YaHei', sans-serif">
+  <defs>
+    <marker id="arrE" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#475569"/>
+    </marker>
+    <linearGradient id="bgE" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#eef2f7"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1240" height="920" fill="url(#bgE)"/>
+  <text x="620" y="34" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a">账号持久化 E-R 图 (核心表)</text>
+
+  <!-- ===== htx_user ===== -->
+  <rect x="40" y="70" width="380" height="430" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="2"/>
+  <rect x="40" y="70" width="380" height="32" rx="10" fill="#2563eb"/>
+  <text x="230" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">htx_user  (users.User)</text>
+
+  <text x="60" y="124" font-size="11" font-weight="600" fill="#1e3a8a">列名</text>
+  <text x="300" y="124" font-size="11" font-weight="600" fill="#1e3a8a">类型</text>
+
+  <line x1="55" y1="130" x2="405" y2="130" stroke="#cbd5e1" stroke-width="1"/>
+
+  <text x="60" y="148" font-size="11" fill="#0f172a">id</text>
+  <text x="300" y="148" font-size="11" fill="#475569">BigAutoField PK</text>
+
+  <text x="60" y="168" font-size="11" fill="#0f172a">password</text>
+  <text x="300" y="168" font-size="11" fill="#475569">varchar(128)</text>
+
+  <text x="60" y="188" font-size="11" fill="#0f172a">last_login</text>
+  <text x="300" y="188" font-size="11" fill="#475569">datetime null</text>
+
+  <text x="60" y="208" font-size="11" fill="#0f172a">is_superuser</text>
+  <text x="300" y="208" font-size="11" fill="#475569">bool</text>
+
+  <text x="60" y="228" font-size="11" fill="#0f172a">username</text>
+  <text x="300" y="228" font-size="11" fill="#475569">varchar(256)</text>
+
+  <text x="60" y="248" font-size="11" fill="#0f172a">email  (UNIQUE)</text>
+  <text x="300" y="248" font-size="11" fill="#475569">varchar(254)</text>
+
+  <text x="60" y="268" font-size="11" fill="#0f172a">first_name / last_name</text>
+  <text x="300" y="268" font-size="11" fill="#475569">varchar(256)</text>
+
+  <text x="60" y="288" font-size="11" fill="#0f172a">phone</text>
+  <text x="300" y="288" font-size="11" fill="#475569">varchar(256)</text>
+
+  <text x="60" y="308" font-size="11" fill="#0f172a">avatar</text>
+  <text x="300" y="308" font-size="11" fill="#475569">ImageField</text>
+
+  <text x="60" y="328" font-size="11" fill="#0f172a">custom_hotkeys</text>
+  <text x="300" y="328" font-size="11" fill="#475569">JSONField</text>
+
+  <text x="60" y="348" font-size="11" fill="#0f172a">is_staff / is_active</text>
+  <text x="300" y="348" font-size="11" fill="#475569">bool</text>
+
+  <text x="60" y="368" font-size="11" fill="#0f172a">date_joined</text>
+  <text x="300" y="368" font-size="11" fill="#475569">datetime</text>
+
+  <text x="60" y="388" font-size="11" fill="#0f172a">activity_at</text>
+  <text x="300" y="388" font-size="11" fill="#475569">datetime auto_now</text>
+
+  <text x="60" y="408" font-size="11" fill="#0f172a">last_activity</text>
+  <text x="300" y="408" font-size="11" fill="#475569">datetime</text>
+
+  <text x="60" y="428" font-size="11" font-weight="700" fill="#1d4ed8">active_organization_id</text>
+  <text x="300" y="428" font-size="11" fill="#475569">FK → organization.id</text>
+
+  <text x="60" y="448" font-size="11" fill="#0f172a">allow_newsletters</text>
+  <text x="300" y="448" font-size="11" fill="#475569">bool null</text>
+
+  <text x="60" y="476" font-size="10" fill="#64748b">db_table = 'htx_user'</text>
+  <text x="60" y="490" font-size="10" fill="#64748b">users/models.py:108 / migrations:0001_squashed</text>
+
+  <!-- ===== organization ===== -->
+  <rect x="470" y="70" width="380" height="280" rx="10" fill="#ffffff" stroke="#d97706" stroke-width="2"/>
+  <rect x="470" y="70" width="380" height="32" rx="10" fill="#d97706"/>
+  <text x="660" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">organization  (organizations.Organization)</text>
+
+  <text x="490" y="124" font-size="11" font-weight="600" fill="#78350f">列名</text>
+  <text x="710" y="124" font-size="11" font-weight="600" fill="#78350f">类型</text>
+  <line x1="485" y1="130" x2="835" y2="130" stroke="#cbd5e1" stroke-width="1"/>
+
+  <text x="490" y="148" font-size="11" fill="#0f172a">id</text>
+  <text x="710" y="148" font-size="11" fill="#475569">BigAutoField PK</text>
+  <text x="490" y="168" font-size="11" fill="#0f172a">title</text>
+  <text x="710" y="168" font-size="11" fill="#475569">varchar(1000)</text>
+  <text x="490" y="188" font-size="11" fill="#0f172a">token  (UNIQUE)</text>
+  <text x="710" y="188" font-size="11" fill="#475569">varchar(256)</text>
+  <text x="490" y="208" font-size="11" font-weight="700" fill="#b45309">created_by_id</text>
+  <text x="710" y="208" font-size="11" fill="#475569">OneToOne FK → htx_user.id</text>
+  <text x="490" y="228" font-size="11" fill="#0f172a">created_at / updated_at</text>
+  <text x="710" y="228" font-size="11" fill="#475569">datetime</text>
+  <text x="490" y="248" font-size="11" fill="#0f172a">contact_info</text>
+  <text x="710" y="248" font-size="11" fill="#475569">email null</text>
+  <text x="490" y="284" font-size="10" fill="#64748b">db_table = 'organization'</text>
+  <text x="490" y="298" font-size="10" fill="#64748b">users(多对多, through=OrganizationMember)</text>
+  <text x="490" y="312" font-size="10" fill="#64748b">organizations/models.py:79</text>
+
+  <!-- ===== OrganizationMember ===== -->
+  <rect x="470" y="380" width="380" height="220" rx="10" fill="#ffffff" stroke="#15803d" stroke-width="2"/>
+  <rect x="470" y="380" width="380" height="32" rx="10" fill="#15803d"/>
+  <text x="660" y="401" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">OrganizationMember  (中间表)</text>
+
+  <text x="490" y="434" font-size="11" font-weight="600" fill="#14532d">列名</text>
+  <text x="710" y="434" font-size="11" font-weight="600" fill="#14532d">类型</text>
+  <line x1="485" y1="440" x2="835" y2="440" stroke="#cbd5e1" stroke-width="1"/>
+
+  <text x="490" y="458" font-size="11" fill="#0f172a">id</text>
+  <text x="710" y="458" font-size="11" fill="#475569">BigAutoField PK</text>
+  <text x="490" y="478" font-size="11" font-weight="700" fill="#15803d">user_id</text>
+  <text x="710" y="478" font-size="11" fill="#475569">FK → htx_user.id (CASCADE)</text>
+  <text x="490" y="498" font-size="11" font-weight="700" fill="#15803d">organization_id</text>
+  <text x="710" y="498" font-size="11" fill="#475569">FK → organization.id (CASCADE)</text>
+  <text x="490" y="518" font-size="11" fill="#0f172a">created_at / updated_at</text>
+  <text x="710" y="518" font-size="11" fill="#475569">datetime</text>
+  <text x="490" y="538" font-size="11" fill="#0f172a">deleted_at  (软删除)</text>
+  <text x="710" y="538" font-size="11" fill="#475569">datetime null index</text>
+  <text x="490" y="566" font-size="10" fill="#64748b">organizations/models.py:18</text>
+  <text x="490" y="580" font-size="10" fill="#64748b">migrations:0001_initial.py</text>
+
+  <!-- ===== authtoken_token ===== -->
+  <rect x="900" y="70" width="320" height="200" rx="10" fill="#ffffff" stroke="#0ea5e9" stroke-width="2"/>
+  <rect x="900" y="70" width="320" height="32" rx="10" fill="#0ea5e9"/>
+  <text x="1060" y="91" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">authtoken_token  (DRF Token)</text>
+
+  <text x="920" y="124" font-size="11" font-weight="600" fill="#0369a1">列名</text>
+  <text x="1090" y="124" font-size="11" font-weight="600" fill="#0369a1">类型</text>
+  <line x1="915" y1="130" x2="1205" y2="130" stroke="#cbd5e1" stroke-width="1"/>
+
+  <text x="920" y="148" font-size="11" fill="#0f172a">key  (PK)</text>
+  <text x="1090" y="148" font-size="11" fill="#475569">char(40)</text>
+  <text x="920" y="168" font-size="11" font-weight="700" fill="#0369a1">user_id</text>
+  <text x="1090" y="168" font-size="11" fill="#475569">OneToOne FK → htx_user</text>
+  <text x="920" y="188" font-size="11" fill="#0f172a">created</text>
+  <text x="1090" y="188" font-size="11" fill="#475569">datetime</text>
+  <text x="920" y="224" font-size="10" fill="#64748b">rest_framework.authtoken.models.Token</text>
+  <text x="920" y="238" font-size="10" fill="#64748b">User 创建时 post_save 信号自动生成</text>
+  <text x="920" y="252" font-size="10" fill="#64748b">users/models.py:243 (init_user)</text>
+
+  <!-- ===== JWTSettings ===== -->
+  <rect x="900" y="300" width="320" height="220" rx="10" fill="#ffffff" stroke="#7c3aed" stroke-width="2"/>
+  <rect x="900" y="300" width="320" height="32" rx="10" fill="#7c3aed"/>
+  <text x="1060" y="321" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">JWTSettings  (jwt_auth)</text>
+
+  <text x="920" y="354" font-size="11" font-weight="600" fill="#4c1d95">列名</text>
+  <text x="1090" y="354" font-size="11" font-weight="600" fill="#4c1d95">类型</text>
+  <line x1="915" y1="360" x2="1205" y2="360" stroke="#cbd5e1" stroke-width="1"/>
+
+  <text x="920" y="378" font-size="11" font-weight="700" fill="#7c3aed">organization_id</text>
+  <text x="1090" y="378" font-size="11" fill="#475569">PK, OneToOne → organization</text>
+  <text x="920" y="398" font-size="11" fill="#0f172a">api_tokens_enabled</text>
+  <text x="1090" y="398" font-size="11" fill="#475569">bool default=True</text>
+  <text x="920" y="418" font-size="11" fill="#0f172a">api_token_ttl_days</text>
+  <text x="1090" y="418" font-size="11" fill="#475569">int default=73000</text>
+  <text x="920" y="438" font-size="11" fill="#0f172a">legacy_api_tokens_enabled</text>
+  <text x="1090" y="438" font-size="11" fill="#475569">bool default=False</text>
+  <text x="920" y="458" font-size="11" fill="#0f172a">created_at / updated_at</text>
+  <text x="1090" y="458" font-size="11" fill="#475569">datetime</text>
+  <text x="920" y="494" font-size="10" fill="#64748b">jwt_auth/models.py:14</text>
+  <text x="920" y="508" font-size="10" fill="#64748b">migrations/0001_initial.py</text>
+
+  <!-- ===== SessionTimeoutPolicy ===== -->
+  <rect x="900" y="550" width="320" height="180" rx="10" fill="#ffffff" stroke="#be185d" stroke-width="2"/>
+  <rect x="900" y="550" width="320" height="32" rx="10" fill="#be185d"/>
+  <text x="1060" y="571" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">SessionTimeoutPolicy</text>
+
+  <text x="920" y="604" font-size="11" font-weight="600" fill="#831843">列名</text>
+  <text x="1090" y="604" font-size="11" font-weight="600" fill="#831843">类型</text>
+  <line x1="915" y1="610" x2="1205" y2="610" stroke="#cbd5e1" stroke-width="1"/>
+
+  <text x="920" y="628" font-size="11" font-weight="700" fill="#be185d">organization_id</text>
+  <text x="1090" y="628" font-size="11" fill="#475569">PK, OneToOne → organization</text>
+  <text x="920" y="648" font-size="11" fill="#0f172a">max_session_age</text>
+  <text x="1090" y="648" font-size="11" fill="#475569">int (分钟) default=11520</text>
+  <text x="920" y="668" font-size="11" fill="#0f172a">max_time_between_activity</text>
+  <text x="1090" y="668" font-size="11" fill="#475569">int (分钟) default=4320</text>
+  <text x="920" y="688" font-size="11" fill="#0f172a">created_at / updated_at</text>
+  <text x="1090" y="688" font-size="11" fill="#475569">datetime</text>
+  <text x="920" y="716" font-size="10" fill="#64748b">session_policy/models.py:8</text>
+
+  <!-- ===== token_blacklist ===== -->
+  <rect x="40" y="540" width="380" height="200" rx="10" fill="#ffffff" stroke="#64748b" stroke-width="2"/>
+  <rect x="40" y="540" width="380" height="32" rx="10" fill="#64748b"/>
+  <text x="230" y="561" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">token_blacklist (simple-jwt)</text>
+
+  <text x="60" y="594" font-size="11" font-weight="600" fill="#334155">表名</text>
+  <text x="220" y="594" font-size="11" font-weight="600" fill="#334155">说明</text>
+  <line x1="55" y1="600" x2="405" y2="600" stroke="#cbd5e1" stroke-width="1"/>
+
+  <text x="60" y="618" font-size="11" font-weight="600" fill="#0f172a">token_outstandingtoken</text>
+  <text x="220" y="618" font-size="10" fill="#475569">已签发的 refresh token</text>
+  <text x="60" y="638" font-size="10" fill="#64748b">  id, jti, user_id, token,</text>
+  <text x="60" y="652" font-size="10" fill="#64748b">  created_at, expires_at, blacklisted</text>
+
+  <text x="60" y="678" font-size="11" font-weight="600" fill="#0f172a">token_blacklistedtoken</text>
+  <text x="220" y="678" font-size="10" fill="#475569">已吊销黑名单</text>
+  <text x="60" y="698" font-size="10" fill="#64748b">  id, blacklisted_at,</text>
+  <text x="60" y="712" font-size="10" fill="#64748b">  token_id → token_outstandingtoken</text>
+  <text x="60" y="732" font-size="10" fill="#64748b">rest_framework_simplejwt.token_blacklist</text>
+
+  <!-- Relationship lines -->
+  <line x1="660" y1="208" x2="420" y2="208" stroke="#b45309" stroke-width="2" marker-end="url(#arrE)" marker-start="url(#arrE)"/>
+  <text x="520" y="200" text-anchor="middle" font-size="10" fill="#b45309">created_by 1:1</text>
+
+  <line x1="420" y1="428" x2="470" y2="478" stroke="#1d4ed8" stroke-width="2" marker-end="url(#arrE)"/>
+  <text x="430" y="450" font-size="10" fill="#1d4ed8">active_org N:1</text>
+
+  <line x1="660" y1="380" x2="500" y2="500" stroke="#15803d" stroke-width="2" marker-end="url(#arrE)"/>
+  <text x="540" y="360" font-size="10" fill="#15803d">org 1:N members</text>
+  <line x1="540" y1="500" x2="420" y2="478" stroke="#15803d" stroke-width="2" marker-end="url(#arrE)"/>
+  <text x="430" y="510" font-size="10" fill="#15803d">user 1:N members</text>
+
+  <line x1="900" y1="168" x2="420" y2="168" stroke="#0369a1" stroke-width="2" marker-end="url(#arrE)"/>
+  <text x="660" y="160" text-anchor="middle" font-size="10" fill="#0369a1">user 1:1 token</text>
+
+  <line x1="900" y1="378" x2="660" y2="350" stroke="#7c3aed" stroke-width="2" marker-end="url(#arrE)"/>
+  <text x="780" y="370" font-size="10" fill="#7c3aed">org 1:1 jwt</text>
+
+  <line x1="900" y1="628" x2="660" y2="345" stroke="#be185d" stroke-width="2" marker-end="url(#arrE)"/>
+  <text x="780" y="600" font-size="10" fill="#be185d">org 1:1 policy</text>
+
+  <!-- Notes -->
+  <rect x="40" y="770" width="1180" height="120" rx="10" fill="#f8fafc" stroke="#475569" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text x="60" y="794" font-size="12" font-weight="700" fill="#334155">说明</text>
+  <text x="60" y="816" font-size="11" fill="#475569">• 数据库: SQLite (本地开发默认) / PostgreSQL (生产), 详见 core/settings/base.py 数据库配置</text>
+  <text x="60" y="836" font-size="11" fill="#475569">• AUTH_USER_MODEL = 'users.User' (settings/base.py:310), 不使用 Django 默认 auth_user 表</text>
+  <text x="60" y="856" font-size="11" fill="#475569">• 密码以 Django set_password() PBKDF2 哈希存储于 htx_user.password 字段</text>
+  <text x="60" y="876" font-size="11" fill="#475569">• Django auth_group / auth_permission 表保留 (PermissionsMixin), 但 OSS 中角色判断主要由 OrganizationMember 承担</text>
+</svg>

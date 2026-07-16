@@ -29,7 +29,7 @@ export const DynamicPreannotationsToggle = inject("store")(
                   ToolsManager.allInstances().forEach((inst) => inst.selectDefault());
                 }
               }}
-              label="Auto-Annotation"
+              label="自动标注"
               data-testid="bottombar-auto-annotation-toggle"
             />
           </Space>

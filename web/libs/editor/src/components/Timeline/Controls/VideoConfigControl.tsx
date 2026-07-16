@@ -159,21 +159,21 @@ export const VideoConfigControl: FC<VideoConfigControlProps> = ({
         style={{ opacity: 0, position: "fixed" }}
       >
         <div className={styles.scrollContent}>
-          <div className={styles.sectionHeader}>Playback Settings</div>
+          <div className={styles.sectionHeader}>播放设置</div>
           <Slider
             min={minSpeed}
             max={MAX_SPEED}
             step={0.05}
             value={speed}
-            description={"Playback speed"}
-            info={"Increase or decrease the playback speed"}
+            description={"播放速度"}
+            info={"增大或减小播放速度"}
             onChange={handleChangePlaybackSpeed}
           />
           <div className={styles.toggle}>
             <Toggle
               checked={loopTimelineRegion}
               onChange={(e) => onLoopTimelineRegionChange(e.target.checked)}
-              label="Loop Timeline Regions"
+              label="循环播放时间线区域"
               labelProps={{ size: "small" }}
             />
           </div>
@@ -186,7 +186,7 @@ export const VideoConfigControl: FC<VideoConfigControlProps> = ({
 
   return (
     <div className={styles.videoConfig} ref={buttonRef} onClick={handleContainerClick}>
-      <ControlButton look={configModal ? "filled" : undefined} onClick={handleButtonClick} aria-label="Video settings">
+      <ControlButton look={configModal ? "filled" : undefined} onClick={handleButtonClick} aria-label="视频设置">
         {<IconConfig />}
       </ControlButton>
       {configModal && renderModal()}

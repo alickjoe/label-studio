@@ -182,7 +182,7 @@ export const Controls: FC<TimelineControlsProps> = memo(
         {buffering && (
           <div
             className={cn("timeline-controls").elem("buffering").toClassName()}
-            aria-label="Buffering Media Source"
+            aria-label="缓冲媒体源"
           />
         )}
         {mediaType === "audio" ? (
@@ -224,7 +224,7 @@ export const Controls: FC<TimelineControlsProps> = memo(
                       onClick={stepHandlerWrapper(onStepBackward, settings.stepSize)}
                       hotkey={settings?.stepAltBack}
                       disabled={startReached}
-                      aria-label="Hop backward"
+                      aria-label="向后跳跃"
                     >
                       {<IconPrev />}
                     </ControlButton>
@@ -233,7 +233,7 @@ export const Controls: FC<TimelineControlsProps> = memo(
                     onClick={stepHandlerWrapper(onStepBackward)}
                     hotkey={settings?.stepBackHotkey}
                     disabled={startReached}
-                    aria-label="Step backward"
+                    aria-label="后退一步"
                   >
                     <IconChevronLeft />
                   </ControlButton>
@@ -245,7 +245,7 @@ export const Controls: FC<TimelineControlsProps> = memo(
                     onClick={() => onRewind?.()}
                     disabled={startReached}
                     hotkey={settings?.skipToBeginning}
-                    aria-label="Skip to start"
+                    aria-label="跳到开头"
                   >
                     <IconRewind />
                   </ControlButton>
@@ -253,7 +253,7 @@ export const Controls: FC<TimelineControlsProps> = memo(
                     onClick={() => onRewind?.(altHopSize)}
                     disabled={startReached}
                     hotkey={settings?.hopBackward}
-                    aria-label="Media rewind"
+                    aria-label="媒体后退"
                   >
                     <IconBackward />
                   </ControlButton>
@@ -265,7 +265,7 @@ export const Controls: FC<TimelineControlsProps> = memo(
               onClick={handlePlay}
               hotkey={settings?.playpauseHotkey}
               hotkeyScope={Hotkey.ALL_SCOPES}
-              aria-label="Play"
+              aria-label="播放"
             >
               {playing ? <IconTimelinePause /> : <IconTimelinePlay />}
             </ControlButton>
@@ -277,7 +277,7 @@ export const Controls: FC<TimelineControlsProps> = memo(
                     onClick={stepHandlerWrapper(onStepForward)}
                     hotkey={settings?.stepForwardHotkey}
                     disabled={endReached}
-                    aria-label="Step forward"
+                    aria-label="前进一步"
                   >
                     <IconChevronRight />
                   </ControlButton>
@@ -286,7 +286,7 @@ export const Controls: FC<TimelineControlsProps> = memo(
                       disabled={endReached}
                       onClick={stepHandlerWrapper(onStepForward, settings.stepSize)}
                       hotkey={settings?.stepAltForward}
-                      aria-label="Hop forward"
+                      aria-label="向前跳跃"
                     >
                       <IconNext />
                     </ControlButton>
@@ -299,12 +299,12 @@ export const Controls: FC<TimelineControlsProps> = memo(
                     onClick={() => onForward?.(altHopSize)}
                     disabled={endReached}
                     hotkey={settings?.hopForward}
-                    aria-label="Media fast forward"
+                    aria-label="媒体快进"
                   >
                     <IconForward />
                   </ControlButton>
                   <ControlButton
-                    aria-label="Skip to end"
+                    aria-label="跳到结尾"
                     onClick={() => onForward?.()}
                     disabled={endReached}
                     hotkey={settings?.skipToEnd}
@@ -318,12 +318,12 @@ export const Controls: FC<TimelineControlsProps> = memo(
           </Space>
           <Space className={cn("timeline-controls").elem("group").toClassName()} collapsed>
             {!disableFrames && allowViewCollapse && (
-              <ControlButton tooltip="Toggle Timeline" onClick={() => onToggleCollapsed?.(!collapsed)}>
+              <ControlButton tooltip="切换时间线" onClick={() => onToggleCollapsed?.(!collapsed)}>
                 {collapsed ? <IconExpand /> : <IconCollapse />}
               </ControlButton>
             )}
             {allowFullscreen && (
-              <ControlButton tooltip="Fullscreen" onClick={() => onFullScreenToggle?.(false)}>
+              <ControlButton tooltip="全屏" onClick={() => onFullScreenToggle?.(false)}>
                 {fullscreen ? <IconFullscreenExit /> : <IconFullscreen />}
               </ControlButton>
             )}

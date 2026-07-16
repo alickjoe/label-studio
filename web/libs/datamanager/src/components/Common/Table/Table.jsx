@@ -186,7 +186,7 @@ export const Table = observer(
             className="w-6 h-6 p-0 text-primary-content hover:text-primary-content-hover"
             onClick={() => {
               const modalInstance = modal({
-                title: `Source for task ${out?.id}`,
+                title: `任务 ${out?.id} 的源数据`,
                 style: { width: 900 },
                 header: null, // Will be set by renderToggle
                 body: (
@@ -204,7 +204,7 @@ export const Table = observer(
               });
             }}
             leading={<Icon icon={IconBraces} />}
-            tooltip="View Task Source"
+            tooltip="查看任务源代码"
           />
         );
       },
@@ -286,9 +286,9 @@ export const Table = observer(
         <div className={cn("table-toolbar").mod({ visible: toolbarVisible }).toClassName()}>
           <FieldsButton
             multiSelect={true}
-            title={"Columns"}
+            title={"列"}
             size="small"
-            tooltip={"Customize Columns"}
+            tooltip={"自定义列"}
             data-testid="columns-picker-quickview"
           />
           <DensityToggle size="small" onChange={onDensityChange} data-testid="density-toggle-quickview" />

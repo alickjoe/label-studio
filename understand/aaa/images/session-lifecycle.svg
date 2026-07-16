@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 760" font-family="'Segoe UI', 'Microsoft YaHei', sans-serif">
+  <defs>
+    <marker id="arrS" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#475569"/>
+    </marker>
+    <linearGradient id="bgS" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#eef2f7"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1100" height="760" fill="url(#bgS)"/>
+  <text x="550" y="34" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a">会话与 Token 生命周期 (UML 状态图)</text>
+
+  <!-- Initial -->
+  <circle cx="120" cy="100" r="14" fill="#0f172a"/>
+  <line x1="120" y1="114" x2="120" y2="150" stroke="#475569" stroke-width="2" marker-end="url(#arrS)"/>
+
+  <!-- Anonymous -->
+  <rect x="40" y="150" width="200" height="80" rx="12" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+  <text x="140" y="180" text-anchor="middle" font-size="13" font-weight="700" fill="#075985">匿名 / 未认证</text>
+  <text x="140" y="200" text-anchor="middle" font-size="11" fill="#0c4a6e">request.user = AnonymousUser</text>
+  <text x="140" y="218" text-anchor="middle" font-size="10" fill="#475569">IsAuthenticated → 401</text>
+
+  <!-- Signup/Login -->
+  <line x1="240" y1="190" x2="340" y2="190" stroke="#475569" stroke-width="2" marker-end="url(#arrS)"/>
+  <text x="290" y="180" text-anchor="middle" font-size="10" fill="#15803d" font-weight="600">注册/登录</text>
+
+  <!-- Authenticated Session -->
+  <rect x="340" y="130" width="320" height="130" rx="12" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="500" y="158" text-anchor="middle" font-size="14" font-weight="700" fill="#14532d">已认证会话 (Session)</text>
+  <text x="360" y="182" font-size="11" fill="#166534">• Django session cookie (sessionid)</text>
+  <text x="360" y="200" font-size="11" fill="#166534">• session['last_login'] = time()</text>
+  <text x="360" y="218" font-size="11" fill="#166534">• keep_me_logged_in 控制过期</text>
+  <text x="360" y="236" font-size="11" fill="#166534">• request.user 注入</text>
+  <text x="360" y="252" font-size="10" fill="#475569">users/functions/common.py:96 / users/views.py:104</text>
+
+  <!-- Activity loop -->
+  <path d="M 660 195 Q 740 160 720 130 Q 700 100 660 130" fill="none" stroke="#15803d" stroke-width="1.5" marker-end="url(#arrS)"/>
+  <text x="760" y="140" font-size="10" fill="#15803d">活动刷新</text>
+  <text x="760" y="154" font-size="10" fill="#15803d">set_expiry()</text>
+
+  <!-- Token issued -->
+  <line x1="500" y1="260" x2="500" y2="320" stroke="#475569" stroke-width="2" marker-end="url(#arrS)"/>
+  <text x="510" y="295" font-size="10" fill="#7c3aed" font-weight="600">创建 Token</text>
+
+  <!-- Token Active -->
+  <rect x="340" y="320" width="320" height="130" rx="12" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+  <text x="500" y="348" text-anchor="middle" font-size="14" font-weight="700" fill="#4c1d95">Token 有效</text>
+  <text x="360" y="372" font-size="11" fill="#5b21b6">• DRF Token (authtoken_token) - legacy</text>
+  <text x="360" y="390" font-size="11" fill="#5b21b6">• JWT API Token (LSAPIToken) - 推荐</text>
+  <text x="360" y="408" font-size="11" fill="#5b21b6">• Authorization: Token xxx / Bearer xxx</text>
+  <text x="360" y="426" font-size="11" fill="#5b21b6">• TTL = 200 年 (默认)</text>
+  <text x="360" y="442" font-size="10" fill="#475569">users/models.py:243 / jwt_auth/models.py:74</text>
+
+  <!-- Rotate -->
+  <line x1="660" y1="385" x2="760" y2="385" stroke="#7c3aed" stroke-width="2" marker-end="url(#arrS)"/>
+  <text x="710" y="375" text-anchor="middle" font-size="10" fill="#7c3aed">轮换</text>
+
+  <rect x="760" y="345" width="200" height="80" rx="12" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text x="860" y="372" text-anchor="middle" font-size="12" font-weight="700" fill="#78350f">Token 轮换</text>
+  <text x="860" y="392" text-anchor="middle" font-size="10" fill="#92400e">/api/token/rotate/</text>
+  <text x="860" y="408" text-anchor="middle" font-size="10" fill="#92400e">旧 token → 黑名单</text>
+  <text x="860" y="420" text-anchor="middle" font-size="10" fill="#92400e">签发新 token</text>
+
+  <line x1="860" y1="425" x2="660" y2="425" stroke="#7c3aed" stroke-width="2" marker-end="url(#arrS)" stroke-dasharray="5 3"/>
+
+  <!-- Blacklist -->
+  <line x1="500" y1="450" x2="500" y2="500" stroke="#dc2626" stroke-width="2" marker-end="url(#arrS)"/>
+  <text x="510" y="480" font-size="10" fill="#b91c1c" font-weight="600">吊销/过期</text>
+
+  <rect x="340" y="500" width="320" height="100" rx="12" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+  <text x="500" y="528" text-anchor="middle" font-size="13" font-weight="700" fill="#7f1d1d">Token 吊销 / 过期</text>
+  <text x="360" y="552" font-size="11" fill="#991b1b">• /api/token/blacklist/ → 黑名单</text>
+  <text x="360" y="570" font-size="11" fill="#991b1b">• reset_token() 删除重建 (DRF Token)</text>
+  <text x="360" y="588" font-size="10" fill="#475569">jwt_auth/views.py:192 / users/models.py:222</text>
+
+  <!-- Inactivity timeout -->
+  <line x1="340" y1="195" x2="240" y2="195" stroke="#dc2626" stroke-width="2" marker-end="url(#arrS)" stroke-dasharray="5 3"/>
+  <text x="290" y="170" text-anchor="middle" font-size="10" fill="#b91c1c" font-weight="600">超时登出</text>
+  <text x="290" y="230" text-anchor="middle" font-size="9" fill="#991b1b">InactivitySessionTimeout</text>
+
+  <!-- Logout -->
+  <line x1="660" y1="195" x2="820" y2="195" stroke="#dc2626" stroke-width="2" marker-end="url(#arrS)"/>
+  <text x="740" y="185" text-anchor="middle" font-size="10" fill="#b91c1c" font-weight="600">登出</text>
+
+  <rect x="820" y="155" width="220" height="80" rx="12" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+  <text x="930" y="182" text-anchor="middle" font-size="12" font-weight="700" fill="#7f1d1d">会话终止</text>
+  <text x="930" y="202" text-anchor="middle" font-size="10" fill="#991b1b">auth.logout(request)</text>
+  <text x="930" y="218" text-anchor="middle" font-size="10" fill="#991b1b">session 失效</text>
+
+  <line x1="930" y1="235" x2="930" y2="290" stroke="#475569" stroke-width="2" marker-end="url(#arrS)"/>
+  <line x1="930" y1="290" x2="140" y2="290" stroke="#475569" stroke-width="2" marker-end="url(#arrS)"/>
+  <line x1="140" y1="290" x2="140" y2="230" stroke="#475569" stroke-width="2" marker-end="url(#arrS)"/>
+
+  <!-- Final -->
+  <circle cx="500" cy="640" r="14" fill="none" stroke="#0f172a" stroke-width="3"/>
+  <circle cx="500" cy="640" r="7" fill="#0f172a"/>
+  <line x1="500" y1="600" x2="500" y2="626" stroke="#0f172a" stroke-width="2" marker-end="url(#arrS)"/>
+
+  <!-- Legend -->
+  <rect x="40" y="660" width="1020" height="80" rx="10" fill="#f8fafc" stroke="#475569" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text x="60" y="684" font-size="12" font-weight="700" fill="#334155">超时策略 (SessionTimeoutPolicy / InactivitySessionTimeoutMiddleware)</text>
+  <text x="60" y="706" font-size="11" fill="#475569">• max_session_age: 登录后最长存活时间 (默认 8 天) — 超过则强制登出</text>
+  <text x="60" y="724" font-size="11" fill="#475569">• max_time_between_activity: 两次活动最大间隔 (默认 3 天) — 每次请求刷新 session.set_expiry()</text>
+  <text x="60" y="742" font-size="11" fill="#475569">• 全局兜底: MAX_SESSION_AGE (14天) / MAX_TIME_BETWEEN_ACTIVITY (5天) — settings/base.py:485-487</text>
+</svg>

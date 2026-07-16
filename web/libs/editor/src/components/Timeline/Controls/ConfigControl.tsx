@@ -158,14 +158,14 @@ export const ConfigControl: FC<ConfigControlProps> = ({
     return (
       <div className={cn("audio-config").elem("buttons").toClassName()}>
         <div className={cn("audio-config").elem("menu-button").toClassName()} onClick={handleSetTimeline}>
-          {isTimeline ? "Hide" : "Show"} timeline
+          {isTimeline ? "隐藏" : "显示"}时间线
         </div>
         <div className={cn("audio-config").elem("menu-button").toClassName()} onClick={handleSetAudioWave}>
-          {isAudioWave ? "Hide" : "Show"} audio wave
+          {isAudioWave ? "隐藏" : "显示"}音频波形
         </div>
-        {isFF(FF_AUDIO_SPECTROGRAMS) && (
+        {isFF(FF_AUDIO_SPECTROGRAM) && (
           <div className={cn("audio-config").elem("menu-button").toClassName()} onClick={handleSetSpectrogram}>
-            {isSpectrogram ? "Hide" : "Show"} spectrogram
+            {isSpectrogram ? "隐藏" : "显示"}频谱图
           </div>
         )}
       </div>
@@ -181,14 +181,14 @@ export const ConfigControl: FC<ConfigControlProps> = ({
         style={{ opacity: 0, position: "fixed" }}
       >
         <div className={cn("audio-config").elem("scroll-content").toClassName()}>
-          <div className={cn("audio-config").elem("section-header").toClassName()}>Playback Settings</div>
+          <div className={cn("audio-config").elem("section-header").toClassName()}>播放设置</div>
           <Slider
             min={MIN_SPEED}
             max={MAX_SPEED}
             step={0.1}
             value={speed}
-            description={"Playback speed"}
-            info={"Increase or decrease the playback speed"}
+            description={"播放速度"}
+            info={"增加或减少播放速度"}
             onChange={handleChangePlaybackSpeed}
           />
           <Slider
@@ -196,15 +196,15 @@ export const ConfigControl: FC<ConfigControlProps> = ({
             max={MAX_ZOOM}
             step={0.1}
             value={amp}
-            description={"Audio zoom y-axis"}
-            info={"Increase or decrease the appearance of amplitude"}
+            description={"音频Y轴缩放"}
+            info={"增加或减少振幅的显示"}
             onChange={handleChangeAmp}
           />
           <div className={cn("audio-config").elem("toggle").toClassName()}>
             <Toggle
               checked={settings?.loopRegion}
               onChange={(e) => changeSetting?.("loopRegion", e.target.checked)}
-              label="Loop Regions"
+              label="循环播放区域"
               labelProps={{ size: "small" }}
             />
           </div>
@@ -212,14 +212,14 @@ export const ConfigControl: FC<ConfigControlProps> = ({
             <Toggle
               checked={settings?.autoPlayNewSegments}
               onChange={(e) => changeSetting?.("autoPlayNewSegments", e.target.checked)}
-              label="Auto-play New Regions"
+              label="自动播放新区域"
               labelProps={{ size: "small" }}
             />
           </div>
 
           {isFF(FF_AUDIO_SPECTROGRAMS) && (
             <>
-              <div className={cn("audio-config").elem("section-header").toClassName()}>Spectrogram Settings</div>
+              <div className={cn("audio-config").elem("section-header").toClassName()}>频谱图设置</div>
               <SpectrogramControl waveform={waveform} />
             </>
           )}
@@ -237,7 +237,7 @@ export const ConfigControl: FC<ConfigControlProps> = ({
       ref={buttonRef as any}
       onClick={(e: MouseEvent<HTMLButtonElement>) => e.stopPropagation()}
     >
-      <ControlButton look={configModal ? "filled" : undefined} onClick={onSetModal} aria-label="Audio settings">
+      <ControlButton look={configModal ? "filled" : undefined} onClick={onSetModal} aria-label="音频设置">
         {<IconConfig />}
       </ControlButton>
       {configModal && renderModal()}

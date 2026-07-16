@@ -86,29 +86,29 @@ const TaskSummary = ({ annotations: all, store: annotationStore }: TaskSummaryPr
     ...(typeof task?.agreement === "number"
       ? [
           {
-            title: "Agreement",
+            title: "一致性",
             // 2 decimals but without trailing zeros
             value: `${Math.round(task.agreement * 100) / 100}%`,
-            info: "Overall agreement over all submitted annotations",
+            info: "所有已提交标注的总体一致性",
           },
         ]
       : []),
     {
-      title: "Annotations",
+      title: "标注",
       value: annotations.filter((a) => a.type === "annotation").length,
-      info: "Number of submitted annotations. Table shows only submitted results, not current drafts.",
+      info: "已提交标注的数量。表格仅显示已提交的结果，不包含当前草稿。",
     },
     {
-      title: "Predictions",
+      title: "预测",
       value: annotations.filter((a) => a.type === "prediction").length,
-      info: "Number of predictions. They are not included in the agreement calculation.",
+      info: "预测的数量。它们不参与一致性计算。",
     },
   ];
 
   return (
     <div>
       <div className="mb-base">
-        <h2 className="mt-base text-headline-small font-semibold text-neutral-content">Task Summary</h2>
+        <h2 className="mt-base text-headline-small font-semibold text-neutral-content">任务摘要</h2>
         <NumbersSummary values={values} />
       </div>
       <div className="mb-relaxed">
@@ -121,7 +121,7 @@ const TaskSummary = ({ annotations: all, store: annotationStore }: TaskSummaryPr
         />
       </div>
       <div className="mb-relaxed">
-        <h2 className="mb-base text-headline-small font-semibold text-neutral-content">Task Data</h2>
+        <h2 className="mb-base text-headline-small font-semibold text-neutral-content">任务数据</h2>
         <DataSummary data_types={dataTypes} />
       </div>
     </div>

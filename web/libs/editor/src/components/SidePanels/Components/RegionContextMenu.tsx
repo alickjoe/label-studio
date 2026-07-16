@@ -26,7 +26,7 @@ export const RegionContextMenu: FC<{ item: any }> = observer(({ item }: { item: 
       copyLink();
       ctx.dropdown?.close();
       toast.show({
-        message: "Region link copied to clipboard",
+        message: "区域链接已复制到剪贴板",
         type: ToastType.info,
       });
     },
@@ -36,7 +36,7 @@ export const RegionContextMenu: FC<{ item: any }> = observer(({ item }: { item: 
   const actions = useMemo<ContextMenuAction[]>(
     () => [
       {
-        label: "Copy Region Link",
+        label: "复制区域链接",
         onClick: onCopyLink,
         icon: <IconLink />,
       },
@@ -50,7 +50,7 @@ export const RegionContextMenu: FC<{ item: any }> = observer(({ item }: { item: 
       content={<ContextMenu actions={actions} />}
       onToggle={(isOpen) => setOpen(isOpen)}
     >
-      <Button variant="neutral" look="string" size="smaller" aria-label="Region options">
+      <Button variant="neutral" look="string" size="smaller" aria-label="区域选项">
         <IconEllipsis />
       </Button>
     </ContextMenuTrigger>

@@ -94,7 +94,7 @@ export const PanelTabsBase: FC<BasePropsWithChildren> = ({
   const isParentOfCollapsedPanel = attachedKeys && attachedKeys[0] === key;
   const isChildOfGroup = attachedKeys && attachedKeys.includes(key) && attachedKeys[0] !== key;
   const collapsedHeader = !(collapsed && !isParentOfCollapsedPanel);
-  const tooltipText = visible && !collapsed ? "Collapse" : "Expand";
+  const tooltipText = visible && !collapsed ? "折叠" : "展开";
   const settings = props.currentEntity?.store?.settings || props.currentEntity?.settings;
   const [bottomCollapsed, setBottomCollapsed] = useState(() => {
     if (isBottomPanel && settings?.defaultCollapsedBottomPanel) return true;
@@ -436,7 +436,7 @@ export const PanelTabsBase: FC<BasePropsWithChildren> = ({
                   <div
                     className={cn("tabs-panel").elem("toggle").mod({ detached, collapsed, alignment }).toClassName()}
                     onClick={handleGroupPanelToggle}
-                    data-tooltip={`${tooltipText} Group`}
+                    data-tooltip={`${tooltipText}分组`}
                   >
                     {Side.left === alignment ? <IconChevronLeft /> : <IconChevronRight />}
                   </div>

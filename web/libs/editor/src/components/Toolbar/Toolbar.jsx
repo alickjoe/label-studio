@@ -85,7 +85,7 @@ const SmartTools = observer(({ tools }) => {
       <div className={cn("toolbar").elem("group").toClassName()}>
         <Tool
           smart
-          label="Auto-Detect"
+          label="自动检测"
           active={hasSelected}
           icon={selected.iconClass}
           shortcut="tool:auto-detect"

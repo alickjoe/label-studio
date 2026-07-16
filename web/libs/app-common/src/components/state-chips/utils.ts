@@ -31,10 +31,10 @@ export function formatTimestamp(timestamp: string): string {
   const diffHours = Math.floor(diffMs / 3600000);
   const diffDays = Math.floor(diffMs / 86400000);
 
-  if (diffMins < 1) return "Just now";
-  if (diffMins < 60) return `${diffMins} ${diffMins === 1 ? "minute" : "minutes"} ago`;
-  if (diffHours < 24) return `${diffHours} ${diffHours === 1 ? "hour" : "hours"} ago`;
-  if (diffDays < 7) return `${diffDays} ${diffDays === 1 ? "day" : "days"} ago`;
+  if (diffMins < 1) return "刚刚";
+  if (diffMins < 60) return `${diffMins} 分钟前`;
+  if (diffHours < 24) return `${diffHours} 小时前`;
+  if (diffDays < 7) return `${diffDays} 天前`;
 
   return date.toLocaleDateString(undefined, {
     year: "numeric",
@@ -55,7 +55,7 @@ export function formatUserName(
     email?: string;
   } | null,
 ): string {
-  if (!triggeredBy) return "System";
+  if (!triggeredBy) return "系统";
 
   const { first_name, last_name, email } = triggeredBy;
 
@@ -64,5 +64,5 @@ export function formatUserName(
   if (last_name) return last_name;
   if (email) return email;
 
-  return "System";
+  return "系统";
 }

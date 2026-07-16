@@ -39,7 +39,7 @@ actions: list[DataManagerAction] = [
     {
         'entry_point': next_task,
         'permission': all_permissions.projects_view,
-        'title': 'Generate Next Task',
+        'title': '生成下一个任务',
         'order': 0,
         'hidden': True,
     }

@@ -22,8 +22,8 @@ const Conjunction = observer(({ index, view }) => {
   return (
     <FilterDropdown
       items={[
-        { value: "and", label: "And" },
-        { value: "or", label: "Or" },
+        { value: "and", label: "且" },
+        { value: "or", label: "或" },
       ]}
       disabled={index > 1}
       value={view.conjunction}
@@ -66,7 +66,7 @@ const FilterColumnPicker = observer(({ filter, pickerFilters, recentEntries, onS
       recentEntries={recentEntries}
       value={filter.filter.id ?? null}
       onChange={handleChange}
-      placeholder={filter.field?.title || "Column"}
+      placeholder={filter.field?.title || "列"}
       size="small"
       disabled={filter.field.disabled}
       triggerProps={{
@@ -105,7 +105,7 @@ function filterFieldOptionRender({ item }) {
           color: "#8C8F9A",
         }}
       >
-        {original?.field?.title ?? original?.title ?? "Recent"}
+        {original?.field?.title ?? original?.title ?? "最近使用"}
       </span>
     );
   }
@@ -208,7 +208,7 @@ export const FilterLine = observer(
           {/* Main filter row */}
           <div className={cn("filterLine").elem("column").mix("conjunction").toClassName()}>
             {index === 0 ? (
-              <span style={{ fontSize: 12, paddingRight: 5 }}>Where</span>
+              <span style={{ fontSize: 12, paddingRight: 5 }}>条件</span>
             ) : (
               <Conjunction index={index} view={view} />
             )}
@@ -216,7 +216,7 @@ export const FilterLine = observer(
 
           <div className={cn("filterLine").elem("column").mix("field").toClassName()}>
             <FilterDropdown
-              placeholder="Column"
+              placeholder="列"
               defaultValue={filter.filter.id}
               items={availableFilters}
               dropdownClassName={dropdownClassName}
@@ -260,7 +260,7 @@ export const FilterLine = observer(
             <>
               {/* Conjunction */}
               <div className={cn("filterLine").elem("column").mix("conjunction").toClassName()}>
-                <span style={{ fontSize: 12, paddingRight: 5 }}>and</span>
+                <span style={{ fontSize: 12, paddingRight: 5 }}>且</span>
               </div>
 
               {/* Field — disabled, just shows the linked column name */}
@@ -307,7 +307,7 @@ export const FilterLine = observer(
       <div className={cn("filterLine").mod({ hasChild: !!childFilter }).toClassName()}>
         <div className={cn("filterLine").elem("column").mix("conjunction").toClassName()}>
           {index === 0 ? (
-            <span style={{ fontSize: 12, paddingRight: 5 }}>Where</span>
+            <span style={{ fontSize: 12, paddingRight: 5 }}>条件</span>
           ) : (
             <Conjunction index={index} view={view} />
           )}
@@ -354,7 +354,7 @@ export const FilterLine = observer(
             <div className={cn("filterLine").elem("remove").toClassName()} />
 
             <div className={cn("filterLine").elem("column").mix("conjunction").toClassName()}>
-              <span style={{ fontSize: 12, paddingRight: 5 }}>and</span>
+              <span style={{ fontSize: 12, paddingRight: 5 }}>且</span>
             </div>
 
             <div className={cn("filterLine").elem("column").mix("field child-field").toClassName()}>

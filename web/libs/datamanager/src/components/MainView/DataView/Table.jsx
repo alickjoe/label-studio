@@ -200,9 +200,9 @@ export const DataView = injector(
         if (store.SDK.type === "DE" && ["canceled", "failed"].includes(datasetStatusID)) {
           return (
             <div className={cn("syncInProgress").toClassName()}>
-              <h3 className={cn("syncInProgress").elem("title").toClassName()}>Failed to sync data</h3>
+              <h3 className={cn("syncInProgress").elem("title").toClassName()}>数据同步失败</h3>
               <div className={cn("syncInProgress").elem("text").toClassName()}>
-                Check your storage settings. You may need to recreate this dataset
+                请检查您的存储设置。您可能需要重新创建此数据集
               </div>
             </div>
           );
@@ -214,9 +214,9 @@ export const DataView = injector(
         ) {
           return (
             <div className={cn("syncInProgress").toClassName()}>
-              <h3 className={cn("syncInProgress").elem("title").toClassName()}>Nothing found</h3>
+              <h3 className={cn("syncInProgress").elem("title").toClassName()}>未找到任何内容</h3>
               <div className={cn("syncInProgress").elem("text").toClassName()}>
-                Try adjusting the filter or similarity search parameters
+                请尝试调整筛选或相似性搜索参数
               </div>
             </div>
           );

@@ -60,23 +60,23 @@ export const StorageProviderForm = forwardRef<unknown, StorageProviderFormProps>
     const steps = isEditMode
       ? [
           {
-            title: "Configure Connection",
+            title: "配置连接",
             schema: getProviderSchema(type || "s3", isEditMode, effectiveTarget),
           },
           // Only include preview and review steps for import storages
           ...(effectiveTarget === "import"
-            ? [{ title: "Import Settings & Preview" }, { title: "Review & Confirm" }]
+            ? [{ title: "导入设置与预览" }, { title: "查看并确认" }]
             : []),
         ]
       : [
-          { title: "Select Provider", schema: step1Schema },
+          { title: "选择提供商", schema: step1Schema },
           {
-            title: "Configure Connection",
+            title: "配置连接",
             schema: getProviderSchema(type || "s3", isEditMode, effectiveTarget),
           },
           // Only include preview and review steps for import storages
           ...(effectiveTarget === "import"
-            ? [{ title: "Import Settings & Preview" }, { title: "Review & Confirm" }]
+            ? [{ title: "导入设置与预览" }, { title: "查看并确认" }]
             : []),
         ];
 
@@ -116,23 +116,23 @@ export const StorageProviderForm = forwardRef<unknown, StorageProviderFormProps>
       const newSteps = isEditMode
         ? [
             {
-              title: "Configure Connection",
+              title: "配置连接",
               schema: getProviderSchema(formData.provider || type || "s3", isEditMode, effectiveTarget),
             },
             // Only include preview and review steps for import storages
             ...(effectiveTarget === "import"
-              ? [{ title: "Import Settings & Preview" }, { title: "Review & Confirm" }]
+              ? [{ title: "导入设置与预览" }, { title: "查看并确认" }]
               : []),
           ]
         : [
-            { title: "Select Provider", schema: step1Schema },
+            { title: "选择提供商", schema: step1Schema },
             {
-              title: "Configure Connection",
+              title: "配置连接",
               schema: getProviderSchema(formData.provider || type || "s3", isEditMode, effectiveTarget),
             },
             // Only include preview and review steps for import storages
             ...(effectiveTarget === "import"
-              ? [{ title: "Import Settings & Preview" }, { title: "Review & Confirm" }]
+              ? [{ title: "导入设置与预览" }, { title: "查看并确认" }]
               : []),
           ];
       setCurrentSteps(newSteps);

@@ -214,10 +214,10 @@ export const DataManagerPage = ({ ...props }) => {
 
   return crashed ? (
     <div className={cn("crash").toClassName()}>
-      <div className={cn("crash").elem("info").toClassName()}>Project was deleted or not yet created</div>
+      <div className={cn("crash").elem("info").toClassName()}>项目已被删除或尚未创建</div>
 
-      <Button to="/projects" aria-label="Back to projects">
-        Back to projects
+      <Button to="/projects" aria-label="返回项目列表">
+        返回项目列表
       </Button>
     </div>
   ) : (
@@ -243,7 +243,7 @@ DataManagerPage.context = ({ dmRef }) => {
   const [mode, setMode] = useState(dmRef?.mode ?? "explorer");
 
   const links = {
-    "/settings": "Settings",
+    "/settings": "设置",
   };
 
   const updateCrumbs = (currentMode) => {
@@ -254,7 +254,7 @@ DataManagerPage.context = ({ dmRef }) => {
     } else {
       addCrumb({
         key: "dm-crumb",
-        title: "Labeling",
+        title: "标注",
       });
     }
   };
@@ -265,7 +265,7 @@ DataManagerPage.context = ({ dmRef }) => {
 
     if (isLabelStream && show_instruction && expert_instruction) {
       modal({
-        title: "Labeling Instructions",
+        title: "标注说明",
         body: <div dangerouslySetInnerHTML={{ __html: expert_instruction }} />,
         style: { width: 680 },
       });
@@ -296,7 +296,7 @@ DataManagerPage.context = ({ dmRef }) => {
           look="outlined"
           onClick={() => {
             modal({
-              title: "Instructions",
+              title: "说明",
               body: () => (
                 <div
                   dangerouslySetInnerHTML={{
@@ -307,7 +307,7 @@ DataManagerPage.context = ({ dmRef }) => {
             });
           }}
         >
-          Instructions
+          说明
         </Button>
       )}
 

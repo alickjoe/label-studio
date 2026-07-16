@@ -1,12 +1,12 @@
 export const recipes = [
   {
-    title: "Bbox object detection",
+    title: "边界框目标检测",
     type: "community",
-    group: "Computer Vision",
+    group: "计算机视觉",
     image: "bbox.png",
-    details: `<h1>Simple object detection</h1>
-    <p>Sample config to label with bboxes</p>
-    <p>You can configure labels and their colors</p>`,
+    details: `<h1>简单的目标检测</h1>
+    <p>使用边界框进行标注的示例配置</p>
+    <p>您可以配置标签及其颜色</p>`,
     config: `<View>
   <Image name="image" value="$image"/>
   <RectangleLabels name="label" toName="image">
@@ -16,13 +16,13 @@ export const recipes = [
 </View>`,
   },
   {
-    title: "Polygon labeling",
+    title: "多边形标注",
     type: "community",
-    group: "Computer Vision",
+    group: "计算机视觉",
     image: "polygon.png",
     details: "",
     config: `<View>
-  <Header value="Select label and click on image to start"/>
+  <Header value="选择标签并点击图像开始标注"/>
   <Image name="image" value="$image"/>
   <PolygonLabels name="label" toName="image"
                  strokeWidth="3" pointSize="small"
@@ -34,9 +34,9 @@ export const recipes = [
 `,
   },
   {
-    title: "Named entity recognition",
+    title: "命名实体识别",
     type: "community",
-    group: "NLP",
+    group: "自然语言处理",
     image: "text.png",
     config: `<View>
   <Labels name="label" toName="text">

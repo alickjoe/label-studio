@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" font-family="Microsoft YaHei,Arial,sans-serif">
+  <defs>
+    <linearGradient id="feBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f0f9ff"/>
+      <stop offset="100%" stop-color="#e0f2fe"/>
+    </linearGradient>
+    <linearGradient id="appGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#bfdbfe"/>
+      <stop offset="100%" stop-color="#60a5fa"/>
+    </linearGradient>
+    <linearGradient id="libGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#bbf7d0"/>
+      <stop offset="100%" stop-color="#4ade80"/>
+    </linearGradient>
+    <linearGradient id="sharedGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fed7aa"/>
+      <stop offset="100%" stop-color="#fb923c"/>
+    </linearGradient>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#334155"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="720" fill="url(#feBg)"/>
+  <text x="600" y="40" text-anchor="middle" font-size="26" font-weight="700" fill="#0f172a">Label Studio 前端 Monorepo 结构与依赖规则</text>
+  <text x="600" y="65" text-anchor="middle" font-size="13" fill="#475569">Nx + Yarn Workspaces  |  React + TypeScript  |  Jotai + mobx-state-tree  |  Biome + Tailwind</text>
+
+  <!-- Apps 层 -->
+  <g>
+    <rect x="40" y="100" width="1120" height="240" rx="12" fill="url(#appGrad)" stroke="#1d4ed8" stroke-width="2" opacity="0.95"/>
+    <text x="600" y="130" text-anchor="middle" font-size="18" font-weight="700" fill="#1e3a8a">web/apps/* (应用层 — 可被 libs 反向依赖的例外: app-common)</text>
+
+    <rect x="80" y="150" width="320" height="170" rx="8" fill="#fff" stroke="#1e40af" stroke-width="1.5"/>
+    <text x="240" y="178" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">labelstudio (主应用)</text>
+    <text x="95" y="200" font-size="11" fill="#334155">入口: src/main.tsx → src/app/App.jsx</text>
+    <text x="95" y="218" font-size="11" fill="#334155">页面 (src/pages/):</text>
+    <text x="105" y="236" font-size="10" fill="#475569">• Projects / CreateProject</text>
+    <text x="105" y="252" font-size="10" fill="#475569">• DataManager (枚举数据任务)</text>
+    <text x="105" y="268" font-size="10" fill="#475569">• Export / Settings</text>
+    <text x="105" y="284" font-size="10" fill="#475569">• Webhooks / Organization / People</text>
+    <text x="105" y="300" font-size="10" fill="#475569">• Models (ML 模型管理)</text>
+    <text x="95" y="316" font-size="10" fill="#64748b">状态: Jotai atoms + atomWithQuery</text>
+
+    <rect x="440" y="150" width="320" height="170" rx="8" fill="#fff" stroke="#1e40af" stroke-width="1.5"/>
+    <text x="600" y="178" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">playground (独立预览)</text>
+    <text x="455" y="200" font-size="11" fill="#334155">入口: src/main.tsx</text>
+    <text x="455" y="218" font-size="11" fill="#334155">用途:</text>
+    <text x="465" y="236" font-size="10" fill="#475569">• 嵌入式编辑器独立预览</text>
+    <text x="465" y="252" font-size="10" fill="#475569">• 调试 LSF 标注配置</text>
+    <text x="465" y="268" font-size="10" fill="#475569">• 不依赖完整主应用</text>
+    <text x="455" y="290" font-size="11" fill="#334155">配置:</text>
+    <text x="465" y="308" font-size="10" fill="#475569">project.json + tsconfig + jest</text>
+
+    <rect x="800" y="150" width="320" height="170" rx="8" fill="#fff" stroke="#1e40af" stroke-width="1.5"/>
+    <text x="960" y="178" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">labelstudio-e2e (Cypress)</text>
+    <text x="815" y="200" font-size="11" fill="#334155">位置: web/apps/labelstudio-e2e</text>
+    <text x="815" y="218" font-size="11" fill="#334155">用途:</text>
+    <text x="825" y="236" font-size="10" fill="#475569">• Cypress 端到端测试</text>
+    <text x="825" y="252" font-size="10" fill="#475569">• 覆盖主应用关键流程</text>
+    <text x="825" y="268" font-size="10" fill="#475569">• yarn test:e2e / yarn ls:e2e</text>
+    <text x="815" y="290" font-size="11" fill="#334155">包含:</text>
+    <text x="825" y="308" font-size="10" fill="#475569">cypress/e2e/*.cy.js 测试用例</text>
+  </g>
+
+  <!-- 依赖箭头 apps -> libs -->
+  <line x1="240" y1="320" x2="240" y2="370" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="600" y1="320" x2="600" y2="370" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="600" y="360" text-anchor="middle" font-size="11" fill="#334155">应用层依赖库层(apps → libs)</text>
+
+  <!-- Libs 层 -->
+  <g>
+    <rect x="40" y="375" width="1120" height="240" rx="12" fill="url(#libGrad)" stroke="#15803d" stroke-width="2" opacity="0.95"/>
+    <text x="600" y="405" text-anchor="middle" font-size="18" font-weight="700" fill="#14532d">web/libs/* (库层 — libs 之间不可互相导入 app-common 除外)</text>
+
+    <rect x="60" y="425" width="240" height="170" rx="8" fill="#fff" stroke="#15803d" stroke-width="1.5"/>
+    <text x="180" y="452" text-anchor="middle" font-size="14" font-weight="700" fill="#14532d">editor (LSF)</text>
+    <text x="75" y="474" font-size="11" fill="#334155">Label Studio Frontend</text>
+    <text x="75" y="492" font-size="10" fill="#475569">• 嵌入式标注 UI 库</text>
+    <text x="75" y="508" font-size="10" fill="#475569">• React + mobx-state-tree</text>
+    <text x="75" y="524" font-size="10" fill="#475569">• 解析 XML label_config</text>
+    <text x="75" y="540" font-size="10" fill="#475569">• 渲染对象/控制标签</text>
+    <text x="75" y="556" font-size="10" fill="#475569">• 独立发布到 npm</text>
+    <text x="75" y="576" font-size="10" fill="#64748b">yarn lsf:serve / lsf:watch</text>
+
+    <rect x="320" y="425" width="240" height="170" rx="8" fill="#fff" stroke="#15803d" stroke-width="1.5"/>
+    <text x="440" y="452" text-anchor="middle" font-size="14" font-weight="700" fill="#14532d">datamanager</text>
+    <text x="335" y="474" font-size="11" fill="#334155">数据管理库</text>
+    <text x="335" y="492" font-size="10" fill="#475569">• 表格视图 / Tabs / Views</text>
+    <text x="335" y="508" font-size="10" fill="#475569">• 过滤、排序、分页</text>
+    <text x="335" y="524" font-size="10" fill="#475569">• 批量操作 UI</text>
+    <text x="335" y="540" font-size="10" fill="#475569">• 与后端 /api/dm/ 交互</text>
+    <text x="335" y="556" font-size="10" fill="#475569">• 独立发布到 npm</text>
+    <text x="335" y="576" font-size="10" fill="#64748b">yarn dm:watch</text>
+
+    <rect x="580" y="425" width="240" height="170" rx="8" fill="#fff" stroke="#15803d" stroke-width="1.5"/>
+    <text x="700" y="452" text-anchor="middle" font-size="14" font-weight="700" fill="#14532d">app-common</text>
+    <text x="595" y="474" font-size="11" fill="#334155">共享应用组件</text>
+    <text x="595" y="492" font-size="10" fill="#475569">• 跨应用复用的业务组件</text>
+    <text x="595" y="508" font-size="10" fill="#475569">• 可导入其他 libs 或 apps</text>
+    <text x="595" y="524" font-size="10" fill="#475569">• Form / Modal / Drawer 等</text>
+    <text x="595" y="540" font-size="10" fill="#475569">• 项目设置、存储表单</text>
+    <text x="595" y="556" font-size="10" fill="#64748b">例外: 可引用 apps 与 libs</text>
+    <text x="595" y="576" font-size="10" fill="#64748b">是反向依赖的桥梁</text>
+
+    <rect x="840" y="425" width="280" height="170" rx="8" fill="#fff" stroke="#15803d" stroke-width="1.5"/>
+    <text x="980" y="452" text-anchor="middle" font-size="14" font-weight="700" fill="#14532d">core (共享核心)</text>
+    <text x="855" y="474" font-size="11" fill="#334155">工具与基础设施</text>
+    <text x="855" y="492" font-size="10" fill="#475569">• src/atoms/user.ts: Jotai 全局状态</text>
+    <text x="855" y="508" font-size="10" fill="#475569">• atomWithQuery: API 驱动状态</text>
+    <text x="855" y="524" font-size="10" fill="#475569">• src/lib/utils/: bem, dom, helpers</text>
+    <text x="855" y="540" font-size="10" fill="#475569">• src/types/: 共享类型</text>
+    <text x="855" y="556" font-size="10" fill="#475569">• Tour 引导组件</text>
+    <text x="855" y="576" font-size="10" fill="#64748b">API Provider / Hooks</text>
+  </g>
+
+  <!-- 共享 UI 层 -->
+  <g>
+    <rect x="40" y="630" width="1120" height="80" rx="12" fill="url(#sharedGrad)" stroke="#c2410c" stroke-width="2"/>
+    <text x="600" y="658" text-anchor="middle" font-size="15" font-weight="700" fill="#7c2d12">共享 UI 与工具 (@humansignal/ui, @humansignal/icons, @humansignal/core)</text>
+    <text x="600" y="682" text-anchor="middle" font-size="12" fill="#7c2d12">设计系统: design-tokens.json + Tailwind + CSS Modules  |  Lint: Biome (web/biome.json)  |  无 lodash(用 es-toolkit 经 @humansignal/core 转发)</text>
+    <text x="600" y="700" text-anchor="middle" font-size="11" fill="#7c2d12">kebab-case 文件名,一文件一组件,co-locate .module.css 与 .stories.tsx</text>
+  </g>
+</svg>

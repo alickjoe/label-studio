@@ -191,9 +191,9 @@ const Item: React.FC<RowProps> = ({ style, item, dimensionCallback, maxWidth, is
   const arrowStyle = !isLeaf ? { transform: isOpen ? "rotate(180deg)" : "rotate(90deg)" } : { display: "none" };
 
   const title = onlyLeafsAllowed
-    ? "Only leaf nodes allowed"
+    ? "仅允许选择叶子节点"
     : limitReached
-      ? `Maximum ${maxUsages} items already selected`
+      ? `最多已选择 ${maxUsages} 项`
       : undefined;
 
   const setIndeterminate = useCallback(
@@ -441,9 +441,9 @@ const TaxonomyDropdown = ({ show, flatten, items, dropdownRef, isEditable }: Tax
                 look="string"
                 type="button"
                 onClick={addInside}
-                aria-label="Add new label"
+                aria-label="添加新标签"
               >
-                Add
+                添加
               </Button>
             </div>
           ) : null}

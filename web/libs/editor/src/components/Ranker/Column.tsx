@@ -35,7 +35,7 @@ const CollapsibleColumnTitle = ({ items, title }: { items: InputItem[]; title: s
       <Button
         type="button"
         onClick={toggle}
-        aria-label={collapsed ? "Expand column" : "Collapse column"}
+        aria-label={collapsed ? "展开列" : "折叠列"}
         variant="neutral"
         leading={collapsed ? <IconChevronDown /> : <IconChevron />}
         look="string"

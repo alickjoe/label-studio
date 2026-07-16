@@ -404,7 +404,7 @@ export const LabelingSummary = observer(({ hideInfo, annotations: all, controls,
       }),
     );
     columns.unshift({
-      header: "Annotator",
+      header: "标注者",
       accessorKey: "id",
       size: columnWidths.id || 180,
       minSize: 150,

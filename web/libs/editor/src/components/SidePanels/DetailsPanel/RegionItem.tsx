@@ -70,7 +70,7 @@ export const RegionItem: FC<RegionItemProps> = observer(
           <div className={cn("detailed-region").elem("warning").toClassName()}>
             <IconWarning />
             <div className={cn("detailed-region").elem("warning-text").toClassName()}>
-              Incomplete {region.type?.replace("region", "") ?? "region"}
+              未完成的{region.type?.replace("region", "") ?? "区域"}
             </div>
           </div>
         )}
@@ -116,7 +116,7 @@ const RegionAction: FC<any> = observer(({ region, annotation, editMode, onEditMo
             annotation.startLinkingMode(CREATE_RELATION_MODE, region);
           }
         }}
-        aria-label="Create Relation"
+        aria-label="创建关系"
       >
         <IconRelationLink />
       </RegionActionButton>
@@ -130,7 +130,7 @@ const RegionAction: FC<any> = observer(({ region, annotation, editMode, onEditMo
         look={editMode ? "filled" : "string"}
         variant={editMode ? "primary" : "neutral"}
         onClick={() => onEditModeChange(!editMode)}
-        aria-label="Edit region's meta"
+        aria-label="编辑区域元信息"
       >
         <IconPlus />
       </RegionActionButton>
@@ -153,17 +153,17 @@ const RegionAction: FC<any> = observer(({ region, annotation, editMode, onEditMo
             displayedHotkey="region:lock"
             variant="neutral"
             look="string"
-            aria-label="Unlock Region"
-            tooltip="Unlock Region"
+            aria-label="解锁区域"
+            tooltip="解锁区域"
           />
         )}
         {!region.incomplete && region.hideable && (
           <RegionActionButton
-            aria-label={`${region.hidden ? "Show" : "Hide"} selected region`}
+            aria-label={`${region.hidden ? "显示" : "隐藏"}选中区域`}
             variant="neutral"
             look="string"
             onClick={region.toggleHidden}
-            tooltip={`${region.hidden ? "Show" : "Hide"} selected region`}
+            tooltip={`${region.hidden ? "显示" : "隐藏"}选中区域`}
           >
             {region.hidden ? <IconEyeClosed /> : <IconEyeOpened />}
           </RegionActionButton>
@@ -171,9 +171,9 @@ const RegionAction: FC<any> = observer(({ region, annotation, editMode, onEditMo
         <RegionActionButton
           variant="negative"
           look="string"
-          aria-label="Delete selected region"
+          aria-label="删除选中区域"
           disabled={region.isReadOnly()}
-          tooltip="Delete selected region"
+          tooltip="删除选中区域"
           onClick={() => annotation.deleteRegion(region)}
         >
           <IconTrash />

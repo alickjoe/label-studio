@@ -58,7 +58,7 @@ export function TimelineItem({ item, index, isLast }: TimelineItemProps) {
   const labelClass = isCurrent ? "text-neutral-content" : "text-neutral-content-subtle";
 
   const userName = formatUserName(item.triggered_by);
-  const isSystem = userName === "System";
+  const isSystem = userName === "系统";
   const reason = item.reason;
 
   return (
@@ -107,7 +107,7 @@ export function TimelineItem({ item, index, isLast }: TimelineItemProps) {
           {isSystem && (
             <>
               <Typography variant="body" size="smaller">
-                System
+                系统
               </Typography>
               {/* Dot separator */}
               <div className="size-[3px] rounded-full bg-neutral-content-subtler shrink-0" />

@@ -68,8 +68,8 @@ export const EmailPreferences = () => {
 
   const message = useMemo(() => {
     return window.APP_SETTINGS?.whitelabel_is_active
-      ? "Subscribe for news and tips"
-      : "Subscribe to HumanSignal news and tips from Heidi";
+      ? "订阅新闻和小贴士"
+      : "订阅来自 Heidi 的 HumanSignal 新闻和小贴士";
   }, []);
 
   return (

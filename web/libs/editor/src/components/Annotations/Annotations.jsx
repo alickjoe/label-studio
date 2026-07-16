@@ -21,23 +21,23 @@ import styles from "./Annotations.module.css";
 
 export const DraftPanel = observer(({ item }) => {
   if (!item.draftSaved && !item.versions.draft) return null;
-  const saved = item.draft && item.draftSaved ? ` saved ${Utils.UDate.prettyDate(item.draftSaved)}` : "";
+  const saved = item.draft && item.draftSaved ? ` 已保存 ${Utils.UDate.prettyDate(item.draftSaved)}` : "";
 
   if (!item.selected) {
     if (!item.draft) return null;
-    return <div>draft{saved}</div>;
+    return <div>草稿{saved}</div>;
   }
   if (!item.versions.result || !item.versions.result.length) {
-    return <div>{saved ? `draft${saved}` : "not submitted draft"}</div>;
+    return <div>{saved ? `草稿${saved}` : "未提交的草稿"}</div>;
   }
   return (
     <div>
       <Button
         look="string"
         onClick={item.toggleDraft}
-        tooltip={item.draftSelected ? "switch to submitted result" : "switch to current draft"}
+        tooltip={item.draftSelected ? "切换到已提交的结果" : "切换到当前草稿"}
       >
-        {item.draftSelected ? "draft" : "submitted"}
+        {item.draftSelected ? "草稿" : "已提交"}
       </Button>
       {saved}
     </div>
@@ -48,19 +48,19 @@ const Annotation = observer(({ item, store }) => {
   const removeHoney = () => (
     <Button
       size="small"
-      tooltip="Unset this result as a ground truth"
+      tooltip="取消将此结果设为标准答案"
       onClick={(ev) => {
         ev.preventDefault();
         item.setGroundTruth(false);
       }}
-      aria-label="Unset ground truth"
+      aria-label="取消设为标准答案"
     >
       <StarOutlined />
     </Button>
   );
 
   const setHoney = () => {
-    const title = item.ground_truth ? "Unset this result as a ground truth" : "Set this result as a ground truth";
+    const title = item.ground_truth ? "取消将此结果设为标准答案" : "将此结果设为标准答案";
 
     return (
       <Button
@@ -71,7 +71,7 @@ const Annotation = observer(({ item, store }) => {
           ev.preventDefault();
           item.setGroundTruth(!item.ground_truth);
         }}
-        aria-label={item.ground_truth ? "Unset ground truth" : "Set ground truth"}
+        aria-label={item.ground_truth ? "取消设为标准答案" : "设为标准答案"}
       >
         {item.ground_truth ? <StarFilled /> : <StarOutlined />}
       </Button>
@@ -113,7 +113,7 @@ const Annotation = observer(({ item, store }) => {
    * Title of card
    */
   if (item.userGenerate && !item.sentUserGenerate) {
-    annotationID = <span className={styles.title}>Unsaved Annotation</span>;
+    annotationID = <span className={styles.title}>未保存的标注</span>;
   } else {
     if (item.pk) {
       annotationID = <span className={styles.title}>ID {item.pk}</span>;
@@ -148,16 +148,16 @@ const Annotation = observer(({ item, store }) => {
         {store.hasInterface("ground-truth") && (item.ground_truth ? removeHoney() : setHoney())}
         &nbsp;
         {store.hasInterface("annotations:delete") && (
-          <Tooltip placement="topLeft" title="Delete selected annotation">
+          <Tooltip placement="topLeft" title="删除选中的标注">
             <Popconfirm
               placement="bottomLeft"
-              title={"Please confirm you want to delete this annotation"}
+              title={"请确认是否要删除此标注"}
               onConfirm={confirm}
-              okText="Delete"
+              okText="删除"
               okType="danger"
-              cancelText="Cancel"
+              cancelText="取消"
             >
-              <Button size="small" look="string" variant="negative" aria-label="Delete selected annotation">
+              <Button size="small" look="string" variant="negative" aria-label="删除选中的标注">
                 <DeleteOutlined />
               </Button>
             </Popconfirm>
@@ -183,14 +183,14 @@ const Annotation = observer(({ item, store }) => {
             {badge}
             {annotationID}
           </div>
-          {item.pk ? "Created" : "Started"}
-          <i>{item.createdAgo ? ` ${item.createdAgo} ago` : ` ${Utils.UDate.prettyDate(item.createdDate)}`}</i>
-          {item.createdBy && item.pk ? ` by ${item.createdBy}` : null}
+          {item.pk ? "创建于" : "开始于"}
+          <i>{item.createdAgo ? ` ${item.createdAgo} 前` : ` ${Utils.UDate.prettyDate(item.createdDate)}`}</i>
+          {item.createdBy && item.pk ? ` 由 ${item.createdBy}` : null}
           <DraftPanel item={item} />
         </div>
         {/* platform uses was_cancelled so check both */}
         {store.hasInterface("skip") && (item.skipped || item.was_cancelled) && (
-          <Tooltip alignment="top-left" title="Skipped annotation">
+          <Tooltip alignment="top-left" title="已跳过的标注">
             <StopOutlined className={styles.skipped} />
           </Tooltip>
         )}
@@ -199,7 +199,7 @@ const Annotation = observer(({ item, store }) => {
             size="small"
             look="outlined"
             onClick={toggleVisibility}
-            aria-label="Toggle visibility of current annotation"
+            aria-label="切换当前标注的可见性"
           >
             {item.hidden ? <EyeInvisibleOutlined /> : <EyeOutlined />}
           </Button>
@@ -217,21 +217,21 @@ class Annotations extends Component {
     const title = (
       <div className={`${styles.title} ${styles.titlespace}`}>
         <div style={{ display: "flex", alignItems: "center" }}>
-          <h3>Annotations</h3>
+          <h3>标注</h3>
         </div>
 
         <div style={{ marginRight: "1px" }}>
           {store.hasInterface("annotations:add-new") && (
             <Button
               size="small"
-              tooltip="Create new annotation"
+              tooltip="创建新标注"
               onClick={(ev) => {
                 ev.preventDefault();
                 const c = store.annotationStore.createAnnotation();
 
                 store.annotationStore.selectAnnotation(c.id);
               }}
-              aria-label="Create new annotation"
+              aria-label="创建新标注"
             >
               <PlusOutlined />
             </Button>
@@ -239,13 +239,13 @@ class Annotations extends Component {
           &nbsp;
           <Button
             size="small"
-            tooltip="View all annotations"
+            tooltip="查看所有标注"
             look={store.annotationStore.viewingAll ? "filled" : "outlined"}
             onClick={(ev) => {
               ev.preventDefault();
               store.annotationStore.toggleViewingAllAnnotations();
             }}
-            aria-label="Toggle view of all annotations"
+            aria-label="切换查看所有标注"
           >
             <WindowsOutlined />
           </Button>
@@ -257,7 +257,7 @@ class Annotations extends Component {
 
     return (
       <Card title={title} size="small" bodyStyle={{ padding: "0", paddingTop: "1px" }}>
-        <List>{store.annotationStore.annotations ? content : <p>No annotations submitted yet</p>}</List>
+        <List>{store.annotationStore.annotations ? content : <p>暂无已提交的标注</p>}</List>
       </Card>
     );
   }

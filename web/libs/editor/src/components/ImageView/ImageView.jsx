@@ -964,7 +964,7 @@ export default observer(
       this.attachObserver(item.containerRef);
       this.updateReadyStatus();
 
-      hotkeys.addDescription("shift", "Pan image");
+      hotkeys.addDescription("shift", "平移图像");
     }
 
     attachObserver = (node) => {
@@ -1062,7 +1062,7 @@ export default observer(
           {paginationEnabled ? (
             <div
               className={styles.pagination}
-              title={isViewingAll ? "Pagination is not supported in View All Annotations" : undefined}
+              title={isViewingAll ? "查看所有标注时不支持分页" : undefined}
             >
               <Pagination
                 size="small"

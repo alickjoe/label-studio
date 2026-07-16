@@ -5,7 +5,7 @@ import { assembleSchema } from "./types/provider";
 
 // Step validation schemas
 export const step1Schema = z.object({
-  provider: z.string().min(1, "Please select a storage provider"),
+  provider: z.string().min(1, "请选择存储提供商"),
 });
 
 // Helper function to get provider-specific schema
@@ -20,9 +20,9 @@ export const getProviderSchema = (provider: string, isEditMode = false, target?:
     {
       name: "title",
       type: "text",
-      label: "Storage Title",
+      label: "存储标题",
       required: true,
-      schema: z.string().min(1, "Storage title is required"),
+      schema: z.string().min(1, "存储标题为必填项"),
     },
   ];
 
@@ -33,8 +33,8 @@ export const getProviderSchema = (provider: string, isEditMode = false, target?:
           {
             name: "can_delete_objects",
             type: "toggle",
-            label: "Can delete objects from storage",
-            description: "If unchecked, annotations will not be deleted from storage",
+            label: "可以从存储中删除对象",
+            description: "如果未勾选，标注将不会从存储中删除",
             schema: z.boolean().default(false),
           },
         ]

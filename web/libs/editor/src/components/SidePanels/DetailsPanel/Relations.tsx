@@ -94,7 +94,7 @@ const RelationItem: FC<{ relation: any }> = observer(({ relation }) => {
             {(hovered || relation.showMeta) && relation.hasRelations && (
               <Button
                 primary={relation.showMeta}
-                aria-label={`${relation.showMeta ? "Hide" : "Show"} Relation Labels`}
+                aria-label={`${relation.showMeta ? "隐藏" : "显示"}关系标签`}
                 type={relation.showMeta ? undefined : "text"}
                 onClick={relation.toggleMeta}
                 style={{ padding: 0 }}
@@ -109,9 +109,9 @@ const RelationItem: FC<{ relation: any }> = observer(({ relation }) => {
                 variant="neutral"
                 look="string"
                 size="small"
-                tooltip="Toggle Visibility"
+                tooltip="切换可见性"
                 onClick={relation.toggleVisibility}
-                aria-label={`${relation.visible ? "Hide" : "Show"} Relation`}
+                aria-label={`${relation.visible ? "隐藏" : "显示"}关系`}
               >
                 {relation.visible ? (
                   <IconEyeOpened style={{ width: 20, height: 20 }} />
@@ -127,8 +127,8 @@ const RelationItem: FC<{ relation: any }> = observer(({ relation }) => {
                 variant="negative"
                 look="string"
                 size="small"
-                aria-label="Delete Relation"
-                tooltip="Delete Relation"
+                aria-label="删除关系"
+                tooltip="删除关系"
                 onClick={() => {
                   relation.node1.setHighlight(false);
                   relation.node2.setHighlight(false);
@@ -176,7 +176,7 @@ const RelationMeta: FC<any> = observer(({ relation }) => {
       <Select
         multiple={selectionMode}
         style={{ width: "100%" }}
-        placeholder="Select labels"
+        placeholder="选择标签"
         value={selectedValues}
         onChange={onChange}
         options={options}

@@ -22,7 +22,7 @@ export const DraftPanel = observer(({ item }) => {
     <div className={panel}>
       <Tooltip
         alignment="top-left"
-        title={item.draftSelected ? "switch to original result" : "switch to current draft"}
+        title={item.draftSelected ? "切换到原始结果" : "切换到当前草稿"}
       >
         <Button
           type="button"
@@ -30,9 +30,9 @@ export const DraftPanel = observer(({ item }) => {
           look="string"
           onClick={() => item.toggleDraft()}
           className={panel.elem("toggle").toClassName()}
-          aria-label="Toggle draft mode"
+          aria-label="切换草稿模式"
         >
-          {item.draftSelected ? "draft" : "original"}
+          {item.draftSelected ? "草稿" : "原始"}
         </Button>
       </Tooltip>
       {saved}

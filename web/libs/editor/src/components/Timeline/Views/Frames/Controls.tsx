@@ -69,11 +69,11 @@ export const Controls: FC<TimelineExtraControls<Actions, DataType>> = ({ onActio
 
   return (
     <>
-      <ControlButton onClick={onKeypointToggle} disabled={!hasSelectedRegion || readonly} tooltip="Toggle Keypoint">
+      <ControlButton onClick={onKeypointToggle} disabled={!hasSelectedRegion || readonly} tooltip="切换关键点">
         {keypointIcon}
       </ControlButton>
 
-      <ControlButton onClick={onLifespanToggle} disabled={!closestKeypoint || readonly} tooltip="Toggle Interpolation">
+      <ControlButton onClick={onLifespanToggle} disabled={!closestKeypoint || readonly} tooltip="切换插值">
         {interpolationIcon}
       </ControlButton>
     </>

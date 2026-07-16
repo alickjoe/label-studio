@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 820" font-family="Microsoft YaHei,Arial,sans-serif">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#eef2f7"/>
+    </linearGradient>
+    <linearGradient id="feGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#dbeafe"/>
+      <stop offset="100%" stop-color="#93c5fd"/>
+    </linearGradient>
+    <linearGradient id="beGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#dcfce7"/>
+      <stop offset="100%" stop-color="#86efac"/>
+    </linearGradient>
+    <linearGradient id="dataGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fef3c7"/>
+      <stop offset="100%" stop-color="#fcd34d"/>
+    </linearGradient>
+    <linearGradient id="extGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f3e8ff"/>
+      <stop offset="100%" stop-color="#c4b5fd"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="820" fill="url(#bgGrad)"/>
+  <text x="600" y="40" text-anchor="middle" font-size="26" font-weight="700" fill="#0f172a">Label Studio 系统总体架构</text>
+
+  <!-- 用户层 -->
+  <g>
+    <rect x="40" y="70" width="1120" height="80" rx="10" fill="#fff7ed" stroke="#fb923c" stroke-width="2"/>
+    <text x="600" y="100" text-anchor="middle" font-size="16" font-weight="600" fill="#9a3412">用户层 / Users</text>
+    <text x="200" y="130" text-anchor="middle" font-size="13" fill="#7c2d12">标注员 Annotator</text>
+    <text x="450" y="130" text-anchor="middle" font-size="13" fill="#7c2d12">项目管理员 Admin</text>
+    <text x="700" y="130" text-anchor="middle" font-size="13" fill="#7c2d12">API 集成 SDK</text>
+    <text x="950" y="130" text-anchor="middle" font-size="13" fill="#7c2d12">ML 工程师</text>
+  </g>
+
+  <!-- 前端层 -->
+  <g>
+    <rect x="40" y="170" width="1120" height="180" rx="10" fill="url(#feGrad)" stroke="#3b82f6" stroke-width="2"/>
+    <text x="600" y="200" text-anchor="middle" font-size="18" font-weight="700" fill="#1e3a8a">前端层 / Frontend (Nx Monorepo, React + TypeScript)</text>
+
+    <rect x="80" y="220" width="240" height="110" rx="8" fill="#fff" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="200" y="245" text-anchor="middle" font-size="14" font-weight="600" fill="#1e40af">web/apps/labelstudio</text>
+    <text x="200" y="268" text-anchor="middle" font-size="11" fill="#334155">主应用 (Pages: Projects,</text>
+    <text x="200" y="285" text-anchor="middle" font-size="11" fill="#334155">DataManager, Export,</text>
+    <text x="200" y="302" text-anchor="middle" font-size="11" fill="#334155">Settings, Webhooks, Org)</text>
+    <text x="200" y="320" text-anchor="middle" font-size="11" fill="#64748b">Jotai + React Router</text>
+
+    <rect x="360" y="220" width="220" height="110" rx="8" fill="#fff" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="470" y="245" text-anchor="middle" font-size="14" font-weight="600" fill="#1e40af">web/libs/editor (LSF)</text>
+    <text x="470" y="268" text-anchor="middle" font-size="11" fill="#334155">标注 UI 库</text>
+    <text x="470" y="285" text-anchor="middle" font-size="11" fill="#334155">React + mobx-state-tree</text>
+    <text x="470" y="302" text-anchor="middle" font-size="11" fill="#334155">独立发布,可嵌入</text>
+    <text x="470" y="320" text-anchor="middle" font-size="11" fill="#64748b">yarn lsf:serve</text>
+
+    <rect x="620" y="220" width="220" height="110" rx="8" fill="#fff" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="730" y="245" text-anchor="middle" font-size="14" font-weight="600" fill="#1e40af">web/libs/datamanager</text>
+    <text x="730" y="268" text-anchor="middle" font-size="11" fill="#334155">数据管理库</text>
+    <text x="730" y="285" text-anchor="middle" font-size="11" fill="#334155">表格、过滤、视图</text>
+    <text x="730" y="302" text-anchor="middle" font-size="11" fill="#334155">批量操作</text>
+    <text x="730" y="320" text-anchor="middle" font-size="11" fill="#64748b">独立发布</text>
+
+    <rect x="880" y="220" width="240" height="110" rx="8" fill="#fff" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="1000" y="245" text-anchor="middle" font-size="14" font-weight="600" fill="#1e40af">web/libs/{core,app-common,ui}</text>
+    <text x="1000" y="268" text-anchor="middle" font-size="11" fill="#334155">core: 工具/API/Jotai atoms</text>
+    <text x="1000" y="285" text-anchor="middle" font-size="11" fill="#334155">app-common: 共享组件</text>
+    <text x="1000" y="302" text-anchor="middle" font-size="11" fill="#334155">ui: @humansignal/ui 组件</text>
+    <text x="1000" y="320" text-anchor="middle" font-size="11" fill="#64748b">Biome + Tailwind + CSS Modules</text>
+  </g>
+
+  <!-- 通信箭头 -->
+  <line x1="600" y1="350" x2="600" y2="390" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="615" y="375" font-size="11" fill="#475569">REST API + WebSocket</text>
+
+  <!-- 后端层 -->
+  <g>
+    <rect x="40" y="395" width="1120" height="240" rx="10" fill="url(#beGrad)" stroke="#16a34a" stroke-width="2"/>
+    <text x="600" y="425" text-anchor="middle" font-size="18" font-weight="700" fill="#14532d">后端层 / Backend (Django + DRF, label_studio Python 包)</text>
+
+    <rect x="60" y="445" width="180" height="80" rx="6" fill="#fff" stroke="#15803d" stroke-width="1.5"/>
+    <text x="150" y="468" text-anchor="middle" font-size="13" font-weight="600" fill="#14532d">projects</text>
+    <text x="150" y="488" text-anchor="middle" font-size="10" fill="#334155">Project 模型、label_config</text>
+    <text x="150" y="503" text-anchor="middle" font-size="10" fill="#334155">采样、跳过队列、软删除</text>
+    <text x="150" y="518" text-anchor="middle" font-size="10" fill="#334155">ProjectVisibleManager</text>
+
+    <rect x="250" y="445" width="180" height="80" rx="6" fill="#fff" stroke="#15803d" stroke-width="1.5"/>
+    <text x="340" y="468" text-anchor="middle" font-size="13" font-weight="600" fill="#14532d">tasks</text>
+    <text x="340" y="488" text-anchor="middle" font-size="10" fill="#334155">Task / Annotation</text>
+    <text x="340" y="503" text-anchor="middle" font-size="10" fill="#334155">Prediction / Draft / Lock</text>
+    <text x="340" y="518" text-anchor="middle" font-size="10" fill="#334155">标注核心实体</text>
+
+    <rect x="440" y="445" width="180" height="80" rx="6" fill="#fff" stroke="#15803d" stroke-width="1.5"/>
+    <text x="530" y="468" text-anchor="middle" font-size="13" font-weight="600" fill="#14532d">data_manager</text>
+    <text x="530" y="488" text-anchor="middle" font-size="10" fill="#334155">View/Tab、过滤器</text>
+    <text x="530" y="503" text-anchor="middle" font-size="10" fill="#334155">actions: next_task</text>
+    <text x="530" y="518" text-anchor="middle" font-size="10" fill="#334155">cache_labels, dedup</text>
+
+    <rect x="630" y="445" width="180" height="80" rx="6" fill="#fff" stroke="#15803d" stroke-width="1.5"/>
+    <text x="720" y="468" text-anchor="middle" font-size="13" font-weight="600" fill="#14532d">io_storages</text>
+    <text x="720" y="488" text-anchor="middle" font-size="10" fill="#334155">S3/GCS/Azure/Redis/Local</text>
+    <text x="720" y="503" text-anchor="middle" font-size="10" fill="#334155">ImportStorage / ExportStorage</text>
+    <text x="720" y="518" text-anchor="middle" font-size="10" fill="#334155">Storage Proxy /resolve/</text>
+
+    <rect x="820" y="445" width="160" height="80" rx="6" fill="#fff" stroke="#15803d" stroke-width="1.5"/>
+    <text x="900" y="468" text-anchor="middle" font-size="13" font-weight="600" fill="#14532d">ml / ml_models</text>
+    <text x="900" y="488" text-anchor="middle" font-size="10" fill="#334155">ML Backend 连接器</text>
+    <text x="900" y="503" text-anchor="middle" font-size="10" fill="#334155">预测同步、训练触发</text>
+    <text x="900" y="518" text-anchor="middle" font-size="10" fill="#334155">ModelRun / ModelVersion</text>
+
+    <rect x="990" y="445" width="150" height="80" rx="6" fill="#fff" stroke="#15803d" stroke-width="1.5"/>
+    <text x="1065" y="468" text-anchor="middle" font-size="13" font-weight="600" fill="#14532d">fsm</text>
+    <text x="1065" y="488" text-anchor="middle" font-size="10" fill="#334155">有限状态机框架</text>
+    <text x="1065" y="503" text-anchor="middle" font-size="10" fill="#334155">Pydantic transitions</text>
+    <text x="1065" y="518" text-anchor="middle" font-size="10" fill="#334155">Registry + StateManager</text>
+
+    <rect x="60" y="540" width="160" height="80" rx="6" fill="#fff" stroke="#15803d" stroke-width="1.5"/>
+    <text x="140" y="563" text-anchor="middle" font-size="13" font-weight="600" fill="#14532d">data_import / export</text>
+    <text x="140" y="583" text-anchor="middle" font-size="10" fill="#334155">FileUpload、批量导入</text>
+    <text x="140" y="598" text-anchor="middle" font-size="10" fill="#334155">多格式导出(JSON/CSV/COCO)</text>
+    <text x="140" y="613" text-anchor="middle" font-size="10" fill="#334155">uploader.py</text>
+
+    <rect x="230" y="540" width="150" height="80" rx="6" fill="#fff" stroke="#15803d" stroke-width="1.5"/>
+    <text x="305" y="563" text-anchor="middle" font-size="13" font-weight="600" fill="#14532d">organizations</text>
+    <text x="305" y="583" text-anchor="middle" font-size="10" fill="#334155">多租户 Organization</text>
+    <text x="305" y="598" text-anchor="middle" font-size="10" fill="#334155">active_organization</text>
+    <text x="305" y="613" text-anchor="middle" font-size="10" fill="#334155">for_user 过滤</text>
+
+    <rect x="390" y="540" width="150" height="80" rx="6" fill="#fff" stroke="#15803d" stroke-width="1.5"/>
+    <text x="465" y="563" text-anchor="middle" font-size="13" font-weight="600" fill="#14532d">users / jwt_auth</text>
+    <text x="465" y="583" text-anchor="middle" font-size="10" fill="#334155">User (AbstractBaseUser)</text>
+    <text x="465" y="598" text-anchor="middle" font-size="10" fill="#334155">LSAPIToken / JWT</text>
+    <text x="465" y="613" text-anchor="middle" font-size="10" fill="#334155">session_policy</text>
+
+    <rect x="550" y="540" width="150" height="80" rx="6" fill="#fff" stroke="#15803d" stroke-width="1.5"/>
+    <text x="625" y="563" text-anchor="middle" font-size="13" font-weight="600" fill="#14532d">webhooks</text>
+    <text x="625" y="583" text-anchor="middle" font-size="10" fill="#334155">事件订阅与分发</text>
+    <text x="625" y="598" text-anchor="middle" font-size="10" fill="#334155">项目/组织级别</text>
+    <text x="625" y="613" text-anchor="middle" font-size="10" fill="#334155">异步 HTTP 通知</text>
+
+    <rect x="710" y="540" width="150" height="80" rx="6" fill="#fff" stroke="#15803d" stroke-width="1.5"/>
+    <text x="785" y="563" text-anchor="middle" font-size="13" font-weight="600" fill="#14532d">core</text>
+    <text x="785" y="583" text-anchor="middle" font-size="10" fill="#334155">settings / middleware</text>
+    <text x="785" y="598" text-anchor="middle" font-size="10" fill="#334155">redis (RQ) / feature_flags</text>
+    <text x="785" y="613" text-anchor="middle" font-size="10" fill="#334155">current_request / mixins</text>
+
+    <rect x="870" y="540" width="150" height="80" rx="6" fill="#fff" stroke="#15803d" stroke-width="1.5"/>
+    <text x="945" y="563" text-anchor="middle" font-size="13" font-weight="600" fill="#14532d">labels_manager</text>
+    <text x="945" y="583" text-anchor="middle" font-size="10" fill="#334155">Label 模型管理</text>
+    <text x="945" y="598" text-anchor="middle" font-size="10" fill="#334155">标签字典</text>
+    <text x="945" y="613" text-anchor="middle" font-size="10" fill="#334155">annotation_templates</text>
+
+    <rect x="1030" y="540" width="110" height="80" rx="6" fill="#fff" stroke="#15803d" stroke-width="1.5"/>
+    <text x="1085" y="563" text-anchor="middle" font-size="13" font-weight="600" fill="#14532d">server.py</text>
+    <text x="1085" y="583" text-anchor="middle" font-size="10" fill="#334155">CLI main()</text>
+    <text x="1085" y="598" text-anchor="middle" font-size="10" fill="#334155">label-studio</text>
+    <text x="1085" y="613" text-anchor="middle" font-size="10" fill="#334155">入口命令</text>
+  </g>
+
+  <!-- 通信箭头 -->
+  <line x1="300" y1="635" x2="300" y2="675" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="600" y1="635" x2="600" y2="675" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="900" y1="635" x2="900" y2="675" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- 数据层 -->
+  <g>
+    <rect x="40" y="680" width="540" height="120" rx="10" fill="url(#dataGrad)" stroke="#d97706" stroke-width="2"/>
+    <text x="310" y="710" text-anchor="middle" font-size="16" font-weight="700" fill="#7c2d12">数据层 / Data</text>
+    <rect x="60" y="725" width="120" height="60" rx="6" fill="#fff" stroke="#b45309" stroke-width="1.5"/>
+    <text x="120" y="750" text-anchor="middle" font-size="12" font-weight="600" fill="#7c2d12">SQLite</text>
+    <text x="120" y="770" text-anchor="middle" font-size="10" fill="#7c2d12">本地开发默认</text>
+    <rect x="200" y="725" width="120" height="60" rx="6" fill="#fff" stroke="#b45309" stroke-width="1.5"/>
+    <text x="260" y="750" text-anchor="middle" font-size="12" font-weight="600" fill="#7c2d12">PostgreSQL</text>
+    <text x="260" y="770" text-anchor="middle" font-size="10" fill="#7c2d12">生产推荐</text>
+    <rect x="340" y="725" width="120" height="60" rx="6" fill="#fff" stroke="#b45309" stroke-width="1.5"/>
+    <text x="400" y="750" text-anchor="middle" font-size="12" font-weight="600" fill="#7c2d12">Redis</text>
+    <text x="400" y="770" text-anchor="middle" font-size="10" fill="#7c2d12">RQ 队列 + 缓存</text>
+    <rect x="460" y="725" width="100" height="60" rx="6" fill="#fff" stroke="#b45309" stroke-width="1.5"/>
+    <text x="510" y="750" text-anchor="middle" font-size="12" font-weight="600" fill="#7c2d12">本地文件</text>
+    <text x="510" y="770" text-anchor="middle" font-size="10" fill="#7c2d12">/label-studio/data</text>
+  </g>
+
+  <!-- 外部集成 -->
+  <g>
+    <rect x="620" y="680" width="540" height="120" rx="10" fill="url(#extGrad)" stroke="#7c3aed" stroke-width="2"/>
+    <text x="890" y="710" text-anchor="middle" font-size="16" font-weight="700" fill="#5b21b6">外部集成 / External</text>
+    <rect x="640" y="725" width="120" height="60" rx="6" fill="#fff" stroke="#6d28d9" stroke-width="1.5"/>
+    <text x="700" y="750" text-anchor="middle" font-size="12" font-weight="600" fill="#5b21b6">ML Backend</text>
+    <text x="700" y="770" text-anchor="middle" font-size="10" fill="#5b21b6">HTTP 预测/训练</text>
+    <rect x="780" y="725" width="120" height="60" rx="6" fill="#fff" stroke="#6d28d9" stroke-width="1.5"/>
+    <text x="840" y="750" text-anchor="middle" font-size="12" font-weight="600" fill="#5b21b6">云存储</text>
+    <text x="840" y="770" text-anchor="middle" font-size="10" fill="#5b21b6">S3/GCS/Azure</text>
+    <rect x="920" y="725" width="120" height="60" rx="6" fill="#fff" stroke="#6d28d9" stroke-width="1.5"/>
+    <text x="980" y="750" text-anchor="middle" font-size="12" font-weight="600" fill="#5b21b6">Webhook</text>
+    <text x="980" y="770" text-anchor="middle" font-size="10" fill="#5b21b6">外部系统通知</text>
+    <rect x="1060" y="725" width="100" height="60" rx="6" fill="#fff" stroke="#6d28d9" stroke-width="1.5"/>
+    <text x="1110" y="750" text-anchor="middle" font-size="12" font-weight="600" fill="#5b21b6">SDK</text>
+    <text x="1110" y="770" text-anchor="middle" font-size="10" fill="#5b21b6">Python SDK</text>
+  </g>
+</svg>

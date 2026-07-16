@@ -144,14 +144,14 @@ export const HotkeySection = ({
           ))}
 
           {hotkeys.length === 0 && (
-            <div className="py-8 text-center text-muted-foreground italic">No hotkeys in this section</div>
+            <div className="py-8 text-center text-muted-foreground italic">此部分没有快捷键</div>
           )}
         </div>
       </CardContent>
 
       <CardFooter className="flex justify-end">
         <Button variant="primary" onClick={handleSaveSection} disabled={!hasChanges}>
-          Save
+          保存
         </Button>
       </CardFooter>
     </Card>

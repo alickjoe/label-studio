@@ -345,10 +345,10 @@ export const AggregationTableRow = ({
                   className="flex items-center gap-2 font-semibold text-neutral-content hover:text-neutral-content transition-colors cursor-pointer"
                 >
                   <IconChevronDown size={16} className={cnm("transition-transform", isExpanded && "rotate-180")} />
-                  Distribution
+                  分布
                 </button>
               ) : (
-                <span className="font-semibold text-neutral-content">Distribution</span>
+                <span className="font-semibold text-neutral-content">分布</span>
               )}
               {/* Show total count from API */}
               {useApiData && distributionData && (

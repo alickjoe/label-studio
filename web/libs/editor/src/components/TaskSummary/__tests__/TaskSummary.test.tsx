@@ -198,8 +198,8 @@ describe("TaskSummary", () => {
 
     renderWithQueryClient(<TaskSummary annotations={annotations} store={store} />);
 
-    expect(screen.getByText("Task Summary")).toBeInTheDocument();
-    expect(screen.getByText("Task Data")).toBeInTheDocument();
+    expect(screen.getByText("任务摘要")).toBeInTheDocument();
+    expect(screen.getByText("任务数据")).toBeInTheDocument();
   });
 
   it("displays agreement when enabled in project settings", () => {
@@ -214,7 +214,7 @@ describe("TaskSummary", () => {
 
     renderWithQueryClient(<TaskSummary annotations={annotations} store={store} />);
 
-    expect(screen.getByText("Agreement")).toBeInTheDocument();
+    expect(screen.getByText("一致性")).toBeInTheDocument();
     expect(screen.getByText("85.5%")).toBeInTheDocument();
   });
 
@@ -231,7 +231,7 @@ describe("TaskSummary", () => {
     renderWithQueryClient(<TaskSummary annotations={annotations} store={store} />);
 
     // Backend controls agreement visibility, so if we have a number, show it
-    expect(screen.getByText("Agreement")).toBeInTheDocument();
+    expect(screen.getByText("一致性")).toBeInTheDocument();
     expect(screen.getByText("85.5%")).toBeInTheDocument();
   });
 
@@ -244,7 +244,7 @@ describe("TaskSummary", () => {
     renderWithQueryClient(<TaskSummary annotations={annotations} store={store} />);
 
     // Backend controls agreement visibility, so if we have a number, show it
-    expect(screen.getByText("Agreement")).toBeInTheDocument();
+    expect(screen.getByText("一致性")).toBeInTheDocument();
     expect(screen.getByText("85.5%")).toBeInTheDocument();
   });
 
@@ -259,7 +259,7 @@ describe("TaskSummary", () => {
 
     renderWithQueryClient(<TaskSummary annotations={annotations} store={store} />);
 
-    expect(screen.getByText("Annotations")).toBeInTheDocument();
+    expect(screen.getByText("标注")).toBeInTheDocument();
     expect(screen.getByText("2")).toBeInTheDocument(); // Only submitted annotations
   });
 
@@ -274,7 +274,7 @@ describe("TaskSummary", () => {
 
     renderWithQueryClient(<TaskSummary annotations={annotations} store={store} />);
 
-    expect(screen.getByText("Predictions")).toBeInTheDocument();
+    expect(screen.getByText("预测")).toBeInTheDocument();
     expect(screen.getByText("2")).toBeInTheDocument(); // Only submitted predictions
   });
 
@@ -299,7 +299,7 @@ describe("TaskSummary", () => {
 
     renderWithQueryClient(<TaskSummary annotations={annotations} store={store} />);
 
-    expect(screen.getByText("Annotator")).toBeInTheDocument();
+    expect(screen.getByText("标注者")).toBeInTheDocument();
     expect(screen.getByText("sentiment")).toBeInTheDocument();
     expect(screen.getByText("category")).toBeInTheDocument();
   });
@@ -333,8 +333,8 @@ describe("TaskSummary", () => {
     renderWithQueryClient(<TaskSummary annotations={annotations} store={store} />);
 
     // Should show 0 for both annotations and predictions
-    expect(screen.getByText("Annotations")).toBeInTheDocument();
-    expect(screen.getByText("Predictions")).toBeInTheDocument();
+    expect(screen.getByText("标注")).toBeInTheDocument();
+    expect(screen.getByText("预测")).toBeInTheDocument();
     expect(screen.getAllByText("0")).toHaveLength(2);
   });
 
@@ -356,7 +356,7 @@ describe("TaskSummary", () => {
     renderWithQueryClient(<TaskSummary annotations={annotations} store={store} />);
 
     // Should not display agreement when it's undefined
-    expect(screen.queryByText("Agreement")).not.toBeInTheDocument();
+    expect(screen.queryByText("一致性")).not.toBeInTheDocument();
   });
 
   it("processes control tags with per_region setting", () => {
@@ -417,8 +417,8 @@ describe("TaskSummary", () => {
 
       renderWithProviders(<TaskSummary annotations={annotations} store={store} />);
 
-      expect(screen.getByText("Task Summary")).toBeInTheDocument();
-      expect(screen.getByText("Task Data")).toBeInTheDocument();
+      expect(screen.getByText("任务摘要")).toBeInTheDocument();
+      expect(screen.getByText("任务数据")).toBeInTheDocument();
     });
 
     it("renders distribution row when FF is on", () => {
@@ -427,7 +427,7 @@ describe("TaskSummary", () => {
 
       renderWithProviders(<TaskSummary annotations={annotations} store={store} />);
 
-      expect(screen.getByText("Distribution")).toBeInTheDocument();
+      expect(screen.getByText("分布")).toBeInTheDocument();
     });
 
     it("handles stub annotations correctly (shows skeleton)", () => {
@@ -444,8 +444,8 @@ describe("TaskSummary", () => {
       renderWithProviders(<TaskSummary annotations={[stubAnnotation]} store={store} />);
 
       // Should still render the component without crashing
-      expect(screen.getByText("Task Summary")).toBeInTheDocument();
-      expect(screen.getByText("Annotations")).toBeInTheDocument();
+      expect(screen.getByText("任务摘要")).toBeInTheDocument();
+      expect(screen.getByText("标注")).toBeInTheDocument();
     });
 
     it("counts annotations correctly with mixed stub and full annotations", () => {
@@ -458,7 +458,7 @@ describe("TaskSummary", () => {
 
       renderWithProviders(<TaskSummary annotations={annotations} store={store} />);
 
-      expect(screen.getByText("Annotations")).toBeInTheDocument();
+      expect(screen.getByText("标注")).toBeInTheDocument();
       expect(screen.getByText("3")).toBeInTheDocument(); // All annotations counted
     });
 
@@ -474,7 +474,7 @@ describe("TaskSummary", () => {
 
       renderWithProviders(<TaskSummary annotations={annotations} store={store} />);
 
-      expect(screen.getByText("Annotator")).toBeInTheDocument();
+      expect(screen.getByText("标注者")).toBeInTheDocument();
       expect(screen.getByText("label")).toBeInTheDocument();
     });
   });

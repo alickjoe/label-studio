@@ -51,13 +51,13 @@ export const ProviderSelectionStep = ({
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-xl font-semibold">Choose your cloud storage provider</h2>
-        <p className="text-muted-foreground">Select the cloud storage service where your data is stored</p>
+        <h2 className="text-xl font-semibold">选择你的云存储提供商</h2>
+        <p className="text-muted-foreground">选择存储你数据的云存储服务</p>
       </div>
 
       <div className="space-y-4">
         <div className="space-y-2">
-          <Label text="Storage Provider" required />
+          <Label text="存储提供商" required />
           <ProviderGrid
             providers={providers}
             selectedProvider={formData.provider}

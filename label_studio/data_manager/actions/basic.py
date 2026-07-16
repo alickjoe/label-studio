@@ -131,12 +131,12 @@ def delete_tasks_annotations_form(user, project):
                 {
                     'type': 'select',
                     'name': 'annotator',
-                    'label': 'Annotator',
+                    'label': '标注员',
                     'options': [
                         {'value': str(user.id), 'label': user.get_full_name() or user.username or user.email}
                         for user in users
                     ],
-                    'placeholder': 'All',
+                    'placeholder': '全部',
                     'searchable': True,
                 }
             ],
@@ -175,37 +175,37 @@ actions: list[DataManagerAction] = [
     {
         'entry_point': retrieve_tasks_predictions,
         'permission': all_permissions.predictions_any,
-        'title': 'Retrieve Predictions',
+        'title': '获取预测',
         'order': 90,
         'dialog': {
-            'title': 'Retrieve Predictions',
-            'text': 'Send the selected tasks to all ML backends connected to the project.'
-            'This operation might be abruptly interrupted due to a timeout. '
-            'The recommended way to get predictions is to update tasks using the Label Studio API.'
-            'Please confirm your action.',
+            'title': '获取预测',
+            'text': '将所选任务发送到项目连接的所有 ML 后端。'
+            '此操作可能会因超时而突然中断。'
+            '获取预测的推荐方式是使用 Label Studio API 更新任务。'
+            '请确认您的操作。',
             'type': 'confirm',
         },
     },
     {
         'entry_point': delete_tasks,
         'permission': all_permissions.tasks_delete,
-        'title': 'Delete Tasks',
+        'title': '删除任务',
         'order': 100,
         'reload': True,
         'dialog': {
-            'text': 'You are going to delete the selected tasks. Please confirm your action.',
+            'text': '您将删除所选任务。请确认您的操作。',
             'type': 'confirm',
         },
     },
     {
         'entry_point': delete_tasks_annotations,
         'permission': [all_permissions.tasks_change, all_permissions.annotations_delete],
-        'title': 'Delete Annotations',
+        'title': '删除标注',
         'order': 101,
         'dialog': {
-            'text': 'You are going to delete annotations from the selected tasks.\n'
-            'You can select specific annotators to delete annotations for.\n'
-            'Please confirm your action.',
+            'text': '您将删除所选任务的标注。\n'
+            '您可以选择特定的标注员来删除其标注。\n'
+            '请确认您的操作。',
             'type': 'confirm',
             'form': delete_tasks_annotations_form,
         },
@@ -213,10 +213,10 @@ actions: list[DataManagerAction] = [
     {
         'entry_point': delete_tasks_predictions,
         'permission': all_permissions.predictions_any,
-        'title': 'Delete Predictions',
+        'title': '删除预测',
         'order': 102,
         'dialog': {
-            'text': 'You are going to delete all predictions from the selected tasks. Please confirm your action.',
+            'text': '您将删除所选任务的所有预测。请确认您的操作。',
             'type': 'confirm',
         },
     },

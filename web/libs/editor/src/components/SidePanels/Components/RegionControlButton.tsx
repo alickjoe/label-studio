@@ -21,7 +21,7 @@ export const RegionControlButton: FC<
         look={look}
         size="smaller"
         style={{ ...(props.style ?? {}) }}
-        aria-label={typeof children === "string" ? children : "Region control"}
+        aria-label={typeof children === "string" ? children : "区域控制"}
         tooltip={tooltip}
       >
         {children}

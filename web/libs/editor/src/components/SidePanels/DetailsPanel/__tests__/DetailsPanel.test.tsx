@@ -121,7 +121,7 @@ describe("DetailsPanel", () => {
 
         const header = screen.getByTestId("empty-state-header");
         expect(header).toBeInTheDocument();
-        expect(header).toHaveTextContent("Create relations between regions");
+        expect(header).toHaveTextContent("在区域之间创建关系");
       });
 
       it("renders empty state with correct description", () => {
@@ -129,7 +129,7 @@ describe("DetailsPanel", () => {
 
         const description = screen.getByTestId("empty-state-description");
         expect(description).toBeInTheDocument();
-        expect(description).toHaveTextContent("Link regions to define relationships between them");
+        expect(description).toHaveTextContent("链接区域以定义它们之间的关系");
       });
 
       it("renders learn more link with correct attributes", () => {
@@ -214,7 +214,7 @@ describe("DetailsPanel", () => {
 
         const header = screen.getByTestId("empty-state-header");
         expect(header).toBeInTheDocument();
-        expect(header).toHaveTextContent("View region details");
+        expect(header).toHaveTextContent("查看区域详情");
       });
 
       it("renders empty state with correct description when no selection", () => {
@@ -222,7 +222,7 @@ describe("DetailsPanel", () => {
 
         const description = screen.getByTestId("empty-state-description");
         expect(description).toBeInTheDocument();
-        expect(description).toHaveTextContent("Select a region to view its properties, metadata and available actions");
+        expect(description).toHaveTextContent("选择一个区域以查看其属性、元数据和可用操作");
       });
 
       it("does not render region details on info panel when no selection", () => {

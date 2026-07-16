@@ -16,7 +16,7 @@ const CommentsLoadingSkeleton: FC = () => (
   <div className={cn("comments").elem("loading").toClassName()}>
     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", padding: "40px 0" }}>
       <Spin size="default" />
-      <span style={{ marginLeft: 12, color: "#999" }}>Loading comments...</span>
+      <span style={{ marginLeft: 12, color: "#999" }}>正在加载评论...</span>
     </div>
   </div>
 );
@@ -79,7 +79,7 @@ export const Comments: FC<{
   useEffect(() => {
     const confirmCommentsLoss = (e: any) => {
       if (commentStore.hasUnsaved) {
-        e.returnValue = "You have unpersisted comments which will be lost if continuing.";
+        e.returnValue = "您有未保存的评论，继续操作将丢失这些评论。";
       }
 
       return e;

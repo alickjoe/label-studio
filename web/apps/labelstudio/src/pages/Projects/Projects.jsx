@@ -29,7 +29,7 @@ export const ProjectsPage = () => {
   const [totalItems, setTotalItems] = useState(1);
   const setContextProps = useContextProps();
 
-  useUpdatePageTitle("Projects");
+  useUpdatePageTitle("项目");
   const defaultPageSize = Number.parseInt(localStorage.getItem("pages:projects-list") ?? 30);
 
   const [modal, setModal] = React.useState(false);
@@ -141,7 +141,7 @@ export const ProjectsPage = () => {
   );
 };
 
-ProjectsPage.title = "Projects";
+ProjectsPage.title = "项目";
 ProjectsPage.path = "/projects";
 ProjectsPage.exact = true;
 ProjectsPage.routes = ({ store }) => [
@@ -163,8 +163,8 @@ ProjectsPage.routes = ({ store }) => [
 ProjectsPage.context = ({ openModal, showButton }) => {
   if (!showButton) return null;
   return (
-    <Button onClick={openModal} size="small" aria-label="Create new project">
-      Create
+    <Button onClick={openModal} size="small" aria-label="创建新项目">
+      创建
     </Button>
   );
 };
